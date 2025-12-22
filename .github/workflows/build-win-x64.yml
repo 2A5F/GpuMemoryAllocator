@@ -7,11 +7,19 @@ on:
     branches: [ "main" ]
   workflow_dispatch:
   workflow_call:
+    outputs:
+      native-artifact:
+        value: ${{ jobs.build.outputs.native-artifact }}
+      managed-nupkg-artifact:
+        value: ${{ jobs.build.outputs.managed-nupkg-artifact }}
 
 jobs:
   build:
     runs-on: windows-latest
-    
+    outputs:
+      native-artifact: ${{ steps.artifact-native.outputs.artifact-id }}
+      managed-nupkg-artifact: ${{ steps.artifact-managed.outputs.artifact-id }}
+
     steps:
       - uses: actions/checkout@v4
         with:
@@ -28,3 +36,15 @@ jobs:
       - name: Build
         shell: pwsh
         run: ./build.ps1
+      - id: artifact-native
+        uses: actions/upload-artifact@v4
+        with:
+          name: 'D3D12MA-win-x64'
+          path: ./build/Release/D3D12MA.dll
+          overwrite: true
+      - id: artifact-managed
+        uses: actions/upload-artifact@v4
+        with:
+          name: 'D3D12MA-managed'
+          path: ./GpuMemoryAllocator.D3d12/bin/Release/*.nupkg
+          overwrite: true
