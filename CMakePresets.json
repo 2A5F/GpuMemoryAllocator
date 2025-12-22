@@ -1,0 +1,30 @@
+﻿{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 10,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "Main",
+      "binaryDir": "${sourceDir}/build",
+      "generator": "Ninja Multi-Config",
+      "toolchainFile": "${sourceDir}/ThirdParty/vcpkg/scripts/buildsystems/vcpkg.cmake"
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "Debug",
+      "configurePreset": "Main",
+      "displayName": "Build (Debug)",
+      "configuration": "Debug"
+    },
+    {
+      "name": "Release",
+      "configurePreset": "Main",
+      "displayName": "Build (Release)",
+      "configuration": "Release"
+    }
+  ]
+}

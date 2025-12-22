@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RunAOTCompilation>true</RunAOTCompilation>
+        <RootNamespace>D3D12MA</RootNamespace>
+        <NoGen>false</NoGen>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <NoWarn>CS0169;CS0649</NoWarn>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Silk.NET.Direct3D12" Version="2.22.0"/>
+    </ItemGroup>
+</Project>

@@ -1,0 +1,1415 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<bindings>
+  <namespace name="D3D12MA">
+    <struct name="ALLOCATION_CALLBACKS" access="public" unsafe="true">
+      <field name="pAllocate" access="public">
+        <type native="D3D12MA::ALLOCATE_FUNC_PTR">delegate* unmanaged[Cdecl]&lt;nuint, nuint, void*, void*&gt;</type>
+      </field>
+      <field name="pFree" access="public">
+        <type native="D3D12MA::FREE_FUNC_PTR">delegate* unmanaged[Cdecl]&lt;void*, void*, void&gt;</type>
+      </field>
+      <field name="pPrivateData" access="public">
+        <type>void*</type>
+      </field>
+    </struct>
+    <enumeration name="ALLOCATION_FLAGS" access="public">
+      <type>int</type>
+      <enumerator name="ALLOCATION_FLAG_NONE" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0</code>
+        </value>
+      </enumerator>
+      <enumerator name="ALLOCATION_FLAG_COMMITTED" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x1</code>
+        </value>
+      </enumerator>
+      <enumerator name="ALLOCATION_FLAG_NEVER_ALLOCATE" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x2</code>
+        </value>
+      </enumerator>
+      <enumerator name="ALLOCATION_FLAG_WITHIN_BUDGET" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x4</code>
+        </value>
+      </enumerator>
+      <enumerator name="ALLOCATION_FLAG_UPPER_ADDRESS" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x8</code>
+        </value>
+      </enumerator>
+      <enumerator name="ALLOCATION_FLAG_CAN_ALIAS" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x10</code>
+        </value>
+      </enumerator>
+      <enumerator name="ALLOCATION_FLAG_STRATEGY_MIN_MEMORY" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x00010000</code>
+        </value>
+      </enumerator>
+      <enumerator name="ALLOCATION_FLAG_STRATEGY_MIN_TIME" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x00020000</code>
+        </value>
+      </enumerator>
+      <enumerator name="ALLOCATION_FLAG_STRATEGY_MIN_OFFSET" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x0004000</code>
+        </value>
+      </enumerator>
+      <enumerator name="ALLOCATION_FLAG_STRATEGY_BEST_FIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>ALLOCATION_FLAG_STRATEGY_MIN_MEMORY</code>
+        </value>
+      </enumerator>
+      <enumerator name="ALLOCATION_FLAG_STRATEGY_FIRST_FIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>ALLOCATION_FLAG_STRATEGY_MIN_TIME</code>
+        </value>
+      </enumerator>
+      <enumerator name="ALLOCATION_FLAG_STRATEGY_MASK" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>ALLOCATION_FLAG_STRATEGY_MIN_MEMORY | ALLOCATION_FLAG_STRATEGY_MIN_TIME | ALLOCATION_FLAG_STRATEGY_MIN_OFFSET</code>
+        </value>
+      </enumerator>
+    </enumeration>
+    <struct name="ALLOCATION_DESC" access="public" unsafe="true">
+      <field name="Flags" access="public">
+        <type native="D3D12MA::ALLOCATION_FLAGS">ALLOCATION_FLAGS</type>
+      </field>
+      <field name="HeapType" access="public">
+        <type native="D3D12_HEAP_TYPE">HeapType</type>
+      </field>
+      <field name="ExtraHeapFlags" access="public">
+        <type native="D3D12_HEAP_FLAGS">HeapFlags</type>
+      </field>
+      <field name="CustomPool" access="public">
+        <type native="D3D12MA::Pool *">Pool*</type>
+      </field>
+      <field name="pPrivateData" access="public">
+        <type>void*</type>
+      </field>
+    </struct>
+    <struct name="Statistics" access="public">
+      <field name="BlockCount" access="public">
+        <type>uint</type>
+      </field>
+      <field name="AllocationCount" access="public">
+        <type>uint</type>
+      </field>
+      <field name="BlockBytes" access="public">
+        <type native="UINT64">ulong</type>
+      </field>
+      <field name="AllocationBytes" access="public">
+        <type native="UINT64">ulong</type>
+      </field>
+    </struct>
+    <struct name="DetailedStatistics" access="public">
+      <field name="Stats" access="public">
+        <type native="D3D12MA::Statistics">Statistics</type>
+      </field>
+      <field name="UnusedRangeCount" access="public">
+        <type>uint</type>
+      </field>
+      <field name="AllocationSizeMin" access="public">
+        <type native="UINT64">ulong</type>
+      </field>
+      <field name="AllocationSizeMax" access="public">
+        <type native="UINT64">ulong</type>
+      </field>
+      <field name="UnusedRangeSizeMin" access="public">
+        <type native="UINT64">ulong</type>
+      </field>
+      <field name="UnusedRangeSizeMax" access="public">
+        <type native="UINT64">ulong</type>
+      </field>
+    </struct>
+    <struct name="TotalStatistics" access="public">
+      <field name="HeapType" access="public">
+        <type native="DetailedStatistics[5]" count="5" fixed="_HeapType_e__FixedBuffer">DetailedStatistics</type>
+      </field>
+      <field name="MemorySegmentGroup" access="public">
+        <type native="DetailedStatistics[2]" count="2" fixed="_MemorySegmentGroup_e__FixedBuffer">DetailedStatistics</type>
+      </field>
+      <field name="Total" access="public">
+        <type native="D3D12MA::DetailedStatistics">DetailedStatistics</type>
+      </field>
+      <struct name="_HeapType_e__FixedBuffer" access="public">
+        <attribute>InlineArray(5)</attribute>
+        <field name="e0" access="public">
+          <type>DetailedStatistics</type>
+        </field>
+      </struct>
+      <struct name="_MemorySegmentGroup_e__FixedBuffer" access="public">
+        <attribute>InlineArray(2)</attribute>
+        <field name="e0" access="public">
+          <type>DetailedStatistics</type>
+        </field>
+      </struct>
+    </struct>
+    <struct name="Budget" access="public">
+      <field name="Stats" access="public">
+        <type native="D3D12MA::Statistics">Statistics</type>
+      </field>
+      <field name="UsageBytes" access="public">
+        <type native="UINT64">ulong</type>
+      </field>
+      <field name="BudgetBytes" access="public">
+        <type native="UINT64">ulong</type>
+      </field>
+    </struct>
+    <struct name="VirtualAllocation" access="public">
+      <field name="AllocHandle" access="public">
+        <type native="D3D12MA::AllocHandle">ulong</type>
+      </field>
+    </struct>
+    <struct name="Allocation" access="public" native="struct Allocation : D3D12MA::IUnknownImpl" unsafe="true">
+      <field name="Base" access="public" inherited="IUnknownImpl">
+        <type>IUnknownImpl</type>
+      </field>
+      <field name="m_Allocator" access="private">
+        <type native="D3D12MA::AllocatorPimpl *">void*</type>
+      </field>
+      <field name="m_Size" access="private">
+        <type native="UINT64">ulong</type>
+      </field>
+      <field name="m_Alignment" access="private">
+        <type native="UINT64">ulong</type>
+      </field>
+      <field name="m_Resource" access="private">
+        <type>ID3D12Resource*</type>
+      </field>
+      <field name="m_pPrivateData" access="private">
+        <type>void*</type>
+      </field>
+      <field name="m_Name" access="private">
+        <type native="wchar_t *">char*</type>
+      </field>
+      <field name="Anonymous" access="private">
+        <type native="__AnonymousRecord_D3D12MemAlloc_L621_C5">_Anonymous_e__Union</type>
+      </field>
+      <field name="m_PackedData" access="private">
+        <type native="struct PackedData">PackedData</type>
+      </field>
+      <field name="m_Committed" access="private">
+        <type>ref _Anonymous_e__Union._m_Committed_e__Struct</type>
+        <get inlining="aggressive">
+          <code>return ref Anonymous.m_Committed;</code>
+        </get>
+      </field>
+      <field name="m_Placed" access="private">
+        <type>ref _Anonymous_e__Union._m_Placed_e__Struct</type>
+        <get inlining="aggressive">
+          <code>return ref Anonymous.m_Placed;</code>
+        </get>
+      </field>
+      <field name="m_Heap" access="private">
+        <type>ref _Anonymous_e__Union._m_Heap_e__Struct</type>
+        <get inlining="aggressive">
+          <code>return ref Anonymous.m_Heap;</code>
+        </get>
+      </field>
+      <function name="Allocation" access="private" lib="D3D12MA" convention="ThisCall" entrypoint="??0Allocation@D3D12MA@@AEAA@PEAVAllocatorPimpl@1@_K1@Z" static="true" unsafe="true">
+        <type>void</type>
+        <param name="pThis">
+          <type>Allocation*</type>
+        </param>
+        <param name="allocator">
+          <type>void*</type>
+        </param>
+        <param name="size">
+          <type>ulong</type>
+        </param>
+        <param name="alignment">
+          <type>ulong</type>
+        </param>
+      </function>
+      <function name="GetOffset" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?GetOffset@Allocation@D3D12MA@@QEBA_KXZ" static="true" readonly="true">
+        <type native="UINT64">ulong</type>
+        <param name="pThis">
+          <type>Allocation*</type>
+        </param>
+      </function>
+      <function name="GetAlignment" access="public" readonly="true">
+        <type native="UINT64">ulong</type>
+        <code>return m_Alignment;</code>
+      </function>
+      <function name="GetSize" access="public" readonly="true">
+        <type native="UINT64">ulong</type>
+        <code>return m_Size;</code>
+      </function>
+      <function name="GetResource" access="public" readonly="true" unsafe="true">
+        <type>ID3D12Resource*</type>
+        <code>return m_Resource;</code>
+      </function>
+      <function name="SetResource" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?SetResource@Allocation@D3D12MA@@QEAAXPEAUID3D12Resource@@@Z" static="true" unsafe="true">
+        <type>void</type>
+        <param name="pThis">
+          <type>Allocation*</type>
+        </param>
+        <param name="pResource">
+          <type>ID3D12Resource*</type>
+        </param>
+      </function>
+      <function name="GetHeap" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?GetHeap@Allocation@D3D12MA@@QEBAPEAUID3D12Heap@@XZ" static="true" readonly="true" unsafe="true">
+        <type>ID3D12Heap*</type>
+        <param name="pThis">
+          <type>Allocation*</type>
+        </param>
+      </function>
+      <function name="SetPrivateData" access="public" unsafe="true">
+        <type>void</type>
+        <param name="pPrivateData">
+          <type>void*</type>
+        </param>
+        <code>m_pPrivateData = pPrivateData;</code>
+      </function>
+      <function name="GetPrivateData" access="public" readonly="true" unsafe="true">
+        <type>void*</type>
+        <code>return m_pPrivateData;</code>
+      </function>
+      <function name="SetName" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?SetName@Allocation@D3D12MA@@QEAAXPEB_W@Z" static="true" unsafe="true">
+        <type>void</type>
+        <param name="pThis">
+          <type>Allocation*</type>
+        </param>
+        <param name="Name">
+          <type>char*</type>
+        </param>
+      </function>
+      <function name="GetName" access="public" readonly="true" unsafe="true">
+        <type native="LPCWSTR">char*</type>
+        <code>return m_Name;</code>
+      </function>
+      <function name="InitCommitted" access="private" lib="D3D12MA" convention="ThisCall" entrypoint="?InitCommitted@Allocation@D3D12MA@@AEAAXPEAVCommittedAllocationList@2@@Z" static="true" unsafe="true">
+        <type>void</type>
+        <param name="pThis">
+          <type>Allocation*</type>
+        </param>
+        <param name="list">
+          <type>void*</type>
+        </param>
+      </function>
+      <function name="InitPlaced" access="private" lib="D3D12MA" convention="ThisCall" entrypoint="?InitPlaced@Allocation@D3D12MA@@AEAAX_KPEAVNormalBlock@2@@Z" static="true" unsafe="true">
+        <type>void</type>
+        <param name="pThis">
+          <type>Allocation*</type>
+        </param>
+        <param name="allocHandle">
+          <type>ulong</type>
+        </param>
+        <param name="block">
+          <type>void*</type>
+        </param>
+      </function>
+      <function name="InitHeap" access="private" lib="D3D12MA" convention="ThisCall" entrypoint="?InitHeap@Allocation@D3D12MA@@AEAAXPEAVCommittedAllocationList@2@PEAUID3D12Heap@@@Z" static="true" unsafe="true">
+        <type>void</type>
+        <param name="pThis">
+          <type>Allocation*</type>
+        </param>
+        <param name="list">
+          <type>void*</type>
+        </param>
+        <param name="heap">
+          <type>ID3D12Heap*</type>
+        </param>
+      </function>
+      <function name="SwapBlockAllocation" access="private" lib="D3D12MA" convention="ThisCall" entrypoint="?SwapBlockAllocation@Allocation@D3D12MA@@AEAAXPEAV12@@Z" static="true" unsafe="true">
+        <type>void</type>
+        <param name="pThis">
+          <type>Allocation*</type>
+        </param>
+        <param name="allocation">
+          <type>Allocation*</type>
+        </param>
+      </function>
+      <function name="GetAllocHandle" access="private" lib="D3D12MA" convention="ThisCall" entrypoint="?GetAllocHandle@Allocation@D3D12MA@@AEBA_KXZ" static="true" readonly="true">
+        <type native="D3D12MA::AllocHandle">ulong</type>
+        <param name="pThis">
+          <type>Allocation*</type>
+        </param>
+      </function>
+      <function name="GetBlock" access="private" lib="D3D12MA" convention="ThisCall" entrypoint="?GetBlock@Allocation@D3D12MA@@AEAAPEAVNormalBlock@2@XZ" static="true" unsafe="true">
+        <type native="D3D12MA::NormalBlock *">void*</type>
+        <param name="pThis">
+          <type>Allocation*</type>
+        </param>
+      </function>
+      <function name="FreeName" access="private" lib="D3D12MA" convention="ThisCall" entrypoint="?FreeName@Allocation@D3D12MA@@AEAAXXZ" static="true">
+        <type>void</type>
+        <param name="pThis">
+          <type>Allocation*</type>
+        </param>
+      </function>
+      <enumeration name="Type" access="private">
+        <type>int</type>
+        <enumerator name="TYPE_COMMITTED" access="public">
+          <type primitive="False">int</type>
+        </enumerator>
+        <enumerator name="TYPE_PLACED" access="public">
+          <type primitive="False">int</type>
+        </enumerator>
+        <enumerator name="TYPE_HEAP" access="public">
+          <type primitive="False">int</type>
+        </enumerator>
+        <enumerator name="TYPE_COUNT" access="public">
+          <type primitive="False">int</type>
+        </enumerator>
+      </enumeration>
+      <struct name="_Anonymous_e__Union" access="private" layout="Explicit">
+        <field name="m_Committed" access="public" offset="0">
+          <type native="__AnonymousRecord_D3D12MemAlloc_L623_C9">_m_Committed_e__Struct</type>
+        </field>
+        <field name="m_Placed" access="public" offset="0">
+          <type native="__AnonymousRecord_D3D12MemAlloc_L630_C9">_m_Placed_e__Struct</type>
+        </field>
+        <field name="m_Heap" access="public" offset="0">
+          <type native="__AnonymousRecord_D3D12MemAlloc_L636_C9">_m_Heap_e__Struct</type>
+        </field>
+        <struct name="_m_Committed_e__Struct" access="public" unsafe="true">
+          <field name="list" access="public">
+            <type native="D3D12MA::CommittedAllocationList *">void*</type>
+          </field>
+          <field name="prev" access="public">
+            <type native="D3D12MA::Allocation *">Allocation*</type>
+          </field>
+          <field name="next" access="public">
+            <type native="D3D12MA::Allocation *">Allocation*</type>
+          </field>
+        </struct>
+        <struct name="_m_Placed_e__Struct" access="public" unsafe="true">
+          <field name="allocHandle" access="public">
+            <type native="D3D12MA::AllocHandle">ulong</type>
+          </field>
+          <field name="block" access="public">
+            <type native="D3D12MA::NormalBlock *">void*</type>
+          </field>
+        </struct>
+        <struct name="_m_Heap_e__Struct" access="public" unsafe="true">
+          <field name="list" access="public">
+            <type native="D3D12MA::CommittedAllocationList *">void*</type>
+          </field>
+          <field name="prev" access="public">
+            <type native="D3D12MA::Allocation *">Allocation*</type>
+          </field>
+          <field name="next" access="public">
+            <type native="D3D12MA::Allocation *">Allocation*</type>
+          </field>
+          <field name="heap" access="public">
+            <type>ID3D12Heap*</type>
+          </field>
+        </struct>
+      </struct>
+      <struct name="PackedData" access="private">
+        <field name="_bitfield1" access="public">
+          <type>uint</type>
+        </field>
+        <field name="m_Type" access="private">
+          <type native="uint : 2">uint</type>
+          <get inlining="aggressive">
+            <code>return <bitfieldName>_bitfield1</bitfieldName> &amp; 0x<bitwidthHexStringBacking>3u</bitwidthHexStringBacking>;</code>
+          </get>
+          <set inlining="aggressive">
+            <code>
+              <bitfieldName>_bitfield1</bitfieldName> = (_bitfield1 &amp; ~0x<bitwidthHexStringBacking>3u</bitwidthHexStringBacking>) | (value &amp; 0x<bitwidthHexString>3u</bitwidthHexString>);</code>
+          </set>
+        </field>
+        <field name="m_ResourceDimension" access="private">
+          <type native="uint : 3">uint</type>
+          <get inlining="aggressive">
+            <code>return (<bitfieldName>_bitfield1</bitfieldName> &gt;&gt; <bitfieldOffset>2</bitfieldOffset>) &amp; 0x<bitwidthHexStringBacking>7u</bitwidthHexStringBacking>;</code>
+          </get>
+          <set inlining="aggressive">
+            <code>
+              <bitfieldName>_bitfield1</bitfieldName> = (_bitfield1 &amp; ~(0x<bitwidthHexStringBacking>7u</bitwidthHexStringBacking> &lt;&lt; <bitfieldOffset>2</bitfieldOffset>)) | ((value &amp; 0x<bitwidthHexString>7u</bitwidthHexString>) &lt;&lt; 2);</code>
+          </set>
+        </field>
+        <field name="m_ResourceFlags" access="private">
+          <type native="uint : 24">uint</type>
+          <get inlining="aggressive">
+            <code>return (<bitfieldName>_bitfield1</bitfieldName> &gt;&gt; <bitfieldOffset>5</bitfieldOffset>) &amp; 0x<bitwidthHexStringBacking>FFFFFFu</bitwidthHexStringBacking>;</code>
+          </get>
+          <set inlining="aggressive">
+            <code>
+              <bitfieldName>_bitfield1</bitfieldName> = (_bitfield1 &amp; ~(0x<bitwidthHexStringBacking>FFFFFFu</bitwidthHexStringBacking> &lt;&lt; <bitfieldOffset>5</bitfieldOffset>)) | ((value &amp; 0x<bitwidthHexString>FFFFFFu</bitwidthHexString>) &lt;&lt; 5);</code>
+          </set>
+        </field>
+        <field name="_bitfield2" access="public">
+          <type>uint</type>
+        </field>
+        <field name="m_TextureLayout" access="private">
+          <type native="uint : 9">uint</type>
+          <get inlining="aggressive">
+            <code>return <bitfieldName>_bitfield2</bitfieldName> &amp; 0x<bitwidthHexStringBacking>1FFu</bitwidthHexStringBacking>;</code>
+          </get>
+          <set inlining="aggressive">
+            <code>
+              <bitfieldName>_bitfield2</bitfieldName> = (_bitfield2 &amp; ~0x<bitwidthHexStringBacking>1FFu</bitwidthHexStringBacking>) | (value &amp; 0x<bitwidthHexString>1FFu</bitwidthHexString>);</code>
+          </set>
+        </field>
+        <function name="PackedData" access="public">
+          <type>void</type>
+          <init field="m_Type" hint="">
+            <code>0</code>
+          </init>
+          <init field="m_ResourceDimension" hint="">
+            <code>0</code>
+          </init>
+          <init field="m_ResourceFlags" hint="">
+            <code>0</code>
+          </init>
+          <init field="m_TextureLayout" hint="">
+            <code>0</code>
+          </init>
+          <code></code>
+        </function>
+        <function name="GetType" access="public" readonly="true">
+          <type native="D3D12MA::Allocation::Type">Type</type>
+          <code>return (Type)(<value>m_Type</value>);</code>
+        </function>
+        <function name="GetResourceDimension" access="public" readonly="true">
+          <type native="D3D12_RESOURCE_DIMENSION">ResourceDimension</type>
+          <code>return (ResourceDimension)(<value>m_ResourceDimension</value>);</code>
+        </function>
+        <function name="GetResourceFlags" access="public" readonly="true">
+          <type native="D3D12_RESOURCE_FLAGS">ResourceFlags</type>
+          <code>return (ResourceFlags)(<value>m_ResourceFlags</value>);</code>
+        </function>
+        <function name="GetTextureLayout" access="public" readonly="true">
+          <type native="D3D12_TEXTURE_LAYOUT">TextureLayout</type>
+          <code>return (TextureLayout)(<value>m_TextureLayout</value>);</code>
+        </function>
+        <function name="SetType" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?SetType@PackedData@Allocation@D3D12MA@@QEAAXW4Type@23@@Z" static="true">
+          <type>void</type>
+          <param name="pThis">
+            <type>PackedData*</type>
+          </param>
+          <param name="type">
+            <type>Type</type>
+          </param>
+        </function>
+        <function name="SetResourceDimension" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?SetResourceDimension@PackedData@Allocation@D3D12MA@@QEAAXW4D3D12_RESOURCE_DIMENSION@@@Z" static="true">
+          <type>void</type>
+          <param name="pThis">
+            <type>PackedData*</type>
+          </param>
+          <param name="resourceDimension">
+            <type>ResourceDimension</type>
+          </param>
+        </function>
+        <function name="SetResourceFlags" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?SetResourceFlags@PackedData@Allocation@D3D12MA@@QEAAXW4D3D12_RESOURCE_FLAGS@@@Z" static="true">
+          <type>void</type>
+          <param name="pThis">
+            <type>PackedData*</type>
+          </param>
+          <param name="resourceFlags">
+            <type>ResourceFlags</type>
+          </param>
+        </function>
+        <function name="SetTextureLayout" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?SetTextureLayout@PackedData@Allocation@D3D12MA@@QEAAXW4D3D12_TEXTURE_LAYOUT@@@Z" static="true">
+          <type>void</type>
+          <param name="pThis">
+            <type>PackedData*</type>
+          </param>
+          <param name="textureLayout">
+            <type>TextureLayout</type>
+          </param>
+        </function>
+      </struct>
+    </struct>
+    <enumeration name="DEFRAGMENTATION_FLAGS" access="public">
+      <type>int</type>
+      <enumerator name="DEFRAGMENTATION_FLAG_ALGORITHM_FAST" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x1</code>
+        </value>
+      </enumerator>
+      <enumerator name="DEFRAGMENTATION_FLAG_ALGORITHM_BALANCED" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x2</code>
+        </value>
+      </enumerator>
+      <enumerator name="DEFRAGMENTATION_FLAG_ALGORITHM_FULL" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x4</code>
+        </value>
+      </enumerator>
+      <enumerator name="DEFRAGMENTATION_FLAG_ALGORITHM_MASK" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>DEFRAGMENTATION_FLAG_ALGORITHM_FAST | DEFRAGMENTATION_FLAG_ALGORITHM_BALANCED | DEFRAGMENTATION_FLAG_ALGORITHM_FULL</code>
+        </value>
+      </enumerator>
+    </enumeration>
+    <struct name="DEFRAGMENTATION_DESC" access="public">
+      <field name="Flags" access="public">
+        <type native="D3D12MA::DEFRAGMENTATION_FLAGS">DEFRAGMENTATION_FLAGS</type>
+      </field>
+      <field name="MaxBytesPerPass" access="public">
+        <type native="UINT64">ulong</type>
+      </field>
+      <field name="MaxAllocationsPerPass" access="public">
+        <type native="UINT32">uint</type>
+      </field>
+    </struct>
+    <enumeration name="DEFRAGMENTATION_MOVE_OPERATION" access="public">
+      <type>int</type>
+      <enumerator name="COPY" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0</code>
+        </value>
+      </enumerator>
+      <enumerator name="IGNORE" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>1</code>
+        </value>
+      </enumerator>
+      <enumerator name="DESTROY" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>2</code>
+        </value>
+      </enumerator>
+    </enumeration>
+    <struct name="DEFRAGMENTATION_MOVE" access="public" unsafe="true">
+      <field name="Operation" access="public">
+        <type native="D3D12MA::DEFRAGMENTATION_MOVE_OPERATION">DEFRAGMENTATION_MOVE_OPERATION</type>
+      </field>
+      <field name="pSrcAllocation" access="public">
+        <type native="D3D12MA::Allocation *">Allocation*</type>
+      </field>
+      <field name="pDstTmpAllocation" access="public">
+        <type native="D3D12MA::Allocation *">Allocation*</type>
+      </field>
+    </struct>
+    <struct name="DEFRAGMENTATION_PASS_MOVE_INFO" access="public" unsafe="true">
+      <field name="MoveCount" access="public">
+        <type native="UINT32">uint</type>
+      </field>
+      <field name="pMoves" access="public">
+        <type native="D3D12MA::DEFRAGMENTATION_MOVE *">DEFRAGMENTATION_MOVE*</type>
+      </field>
+    </struct>
+    <struct name="DEFRAGMENTATION_STATS" access="public">
+      <field name="BytesMoved" access="public">
+        <type native="UINT64">ulong</type>
+      </field>
+      <field name="BytesFreed" access="public">
+        <type native="UINT64">ulong</type>
+      </field>
+      <field name="AllocationsMoved" access="public">
+        <type native="UINT32">uint</type>
+      </field>
+      <field name="HeapsFreed" access="public">
+        <type native="UINT32">uint</type>
+      </field>
+    </struct>
+    <struct name="DefragmentationContext" access="public" native="struct DefragmentationContext : D3D12MA::IUnknownImpl" unsafe="true">
+      <field name="Base" access="public" inherited="IUnknownImpl">
+        <type>IUnknownImpl</type>
+      </field>
+      <field name="m_Pimpl" access="private">
+        <type native="D3D12MA::DefragmentationContextPimpl *">void*</type>
+      </field>
+      <function name="DefragmentationContext" access="private" lib="D3D12MA" convention="ThisCall" entrypoint="??0DefragmentationContext@D3D12MA@@AEAA@PEAVAllocatorPimpl@1@AEBUDEFRAGMENTATION_DESC@1@PEAVBlockVector@1@@Z" static="true" unsafe="true">
+        <type>void</type>
+        <param name="pThis">
+          <type>DefragmentationContext*</type>
+        </param>
+        <param name="allocator">
+          <type>void*</type>
+        </param>
+        <param name="desc">
+          <type>DEFRAGMENTATION_DESC*</type>
+        </param>
+        <param name="poolVector">
+          <type>void*</type>
+        </param>
+      </function>
+      <function name="BeginPass" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?BeginPass@DefragmentationContext@D3D12MA@@QEAAJPEAUDEFRAGMENTATION_PASS_MOVE_INFO@2@@Z" static="true" unsafe="true">
+        <type native="HRESULT">int</type>
+        <param name="pThis">
+          <type>DefragmentationContext*</type>
+        </param>
+        <param name="pPassInfo">
+          <type>DEFRAGMENTATION_PASS_MOVE_INFO*</type>
+        </param>
+      </function>
+      <function name="EndPass" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?EndPass@DefragmentationContext@D3D12MA@@QEAAJPEAUDEFRAGMENTATION_PASS_MOVE_INFO@2@@Z" static="true" unsafe="true">
+        <type native="HRESULT">int</type>
+        <param name="pThis">
+          <type>DefragmentationContext*</type>
+        </param>
+        <param name="pPassInfo">
+          <type>DEFRAGMENTATION_PASS_MOVE_INFO*</type>
+        </param>
+      </function>
+      <function name="GetStats" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?GetStats@DefragmentationContext@D3D12MA@@QEAAXPEAUDEFRAGMENTATION_STATS@2@@Z" static="true" unsafe="true">
+        <type>void</type>
+        <param name="pThis">
+          <type>DefragmentationContext*</type>
+        </param>
+        <param name="pStats">
+          <type>DEFRAGMENTATION_STATS*</type>
+        </param>
+      </function>
+    </struct>
+    <enumeration name="POOL_FLAGS" access="public">
+      <type>int</type>
+      <enumerator name="POOL_FLAG_NONE" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0</code>
+        </value>
+      </enumerator>
+      <enumerator name="POOL_FLAG_ALGORITHM_LINEAR" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x1</code>
+        </value>
+      </enumerator>
+      <enumerator name="POOL_FLAG_MSAA_TEXTURES_ALWAYS_COMMITTED" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x2</code>
+        </value>
+      </enumerator>
+      <enumerator name="POOL_FLAG_ALWAYS_COMMITTED" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x4</code>
+        </value>
+      </enumerator>
+      <enumerator name="POOL_FLAG_ALGORITHM_MASK" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>POOL_FLAG_ALGORITHM_LINEAR</code>
+        </value>
+      </enumerator>
+    </enumeration>
+    <struct name="POOL_DESC" access="public" unsafe="true">
+      <field name="Flags" access="public">
+        <type native="D3D12MA::POOL_FLAGS">POOL_FLAGS</type>
+      </field>
+      <field name="HeapProperties" access="public">
+        <type native="D3D12_HEAP_PROPERTIES">HeapProperties</type>
+      </field>
+      <field name="HeapFlags" access="public">
+        <type native="D3D12_HEAP_FLAGS">HeapFlags</type>
+      </field>
+      <field name="BlockSize" access="public">
+        <type native="UINT64">ulong</type>
+      </field>
+      <field name="MinBlockCount" access="public">
+        <type>uint</type>
+      </field>
+      <field name="MaxBlockCount" access="public">
+        <type>uint</type>
+      </field>
+      <field name="MinAllocationAlignment" access="public">
+        <type native="UINT64">ulong</type>
+      </field>
+      <field name="pProtectedSession" access="public">
+        <type>ID3D12ProtectedResourceSession*</type>
+      </field>
+      <field name="ResidencyPriority" access="public">
+        <type native="D3D12_RESIDENCY_PRIORITY">ResidencyPriority</type>
+      </field>
+    </struct>
+    <struct name="Pool" access="public" native="struct Pool : D3D12MA::IUnknownImpl" unsafe="true">
+      <field name="Base" access="public" inherited="IUnknownImpl">
+        <type>IUnknownImpl</type>
+      </field>
+      <field name="m_Pimpl" access="private">
+        <type native="D3D12MA::PoolPimpl *">void*</type>
+      </field>
+      <function name="Pool" access="private" lib="D3D12MA" convention="ThisCall" entrypoint="??0Pool@D3D12MA@@AEAA@PEAVAllocator@1@AEBUPOOL_DESC@1@@Z" static="true" unsafe="true">
+        <type>void</type>
+        <param name="pThis">
+          <type>Pool*</type>
+        </param>
+        <param name="allocator">
+          <type>Allocator*</type>
+        </param>
+        <param name="desc">
+          <type>POOL_DESC*</type>
+        </param>
+      </function>
+      <function name="GetDesc" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?GetDesc@Pool@D3D12MA@@QEBA?AUPOOL_DESC@2@XZ" static="true" readonly="true">
+        <type native="D3D12MA::POOL_DESC">POOL_DESC</type>
+        <param name="pThis">
+          <type>Pool*</type>
+        </param>
+      </function>
+      <function name="GetStatistics" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?GetStatistics@Pool@D3D12MA@@QEAAXPEAUStatistics@2@@Z" static="true" unsafe="true">
+        <type>void</type>
+        <param name="pThis">
+          <type>Pool*</type>
+        </param>
+        <param name="pStats">
+          <type>Statistics*</type>
+        </param>
+      </function>
+      <function name="CalculateStatistics" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?CalculateStatistics@Pool@D3D12MA@@QEAAXPEAUDetailedStatistics@2@@Z" static="true" unsafe="true">
+        <type>void</type>
+        <param name="pThis">
+          <type>Pool*</type>
+        </param>
+        <param name="pStats">
+          <type>DetailedStatistics*</type>
+        </param>
+      </function>
+      <function name="SetName" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?SetName@Pool@D3D12MA@@QEAAXPEB_W@Z" static="true" unsafe="true">
+        <type>void</type>
+        <param name="pThis">
+          <type>Pool*</type>
+        </param>
+        <param name="Name">
+          <type>char*</type>
+        </param>
+      </function>
+      <function name="GetName" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?GetName@Pool@D3D12MA@@QEBAPEB_WXZ" static="true" readonly="true" unsafe="true">
+        <type native="LPCWSTR">char*</type>
+        <param name="pThis">
+          <type>Pool*</type>
+        </param>
+      </function>
+      <function name="BeginDefragmentation" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?BeginDefragmentation@Pool@D3D12MA@@QEAAJPEBUDEFRAGMENTATION_DESC@2@PEAPEAVDefragmentationContext@2@@Z" static="true" unsafe="true">
+        <type native="HRESULT">int</type>
+        <param name="pThis">
+          <type>Pool*</type>
+        </param>
+        <param name="pDesc">
+          <type>DEFRAGMENTATION_DESC*</type>
+        </param>
+        <param name="ppContext">
+          <type>DefragmentationContext**</type>
+        </param>
+      </function>
+    </struct>
+    <enumeration name="ALLOCATOR_FLAGS" access="public">
+      <type>int</type>
+      <enumerator name="ALLOCATOR_FLAG_NONE" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0</code>
+        </value>
+      </enumerator>
+      <enumerator name="ALLOCATOR_FLAG_SINGLE_THREADED" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x1</code>
+        </value>
+      </enumerator>
+      <enumerator name="ALLOCATOR_FLAG_ALWAYS_COMMITTED" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x2</code>
+        </value>
+      </enumerator>
+      <enumerator name="ALLOCATOR_FLAG_DEFAULT_POOLS_NOT_ZEROED" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x4</code>
+        </value>
+      </enumerator>
+      <enumerator name="ALLOCATOR_FLAG_MSAA_TEXTURES_ALWAYS_COMMITTED" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x8</code>
+        </value>
+      </enumerator>
+      <enumerator name="ALLOCATOR_FLAG_DONT_PREFER_SMALL_BUFFERS_COMMITTED" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x10</code>
+        </value>
+      </enumerator>
+    </enumeration>
+    <struct name="ALLOCATOR_DESC" access="public" unsafe="true">
+      <field name="Flags" access="public">
+        <type native="D3D12MA::ALLOCATOR_FLAGS">ALLOCATOR_FLAGS</type>
+      </field>
+      <field name="pDevice" access="public">
+        <type>ID3D12Device*</type>
+      </field>
+      <field name="PreferredBlockSize" access="public">
+        <type native="UINT64">ulong</type>
+      </field>
+      <field name="pAllocationCallbacks" access="public">
+        <type native="const ALLOCATION_CALLBACKS *">ALLOCATION_CALLBACKS*</type>
+      </field>
+      <field name="pAdapter" access="public">
+        <type>IDXGIAdapter*</type>
+      </field>
+    </struct>
+    <struct name="Allocator" access="public" native="struct Allocator : D3D12MA::IUnknownImpl" unsafe="true">
+      <field name="Base" access="public" inherited="IUnknownImpl">
+        <type>IUnknownImpl</type>
+      </field>
+      <field name="m_Pimpl" access="private">
+        <type native="D3D12MA::AllocatorPimpl *">void*</type>
+      </field>
+      <function name="Allocator" access="private" lib="D3D12MA" convention="ThisCall" entrypoint="??0Allocator@D3D12MA@@AEAA@AEBUALLOCATION_CALLBACKS@1@AEBUALLOCATOR_DESC@1@@Z" static="true" unsafe="true">
+        <type>void</type>
+        <param name="pThis">
+          <type>Allocator*</type>
+        </param>
+        <param name="allocationCallbacks">
+          <type>ALLOCATION_CALLBACKS*</type>
+        </param>
+        <param name="desc">
+          <type>ALLOCATOR_DESC*</type>
+        </param>
+      </function>
+      <function name="GetD3D12Options" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?GetD3D12Options@Allocator@D3D12MA@@QEBAAEBUD3D12_FEATURE_DATA_D3D12_OPTIONS@@XZ" static="true" readonly="true" unsafe="true">
+        <type native="const D3D12_FEATURE_DATA_D3D12_OPTIONS &amp;">FeatureDataD3D12Options*</type>
+        <param name="pThis">
+          <type>Allocator*</type>
+        </param>
+      </function>
+      <function name="IsUMA" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?IsUMA@Allocator@D3D12MA@@QEBAHXZ" static="true" readonly="true">
+        <type native="BOOL">int</type>
+        <param name="pThis">
+          <type>Allocator*</type>
+        </param>
+      </function>
+      <function name="IsCacheCoherentUMA" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?IsCacheCoherentUMA@Allocator@D3D12MA@@QEBAHXZ" static="true" readonly="true">
+        <type native="BOOL">int</type>
+        <param name="pThis">
+          <type>Allocator*</type>
+        </param>
+      </function>
+      <function name="IsGPUUploadHeapSupported" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?IsGPUUploadHeapSupported@Allocator@D3D12MA@@QEBAHXZ" static="true" readonly="true">
+        <type native="BOOL">int</type>
+        <param name="pThis">
+          <type>Allocator*</type>
+        </param>
+      </function>
+      <function name="GetMemoryCapacity" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?GetMemoryCapacity@Allocator@D3D12MA@@QEBA_KI@Z" static="true" readonly="true">
+        <type native="UINT64">ulong</type>
+        <param name="pThis">
+          <type>Allocator*</type>
+        </param>
+        <param name="memorySegmentGroup">
+          <type>uint</type>
+        </param>
+      </function>
+      <function name="CreateResource" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?CreateResource@Allocator@D3D12MA@@QEAAJPEBUALLOCATION_DESC@2@PEBUD3D12_RESOURCE_DESC@@W4D3D12_RESOURCE_STATES@@PEBUD3D12_CLEAR_VALUE@@PEAPEAVAllocation@2@AEBU_GUID@@PEAPEAX@Z" static="true" unsafe="true">
+        <type native="HRESULT">int</type>
+        <param name="pThis">
+          <type>Allocator*</type>
+        </param>
+        <param name="pAllocDesc">
+          <type>ALLOCATION_DESC*</type>
+        </param>
+        <param name="pResourceDesc">
+          <type>ResourceDesc*</type>
+        </param>
+        <param name="InitialResourceState">
+          <type>ResourceStates</type>
+        </param>
+        <param name="pOptimizedClearValue">
+          <type>ClearValue*</type>
+        </param>
+        <param name="ppAllocation">
+          <type>Allocation**</type>
+        </param>
+        <param name="riidResource">
+          <type>Guid*</type>
+        </param>
+        <param name="ppvResource">
+          <type>void**</type>
+        </param>
+      </function>
+      <function name="CreateResource2" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?CreateResource2@Allocator@D3D12MA@@QEAAJPEBUALLOCATION_DESC@2@PEBUD3D12_RESOURCE_DESC1@@W4D3D12_RESOURCE_STATES@@PEBUD3D12_CLEAR_VALUE@@PEAPEAVAllocation@2@AEBU_GUID@@PEAPEAX@Z" static="true" unsafe="true">
+        <type native="HRESULT">int</type>
+        <param name="pThis">
+          <type>Allocator*</type>
+        </param>
+        <param name="pAllocDesc">
+          <type>ALLOCATION_DESC*</type>
+        </param>
+        <param name="pResourceDesc">
+          <type>ResourceDesc1*</type>
+        </param>
+        <param name="InitialResourceState">
+          <type>ResourceStates</type>
+        </param>
+        <param name="pOptimizedClearValue">
+          <type>ClearValue*</type>
+        </param>
+        <param name="ppAllocation">
+          <type>Allocation**</type>
+        </param>
+        <param name="riidResource">
+          <type>Guid*</type>
+        </param>
+        <param name="ppvResource">
+          <type>void**</type>
+        </param>
+      </function>
+      <function name="CreateResource3" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?CreateResource3@Allocator@D3D12MA@@QEAAJPEBUALLOCATION_DESC@2@PEBUD3D12_RESOURCE_DESC1@@W4D3D12_BARRIER_LAYOUT@@PEBUD3D12_CLEAR_VALUE@@IPEBW4DXGI_FORMAT@@PEAPEAVAllocation@2@AEBU_GUID@@PEAPEAX@Z" static="true" unsafe="true">
+        <type native="HRESULT">int</type>
+        <param name="pThis">
+          <type>Allocator*</type>
+        </param>
+        <param name="pAllocDesc">
+          <type>ALLOCATION_DESC*</type>
+        </param>
+        <param name="pResourceDesc">
+          <type>ResourceDesc1*</type>
+        </param>
+        <param name="InitialLayout">
+          <type>BarrierLayout</type>
+        </param>
+        <param name="pOptimizedClearValue">
+          <type>ClearValue*</type>
+        </param>
+        <param name="NumCastableFormats">
+          <type>uint</type>
+        </param>
+        <param name="pCastableFormats">
+          <type>Format*</type>
+        </param>
+        <param name="ppAllocation">
+          <type>Allocation**</type>
+        </param>
+        <param name="riidResource">
+          <type>Guid*</type>
+        </param>
+        <param name="ppvResource">
+          <type>void**</type>
+        </param>
+      </function>
+      <function name="AllocateMemory" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?AllocateMemory@Allocator@D3D12MA@@QEAAJPEBUALLOCATION_DESC@2@PEBUD3D12_RESOURCE_ALLOCATION_INFO@@PEAPEAVAllocation@2@@Z" static="true" unsafe="true">
+        <type native="HRESULT">int</type>
+        <param name="pThis">
+          <type>Allocator*</type>
+        </param>
+        <param name="pAllocDesc">
+          <type>ALLOCATION_DESC*</type>
+        </param>
+        <param name="pAllocInfo">
+          <type>ResourceAllocationInfo*</type>
+        </param>
+        <param name="ppAllocation">
+          <type>Allocation**</type>
+        </param>
+      </function>
+      <function name="CreateAliasingResource" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?CreateAliasingResource@Allocator@D3D12MA@@QEAAJPEAVAllocation@2@_KPEBUD3D12_RESOURCE_DESC@@W4D3D12_RESOURCE_STATES@@PEBUD3D12_CLEAR_VALUE@@AEBU_GUID@@PEAPEAX@Z" static="true" unsafe="true">
+        <type native="HRESULT">int</type>
+        <param name="pThis">
+          <type>Allocator*</type>
+        </param>
+        <param name="pAllocation">
+          <type>Allocation*</type>
+        </param>
+        <param name="AllocationLocalOffset">
+          <type>ulong</type>
+        </param>
+        <param name="pResourceDesc">
+          <type>ResourceDesc*</type>
+        </param>
+        <param name="InitialResourceState">
+          <type>ResourceStates</type>
+        </param>
+        <param name="pOptimizedClearValue">
+          <type>ClearValue*</type>
+        </param>
+        <param name="riidResource">
+          <type>Guid*</type>
+        </param>
+        <param name="ppvResource">
+          <type>void**</type>
+        </param>
+      </function>
+      <function name="CreateAliasingResource1" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?CreateAliasingResource1@Allocator@D3D12MA@@QEAAJPEAVAllocation@2@_KPEBUD3D12_RESOURCE_DESC1@@W4D3D12_RESOURCE_STATES@@PEBUD3D12_CLEAR_VALUE@@AEBU_GUID@@PEAPEAX@Z" static="true" unsafe="true">
+        <type native="HRESULT">int</type>
+        <param name="pThis">
+          <type>Allocator*</type>
+        </param>
+        <param name="pAllocation">
+          <type>Allocation*</type>
+        </param>
+        <param name="AllocationLocalOffset">
+          <type>ulong</type>
+        </param>
+        <param name="pResourceDesc">
+          <type>ResourceDesc1*</type>
+        </param>
+        <param name="InitialResourceState">
+          <type>ResourceStates</type>
+        </param>
+        <param name="pOptimizedClearValue">
+          <type>ClearValue*</type>
+        </param>
+        <param name="riidResource">
+          <type>Guid*</type>
+        </param>
+        <param name="ppvResource">
+          <type>void**</type>
+        </param>
+      </function>
+      <function name="CreateAliasingResource2" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?CreateAliasingResource2@Allocator@D3D12MA@@QEAAJPEAVAllocation@2@_KPEBUD3D12_RESOURCE_DESC1@@W4D3D12_BARRIER_LAYOUT@@PEBUD3D12_CLEAR_VALUE@@IPEBW4DXGI_FORMAT@@AEBU_GUID@@PEAPEAX@Z" static="true" unsafe="true">
+        <type native="HRESULT">int</type>
+        <param name="pThis">
+          <type>Allocator*</type>
+        </param>
+        <param name="pAllocation">
+          <type>Allocation*</type>
+        </param>
+        <param name="AllocationLocalOffset">
+          <type>ulong</type>
+        </param>
+        <param name="pResourceDesc">
+          <type>ResourceDesc1*</type>
+        </param>
+        <param name="InitialLayout">
+          <type>BarrierLayout</type>
+        </param>
+        <param name="pOptimizedClearValue">
+          <type>ClearValue*</type>
+        </param>
+        <param name="NumCastableFormats">
+          <type>uint</type>
+        </param>
+        <param name="pCastableFormats">
+          <type>Format*</type>
+        </param>
+        <param name="riidResource">
+          <type>Guid*</type>
+        </param>
+        <param name="ppvResource">
+          <type>void**</type>
+        </param>
+      </function>
+      <function name="CreatePool" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?CreatePool@Allocator@D3D12MA@@QEAAJPEBUPOOL_DESC@2@PEAPEAVPool@2@@Z" static="true" unsafe="true">
+        <type native="HRESULT">int</type>
+        <param name="pThis">
+          <type>Allocator*</type>
+        </param>
+        <param name="pPoolDesc">
+          <type>POOL_DESC*</type>
+        </param>
+        <param name="ppPool">
+          <type>Pool**</type>
+        </param>
+      </function>
+      <function name="SetCurrentFrameIndex" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?SetCurrentFrameIndex@Allocator@D3D12MA@@QEAAXI@Z" static="true">
+        <type>void</type>
+        <param name="pThis">
+          <type>Allocator*</type>
+        </param>
+        <param name="frameIndex">
+          <type>uint</type>
+        </param>
+      </function>
+      <function name="GetBudget" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?GetBudget@Allocator@D3D12MA@@QEAAXPEAUBudget@2@0@Z" static="true" unsafe="true">
+        <type>void</type>
+        <param name="pThis">
+          <type>Allocator*</type>
+        </param>
+        <param name="pLocalBudget">
+          <type>Budget*</type>
+        </param>
+        <param name="pNonLocalBudget">
+          <type>Budget*</type>
+        </param>
+      </function>
+      <function name="CalculateStatistics" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?CalculateStatistics@Allocator@D3D12MA@@QEAAXPEAUTotalStatistics@2@@Z" static="true" unsafe="true">
+        <type>void</type>
+        <param name="pThis">
+          <type>Allocator*</type>
+        </param>
+        <param name="pStats">
+          <type>TotalStatistics*</type>
+        </param>
+      </function>
+      <function name="BuildStatsString" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?BuildStatsString@Allocator@D3D12MA@@QEBAXPEAPEA_WH@Z" static="true" readonly="true" unsafe="true">
+        <type>void</type>
+        <param name="pThis">
+          <type>Allocator*</type>
+        </param>
+        <param name="ppStatsString">
+          <type>char**</type>
+        </param>
+        <param name="DetailedMap">
+          <type>int</type>
+        </param>
+      </function>
+      <function name="FreeStatsString" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?FreeStatsString@Allocator@D3D12MA@@QEBAXPEA_W@Z" static="true" readonly="true" unsafe="true">
+        <type>void</type>
+        <param name="pThis">
+          <type>Allocator*</type>
+        </param>
+        <param name="pStatsString">
+          <type>char*</type>
+        </param>
+      </function>
+      <function name="BeginDefragmentation" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?BeginDefragmentation@Allocator@D3D12MA@@QEAAXPEBUDEFRAGMENTATION_DESC@2@PEAPEAVDefragmentationContext@2@@Z" static="true" unsafe="true">
+        <type>void</type>
+        <param name="pThis">
+          <type>Allocator*</type>
+        </param>
+        <param name="pDesc">
+          <type>DEFRAGMENTATION_DESC*</type>
+        </param>
+        <param name="ppContext">
+          <type>DefragmentationContext**</type>
+        </param>
+      </function>
+    </struct>
+    <enumeration name="VIRTUAL_BLOCK_FLAGS" access="public">
+      <type>int</type>
+      <enumerator name="VIRTUAL_BLOCK_FLAG_NONE" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0</code>
+        </value>
+      </enumerator>
+      <enumerator name="VIRTUAL_BLOCK_FLAG_ALGORITHM_LINEAR" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>POOL_FLAGS.POOL_FLAG_ALGORITHM_LINEAR</code>
+        </value>
+      </enumerator>
+      <enumerator name="VIRTUAL_BLOCK_FLAG_ALGORITHM_MASK" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>POOL_FLAGS.POOL_FLAG_ALGORITHM_MASK</code>
+        </value>
+      </enumerator>
+    </enumeration>
+    <struct name="VIRTUAL_BLOCK_DESC" access="public" unsafe="true">
+      <field name="Flags" access="public">
+        <type native="D3D12MA::VIRTUAL_BLOCK_FLAGS">VIRTUAL_BLOCK_FLAGS</type>
+      </field>
+      <field name="Size" access="public">
+        <type native="UINT64">ulong</type>
+      </field>
+      <field name="pAllocationCallbacks" access="public">
+        <type native="const ALLOCATION_CALLBACKS *">ALLOCATION_CALLBACKS*</type>
+      </field>
+    </struct>
+    <enumeration name="VIRTUAL_ALLOCATION_FLAGS" access="public">
+      <type>int</type>
+      <enumerator name="VIRTUAL_ALLOCATION_FLAG_NONE" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0</code>
+        </value>
+      </enumerator>
+      <enumerator name="VIRTUAL_ALLOCATION_FLAG_UPPER_ADDRESS" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>ALLOCATION_FLAGS.ALLOCATION_FLAG_UPPER_ADDRESS</code>
+        </value>
+      </enumerator>
+      <enumerator name="VIRTUAL_ALLOCATION_FLAG_STRATEGY_MIN_MEMORY" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>ALLOCATION_FLAGS.ALLOCATION_FLAG_STRATEGY_MIN_MEMORY</code>
+        </value>
+      </enumerator>
+      <enumerator name="VIRTUAL_ALLOCATION_FLAG_STRATEGY_MIN_TIME" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>ALLOCATION_FLAGS.ALLOCATION_FLAG_STRATEGY_MIN_TIME</code>
+        </value>
+      </enumerator>
+      <enumerator name="VIRTUAL_ALLOCATION_FLAG_STRATEGY_MIN_OFFSET" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>ALLOCATION_FLAGS.ALLOCATION_FLAG_STRATEGY_MIN_OFFSET</code>
+        </value>
+      </enumerator>
+      <enumerator name="VIRTUAL_ALLOCATION_FLAG_STRATEGY_MASK" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>ALLOCATION_FLAGS.ALLOCATION_FLAG_STRATEGY_MASK</code>
+        </value>
+      </enumerator>
+    </enumeration>
+    <struct name="VIRTUAL_ALLOCATION_DESC" access="public" unsafe="true">
+      <field name="Flags" access="public">
+        <type native="D3D12MA::VIRTUAL_ALLOCATION_FLAGS">VIRTUAL_ALLOCATION_FLAGS</type>
+      </field>
+      <field name="Size" access="public">
+        <type native="UINT64">ulong</type>
+      </field>
+      <field name="Alignment" access="public">
+        <type native="UINT64">ulong</type>
+      </field>
+      <field name="pPrivateData" access="public">
+        <type>void*</type>
+      </field>
+    </struct>
+    <struct name="VIRTUAL_ALLOCATION_INFO" access="public" unsafe="true">
+      <field name="Offset" access="public">
+        <type native="UINT64">ulong</type>
+      </field>
+      <field name="Size" access="public">
+        <type native="UINT64">ulong</type>
+      </field>
+      <field name="pPrivateData" access="public">
+        <type>void*</type>
+      </field>
+    </struct>
+    <struct name="VirtualBlock" access="public" native="struct VirtualBlock : D3D12MA::IUnknownImpl" unsafe="true">
+      <field name="Base" access="public" inherited="IUnknownImpl">
+        <type>IUnknownImpl</type>
+      </field>
+      <field name="m_Pimpl" access="private">
+        <type native="D3D12MA::VirtualBlockPimpl *">void*</type>
+      </field>
+      <function name="VirtualBlock" access="private" lib="D3D12MA" convention="ThisCall" entrypoint="??0VirtualBlock@D3D12MA@@AEAA@AEBUALLOCATION_CALLBACKS@1@AEBUVIRTUAL_BLOCK_DESC@1@@Z" static="true" unsafe="true">
+        <type>void</type>
+        <param name="pThis">
+          <type>VirtualBlock*</type>
+        </param>
+        <param name="allocationCallbacks">
+          <type>ALLOCATION_CALLBACKS*</type>
+        </param>
+        <param name="desc">
+          <type>VIRTUAL_BLOCK_DESC*</type>
+        </param>
+      </function>
+      <function name="IsEmpty" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?IsEmpty@VirtualBlock@D3D12MA@@QEBAHXZ" static="true" readonly="true">
+        <type native="BOOL">int</type>
+        <param name="pThis">
+          <type>VirtualBlock*</type>
+        </param>
+      </function>
+      <function name="GetAllocationInfo" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?GetAllocationInfo@VirtualBlock@D3D12MA@@QEBAXUVirtualAllocation@2@PEAUVIRTUAL_ALLOCATION_INFO@2@@Z" static="true" readonly="true" unsafe="true">
+        <type>void</type>
+        <param name="pThis">
+          <type>VirtualBlock*</type>
+        </param>
+        <param name="allocation">
+          <type>VirtualAllocation</type>
+        </param>
+        <param name="pInfo">
+          <type>VIRTUAL_ALLOCATION_INFO*</type>
+        </param>
+      </function>
+      <function name="Allocate" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?Allocate@VirtualBlock@D3D12MA@@QEAAJPEBUVIRTUAL_ALLOCATION_DESC@2@PEAUVirtualAllocation@2@PEA_K@Z" static="true" unsafe="true">
+        <type native="HRESULT">int</type>
+        <param name="pThis">
+          <type>VirtualBlock*</type>
+        </param>
+        <param name="pDesc">
+          <type>VIRTUAL_ALLOCATION_DESC*</type>
+        </param>
+        <param name="pAllocation">
+          <type>VirtualAllocation*</type>
+        </param>
+        <param name="pOffset">
+          <type>ulong*</type>
+        </param>
+      </function>
+      <function name="FreeAllocation" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?FreeAllocation@VirtualBlock@D3D12MA@@QEAAXUVirtualAllocation@2@@Z" static="true">
+        <type>void</type>
+        <param name="pThis">
+          <type>VirtualBlock*</type>
+        </param>
+        <param name="allocation">
+          <type>VirtualAllocation</type>
+        </param>
+      </function>
+      <function name="Clear" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?Clear@VirtualBlock@D3D12MA@@QEAAXXZ" static="true">
+        <type>void</type>
+        <param name="pThis">
+          <type>VirtualBlock*</type>
+        </param>
+      </function>
+      <function name="SetAllocationPrivateData" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?SetAllocationPrivateData@VirtualBlock@D3D12MA@@QEAAXUVirtualAllocation@2@PEAX@Z" static="true" unsafe="true">
+        <type>void</type>
+        <param name="pThis">
+          <type>VirtualBlock*</type>
+        </param>
+        <param name="allocation">
+          <type>VirtualAllocation</type>
+        </param>
+        <param name="pPrivateData">
+          <type>void*</type>
+        </param>
+      </function>
+      <function name="GetStatistics" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?GetStatistics@VirtualBlock@D3D12MA@@QEBAXPEAUStatistics@2@@Z" static="true" readonly="true" unsafe="true">
+        <type>void</type>
+        <param name="pThis">
+          <type>VirtualBlock*</type>
+        </param>
+        <param name="pStats">
+          <type>Statistics*</type>
+        </param>
+      </function>
+      <function name="CalculateStatistics" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?CalculateStatistics@VirtualBlock@D3D12MA@@QEBAXPEAUDetailedStatistics@2@@Z" static="true" readonly="true" unsafe="true">
+        <type>void</type>
+        <param name="pThis">
+          <type>VirtualBlock*</type>
+        </param>
+        <param name="pStats">
+          <type>DetailedStatistics*</type>
+        </param>
+      </function>
+      <function name="BuildStatsString" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?BuildStatsString@VirtualBlock@D3D12MA@@QEBAXPEAPEA_W@Z" static="true" readonly="true" unsafe="true">
+        <type>void</type>
+        <param name="pThis">
+          <type>VirtualBlock*</type>
+        </param>
+        <param name="ppStatsString">
+          <type>char**</type>
+        </param>
+      </function>
+      <function name="FreeStatsString" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?FreeStatsString@VirtualBlock@D3D12MA@@QEBAXPEA_W@Z" static="true" readonly="true" unsafe="true">
+        <type>void</type>
+        <param name="pThis">
+          <type>VirtualBlock*</type>
+        </param>
+        <param name="pStatsString">
+          <type>char*</type>
+        </param>
+      </function>
+    </struct>
+    <class name="Apis" access="public" static="true">
+      <function name="CreateAllocator" access="public" lib="D3D12MA" convention="Cdecl" entrypoint="?CreateAllocator@D3D12MA@@YAJPEBUALLOCATOR_DESC@1@PEAPEAVAllocator@1@@Z" static="true" unsafe="true">
+        <type native="HRESULT">int</type>
+        <param name="pDesc">
+          <type>ALLOCATOR_DESC*</type>
+        </param>
+        <param name="ppAllocator">
+          <type>Allocator**</type>
+        </param>
+      </function>
+      <function name="CreateVirtualBlock" access="public" lib="D3D12MA" convention="Cdecl" entrypoint="?CreateVirtualBlock@D3D12MA@@YAJPEBUVIRTUAL_BLOCK_DESC@1@PEAPEAVVirtualBlock@1@@Z" static="true" unsafe="true">
+        <type native="HRESULT">int</type>
+        <param name="pDesc">
+          <type>VIRTUAL_BLOCK_DESC*</type>
+        </param>
+        <param name="ppVirtualBlock">
+          <type>VirtualBlock**</type>
+        </param>
+      </function>
+    </class>
+  </namespace>
+</bindings>
