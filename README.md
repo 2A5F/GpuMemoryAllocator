@@ -13,3 +13,9 @@ C# bindings for d3d12ma and vma, based on silk.net.
   ./init.ps1
   ./build.ps1
   ```
+- Linux
+  - Required .NET 10
+  ```shell
+  ./init.sh
+  ./build.sh
+  ```

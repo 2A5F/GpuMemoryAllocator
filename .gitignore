@@ -348,3 +348,5 @@ healthchecksdb
 MigrationBackup/
 
 .idea/
+
+/build/

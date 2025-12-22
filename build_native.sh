@@ -1,2 +1,2 @@
-#!/bin/bash
+#!/usr/bin/env bash
 cmake --build --target vma --config Release --preset Release
