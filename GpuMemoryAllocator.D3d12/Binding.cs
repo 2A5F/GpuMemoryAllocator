@@ -704,3 +704,125 @@ public static unsafe partial class Apis
     [DllImport("D3D12MA", EntryPoint = "?CreateVirtualBlock@D3D12MA@@YAJPEBUVIRTUAL_BLOCK_DESC@1@PEAPEAVVirtualBlock@1@@Z", ExactSpelling = true)]
     public static extern int CreateVirtualBlock(VirtualBlockDesc* pDesc, VirtualBlock** ppVirtualBlock);
 }
+public unsafe partial struct Allocation : IComVtbl<Allocation>, IComVtbl<IUnknown>
+{
+    public void*** AsVtblPtr() => (void***) Unsafe.AsPointer(ref Unsafe.AsRef(in this));
+}
+public unsafe partial struct DefragmentationContext : IComVtbl<DefragmentationContext>, IComVtbl<IUnknown>
+{
+    public void*** AsVtblPtr() => (void***) Unsafe.AsPointer(ref Unsafe.AsRef(in this));
+}
+public unsafe partial struct Pool : IComVtbl<Pool>, IComVtbl<IUnknown>
+{
+    public void*** AsVtblPtr() => (void***) Unsafe.AsPointer(ref Unsafe.AsRef(in this));
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public int BeginDefragmentation(DefragmentationDesc* pDesc, out ComPtr<DefragmentationContext> Context)
+    {
+        Unsafe.SkipInit(out Context);
+        fixed (DefragmentationContext** ppContext = Context)
+        {
+            return BeginDefragmentation(pDesc, ppContext);
+        }
+    }
+}
+public unsafe partial struct Allocator : IComVtbl<Allocator>, IComVtbl<IUnknown>
+{
+    public void*** AsVtblPtr() => (void***) Unsafe.AsPointer(ref Unsafe.AsRef(in this));
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public int CreateResource<T0>(AllocationDesc* pAllocDesc, ResourceDesc* pResourceDesc, ResourceStates InitialResourceState, ClearValue* pOptimizedClearValue, out ComPtr<Allocation> Allocation, out ComPtr<T0> Resource)
+        where T0: unmanaged, IComVtbl<T0>
+    {
+        Unsafe.SkipInit(out Allocation);
+        Unsafe.SkipInit(out Resource);
+        fixed (Allocation** ppAllocation = Allocation)
+        fixed (T0** ppvResource = Resource)
+        {
+            return CreateResource(pAllocDesc, pResourceDesc, InitialResourceState, pOptimizedClearValue, ppAllocation, SilkMarshal.GuidPtrOf<T0>(), (void**)ppvResource);
+        }
+    }
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public int CreateResource2<T0>(AllocationDesc* pAllocDesc, ResourceDesc1* pResourceDesc, ResourceStates InitialResourceState, ClearValue* pOptimizedClearValue, out ComPtr<Allocation> Allocation, out ComPtr<T0> Resource)
+        where T0: unmanaged, IComVtbl<T0>
+    {
+        Unsafe.SkipInit(out Allocation);
+        Unsafe.SkipInit(out Resource);
+        fixed (Allocation** ppAllocation = Allocation)
+        fixed (T0** ppvResource = Resource)
+        {
+            return CreateResource2(pAllocDesc, pResourceDesc, InitialResourceState, pOptimizedClearValue, ppAllocation, SilkMarshal.GuidPtrOf<T0>(), (void**)ppvResource);
+        }
+    }
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public int CreateResource3<T0>(AllocationDesc* pAllocDesc, ResourceDesc1* pResourceDesc, BarrierLayout InitialLayout, ClearValue* pOptimizedClearValue, uint NumCastableFormats, Format* pCastableFormats, out ComPtr<Allocation> Allocation, out ComPtr<T0> Resource)
+        where T0: unmanaged, IComVtbl<T0>
+    {
+        Unsafe.SkipInit(out Allocation);
+        Unsafe.SkipInit(out Resource);
+        fixed (Allocation** ppAllocation = Allocation)
+        fixed (T0** ppvResource = Resource)
+        {
+            return CreateResource3(pAllocDesc, pResourceDesc, InitialLayout, pOptimizedClearValue, NumCastableFormats, pCastableFormats, ppAllocation, SilkMarshal.GuidPtrOf<T0>(), (void**)ppvResource);
+        }
+    }
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public int AllocateMemory(AllocationDesc* pAllocDesc, ResourceAllocationInfo* pAllocInfo, out ComPtr<Allocation> Allocation)
+    {
+        Unsafe.SkipInit(out Allocation);
+        fixed (Allocation** ppAllocation = Allocation)
+        {
+            return AllocateMemory(pAllocDesc, pAllocInfo, ppAllocation);
+        }
+    }
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public int CreateAliasingResource<T0>(Allocation* pAllocation, ulong AllocationLocalOffset, ResourceDesc* pResourceDesc, ResourceStates InitialResourceState, ClearValue* pOptimizedClearValue, out ComPtr<T0> Resource)
+        where T0: unmanaged, IComVtbl<T0>
+    {
+        Unsafe.SkipInit(out Resource);
+        fixed (T0** ppvResource = Resource)
+        {
+            return CreateAliasingResource(pAllocation, AllocationLocalOffset, pResourceDesc, InitialResourceState, pOptimizedClearValue, SilkMarshal.GuidPtrOf<T0>(), (void**)ppvResource);
+        }
+    }
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public int CreateAliasingResource1<T0>(Allocation* pAllocation, ulong AllocationLocalOffset, ResourceDesc1* pResourceDesc, ResourceStates InitialResourceState, ClearValue* pOptimizedClearValue, out ComPtr<T0> Resource)
+        where T0: unmanaged, IComVtbl<T0>
+    {
+        Unsafe.SkipInit(out Resource);
+        fixed (T0** ppvResource = Resource)
+        {
+            return CreateAliasingResource1(pAllocation, AllocationLocalOffset, pResourceDesc, InitialResourceState, pOptimizedClearValue, SilkMarshal.GuidPtrOf<T0>(), (void**)ppvResource);
+        }
+    }
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public int CreateAliasingResource2<T0>(Allocation* pAllocation, ulong AllocationLocalOffset, ResourceDesc1* pResourceDesc, BarrierLayout InitialLayout, ClearValue* pOptimizedClearValue, uint NumCastableFormats, Format* pCastableFormats, out ComPtr<T0> Resource)
+        where T0: unmanaged, IComVtbl<T0>
+    {
+        Unsafe.SkipInit(out Resource);
+        fixed (T0** ppvResource = Resource)
+        {
+            return CreateAliasingResource2(pAllocation, AllocationLocalOffset, pResourceDesc, InitialLayout, pOptimizedClearValue, NumCastableFormats, pCastableFormats, SilkMarshal.GuidPtrOf<T0>(), (void**)ppvResource);
+        }
+    }
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public int CreatePool(PoolDesc* pPoolDesc, out ComPtr<Pool> Pool)
+    {
+        Unsafe.SkipInit(out Pool);
+        fixed (Pool** ppPool = Pool)
+        {
+            return CreatePool(pPoolDesc, ppPool);
+        }
+    }
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public void BeginDefragmentation(DefragmentationDesc* pDesc, out ComPtr<DefragmentationContext> Context)
+    {
+        Unsafe.SkipInit(out Context);
+        fixed (DefragmentationContext** ppContext = Context)
+        {
+            BeginDefragmentation(pDesc, ppContext);
+        }
+    }
+}
+public unsafe partial struct VirtualBlock : IComVtbl<VirtualBlock>, IComVtbl<IUnknown>
+{
+    public void*** AsVtblPtr() => (void***) Unsafe.AsPointer(ref Unsafe.AsRef(in this));
+}

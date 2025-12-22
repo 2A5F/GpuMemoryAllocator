@@ -55,6 +55,8 @@ void OnLoad()
 
     app = new App(window, ctx, swap_chain);
     foreach (var t in input.Keyboards) t.KeyDown += app.OnKeyDown;
+
+    app.OnLoad();
 }
 
 void OnUpdate(double delta_time)

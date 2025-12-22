@@ -181,9 +181,7 @@ public unsafe partial class GraphicsContext
             pDevice = (ID3D12Device*)m_device.Handle,
             pAdapter = (IDXGIAdapter*)m_adapter.Handle,
         };
-        D3D12MA.Allocator* p_allocator;
-        D3D12MA.Apis.CreateAllocator(&allocator_desc, &p_allocator).TryThrowHResult();
-        m_allocator = p_allocator;
+        D3D12MA.Apis.CreateAllocator(&allocator_desc, out m_allocator).TryThrowHResult();
 
         #endregion
     }

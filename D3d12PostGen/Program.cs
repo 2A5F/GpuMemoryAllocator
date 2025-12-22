@@ -14,16 +14,22 @@ var code = new StringBuilder();
 
 code.AppendLine($"namespace D3D12MA;");
 
+var com_types = new HashSet<string>();
+
 foreach (XmlNode item in root.ChildNodes)
 {
-    GenItem(code, item, "", true);
+    GenItem(com_types, code, item, "", true);
+}
+foreach (XmlNode item in root.ChildNodes)
+{
+    GenCom(com_types, code, item);
 }
 
 File.WriteAllText(output_path, code.ToString());
 
 return;
 
-static void GenItem(StringBuilder code, XmlNode item, string tab, bool root)
+static void GenItem(HashSet<string> com_types, StringBuilder code, XmlNode item, string tab, bool root)
 {
     switch (item.Name)
     {
@@ -50,7 +56,11 @@ static void GenItem(StringBuilder code, XmlNode item, string tab, bool root)
                     var typ_node = member["type"]!;
                     var typ = typ_node.InnerText;
                     typ = UpperSnakeCase().Replace(typ, match => match.Value.ToPascalCase());
-                    if (typ == "IUnknownImpl") field_access = "internal";
+                    if (typ == "IUnknownImpl")
+                    {
+                        field_access = "internal";
+                        com_types.Add(name);
+                    }
                     var count = typ_node.Attributes["count"]?.Value;
                     if (count is not null) typ = $"InlineArray{count}<{typ}>";
                     if (member["get"] is { } get)
@@ -202,7 +212,7 @@ static void GenItem(StringBuilder code, XmlNode item, string tab, bool root)
                 }
                 else if (member.Name is "enumeration" or "struct")
                 {
-                    GenItem(code, member, $"{tab}    ", false);
+                    GenItem(com_types, code, member, $"{tab}    ", false);
                 }
             }
             code.AppendLine($"{tab}}}");
@@ -295,46 +305,197 @@ static void GenItem(StringBuilder code, XmlNode item, string tab, bool root)
     }
 }
 
+static void GenCom(HashSet<string> com_types, StringBuilder code, XmlNode item)
+{
+    if (item.Name != "struct") return;
+    if (!(item.Attributes!["native"]?.Value.EndsWith(": D3D12MA::IUnknownImpl") ?? false)) return;
+    var access = item.Attributes!["access"]!.Value;
+    if (access != "public") access = "internal";
+    var raw_name = item.Attributes!["name"]!.Value;
+    var name = raw_name;
+    if (name.EndsWith("FixedBuffer")) return;
+    name = UpperSnakeCase().Replace(name, match => match.Value.ToPascalCase());
+    code.AppendLine($"{access} unsafe partial struct {name} : IComVtbl<{name}>, IComVtbl<IUnknown>");
+    code.AppendLine($"{{");
+    code.AppendLine($"    public void*** AsVtblPtr() => (void***) Unsafe.AsPointer(ref Unsafe.AsRef(in this));");
+    foreach (XmlNode member in item.ChildNodes)
+    {
+        if (member.Name != "function") continue;
+        if (access != "public") continue;
+        var method_access = member.Attributes!["access"]!.Value;
+        if (method_access != "public") continue;
+        var method_name = member.Attributes!["name"]!.Value;
+        if (method_name == raw_name) continue;
+        var entrypoint = member.Attributes!["entrypoint"]?.Value;
+        if (entrypoint is null) continue;
+        var ret_typ_node = member["type"];
+        var ret_type = ret_typ_node?.InnerText!;
+        ret_type = UpperSnakeCase().Replace(ret_type, match => match.Value.ToPascalCase());
+        var is_static = true;
+        var need_managed = false;
+        var riid_count = 0;
+        foreach (XmlNode param in member.ChildNodes)
+        {
+            if (param.Name != "param") continue;
+            var param_name = param.Attributes!["name"]!.Value;
+            if (param_name is "pThis") is_static = false;
+            var typ = param["type"]!.InnerText;
+            if (param_name.StartsWith("pp") && typ.EndsWith("**") && com_types.Contains(typ[..^2])) need_managed = true;
+            if (param_name.StartsWith("riid")) riid_count++;
+        }
+        if (is_static) continue;
+        if (riid_count > 0) need_managed = true;
+        if (!need_managed) continue;
+        code.AppendLine($"    [MethodImpl(MethodImplOptions.AggressiveInlining)]");
+        code.Append($"    public {ret_type} {method_name}");
+        var first = true;
+        if (riid_count > 0)
+        {
+            code.Append($"<");
+            for (var i = 0; i < riid_count; i++)
+            {
+                if (first) first = false;
+                else code.Append($", ");
+                code.Append($"T{i}");
+            }
+            code.Append($">");
+        }
+        code.Append($"(");
+        var riid = false;
+        var riid_inc = 0;
+        first = true;
+        foreach (XmlNode param in member.ChildNodes)
+        {
+            if (param.Name != "param") continue;
+            if (param.Attributes!["name"]?.Value is "pThis") continue;
+            if (first) first = false;
+            else if (!riid) code.Append($", ");
+            var param_name = param.Attributes!["name"]!.Value;
+            var param_type_node = param["type"]!;
+            var param_type = param_type_node.InnerText;
+            param_type = UpperSnakeCase().Replace(param_type, match => match.Value.ToPascalCase());
+            var typ = param["type"]!.InnerText;
+            re:
+            if (riid)
+            {
+                riid = false;
+                if (!param_name.StartsWith("ppv")) goto re;
+                var nth_riid = riid_inc++;
+                code.Append($"out ComPtr<T{nth_riid}> {param_name[3..]}");
+            }
+            else if (param_name.StartsWith("pp") && typ.EndsWith("**") && com_types.Contains(typ[..^2]))
+            {
+                code.Append($"out ComPtr<{typ[..^2]}> {param_name[2..]}");
+            }
+            else if (param_name.StartsWith("riid"))
+            {
+                riid = true;
+                continue;
+            }
+            else
+            {
+                code.Append($"{param_type} {param_name}");
+            }
+        }
+        code.AppendLine($")");
+        if (riid_count > 0)
+        {
+            for (var i = 0; i < riid_count; i++)
+            {
+                code.AppendLine($"        where T{i}: unmanaged, IComVtbl<T{i}>");
+            }
+        }
+        code.AppendLine($"    {{");
+        riid = false;
+        foreach (XmlNode param in member.ChildNodes)
+        {
+            if (param.Name != "param") continue;
+            if (param.Attributes!["name"]?.Value is "pThis") continue;
+            var param_name = param.Attributes!["name"]!.Value;
+            var typ = param["type"]!.InnerText;
+            re:
+            if (riid)
+            {
+                riid = false;
+                if (!param_name.StartsWith("ppv")) goto re;
+                code.AppendLine($"        Unsafe.SkipInit(out {param_name[3..]});");
+            }
+            else if (param_name.StartsWith("pp") && typ.EndsWith("**") && com_types.Contains(typ[..^2]))
+            {
+                code.AppendLine($"        Unsafe.SkipInit(out {param_name[2..]});");
+            }
+            else if (param_name.StartsWith("riid"))
+            {
+                riid = true;
+                continue;
+            }
+        }
+        riid = false;
+        riid_inc = 0;
+        var has_fixed = false;
+        foreach (XmlNode param in member.ChildNodes)
+        {
+            if (param.Name != "param") continue;
+            if (param.Attributes!["name"]?.Value is "pThis") continue;
+            var param_name = param.Attributes!["name"]!.Value;
+            var typ = param["type"]!.InnerText;
+            re:
+            if (riid)
+            {
+                riid = false;
+                if (!param_name.StartsWith("ppv")) goto re;
+                var nth_riid = riid_inc++;
+                code.AppendLine($"        fixed (T{nth_riid}** {param_name} = {param_name[3..]})");
+                has_fixed = true;
+            }
+            else if (param_name.StartsWith("pp") && typ.EndsWith("**") && com_types.Contains(typ[..^2]))
+            {
+                code.AppendLine($"        fixed ({typ} {param_name} = {param_name[2..]})");
+                has_fixed = true;
+            }
+            else if (param_name.StartsWith("riid"))
+            {
+                riid = true;
+                continue;
+            }
+        }
+        var tab = has_fixed ? "            " : "        ";
+        if (has_fixed) code.AppendLine($"        {{");
+        if (ret_type == "void") code.Append($"{tab}");
+        else code.Append($"{tab}return ");
+        code.Append($"{method_name}(");
+        first = true;
+        riid_inc = 0;
+        foreach (XmlNode param in member.ChildNodes)
+        {
+            if (param.Name != "param") continue;
+            if (param.Attributes!["name"]?.Value is "pThis") continue;
+            if (first) first = false;
+            else code.Append($", ");
+            var param_name = param.Attributes!["name"]!.Value;
+            var param_type_node = param["type"]!;
+            if (param_name.StartsWith("riid"))
+            {
+                code.Append($"SilkMarshal.GuidPtrOf<T{riid_inc++}>()");
+            }
+            else if (param_name.StartsWith("ppv"))
+            {
+                code.Append($"(void**){param_name}");
+            }
+            else
+            {
+                code.Append($"{param_name}");
+            }
+        }
+        code.AppendLine($");");
+        if (has_fixed) code.AppendLine($"        }}");
+        code.AppendLine($"    }}");
+    }
+    code.AppendLine($"}}");
+}
+
 partial class Program
 {
     [GeneratedRegex(@"\b[A-Z0-9_]+\b")]
     private static partial Regex UpperSnakeCase();
 }
-
-// var code = await File.ReadAllLinesAsync(file);
-// var output1 = new List<string>();
-// var output2 = new List<string>();
-//
-// for (var i = 0; i < code.Length; i++)
-// {
-//     var line = code[i];
-//
-//     line = NativeTypeName().Replace(line, "");
-//     if (string.IsNullOrWhiteSpace(line)) continue;
-//     output1.Add(line);
-// }
-//
-// for (var i = 0; i < output1.Count; i++)
-// {
-//     var line = output1[i];
-//
-//     if (line.StartsWith("        private static extern "))
-//     {
-//         output2.RemoveAt(output2.Count - 1);
-//         continue;
-//     }
-//
-//     line = line.Replace("static extern readonly", "static extern");
-//     line = line.Replace("        public IUnknownImpl Base;", "        internal IUnknownImpl Base;");
-//     if (line.StartsWith("    private partial struct")) line = line.Replace("    private partial struct", "    internal partial struct");
-//     output2.Add(line);
-// }
-//
-// var output = output2;
-// await File.WriteAllLinesAsync(file, output);
-//
-// partial class Program
-// {
-//     [GeneratedRegex(@"\[[\w\s:]*NativeTypeName\(""[^""]*""\)\]")]
-//     private static partial Regex NativeTypeName();
-// }
