@@ -1,17 +1,17 @@
-﻿name: Build Linux x64
+﻿name: Build Managed D3D12MA
 
 on:
   workflow_dispatch:
   workflow_call:
     outputs:
-      vma-native-artifact:
-        value: ${{ jobs.build.outputs.vma-native-artifact }}
+      D3D12MA-managed-nupkg-artifact:
+        value: ${{ jobs.build.outputs.D3D12MA-managed-nupkg-artifact }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
     outputs:
-      vma-native-artifact: ${{ steps.vma-native.outputs.artifact-id }}
+      D3D12MA-managed-nupkg-artifact: ${{ steps.D3D12MA-managed.outputs.artifact-id }}
 
     steps:
       - uses: actions/checkout@v4
@@ -23,14 +23,11 @@ jobs:
           dotnet-version: 10.0.x
       - name: Dotnet Restore
         run: dotnet restore
-      - name: Init
-        run: ./init.sh
       - name: Build
-        shell: pwsh
-        run: ./build_native.sh
-      - id: vma-native
+        run: dotnet build ./GpuMemoryAllocator.D3d12/GpuMemoryAllocator.D3d12.csproj -c Release
+      - id: D3D12MA-managed
         uses: actions/upload-artifact@v4
         with:
-          name: 'vma-linux-x64'
-          path: ./build/vma/Release/libvma.so
+          name: 'D3D12MA-managed'
+          path: ./GpuMemoryAllocator.D3d12/bin/Release/*.nupkg
           overwrite: true

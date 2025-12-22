@@ -8,8 +8,6 @@ on:
         value: ${{ jobs.build.outputs.vma-native-artifact }}
       D3D12MA-native-artifact:
         value: ${{ jobs.build.outputs.D3D12MA-native-artifact }}
-      D3D12MA-managed-nupkg-artifact:
-        value: ${{ jobs.build.outputs.D3D12MA-managed-nupkg-artifact }}
 
 jobs:
   build:
@@ -17,7 +15,6 @@ jobs:
     outputs:
       vma-native-artifact: ${{ steps.vma-native.outputs.artifact-id }}
       D3D12MA-native-artifact: ${{ steps.D3D12MA-native.outputs.artifact-id }}
-      D3D12MA-managed-nupkg-artifact: ${{ steps.D3D12MA-managed.outputs.artifact-id }}
 
     steps:
       - uses: actions/checkout@v4
@@ -34,22 +31,16 @@ jobs:
         run: ./init.ps1
       - name: Build
         shell: pwsh
-        run: ./build.ps1
+        run: ./build_native.ps1
       - id: vma-native
         uses: actions/upload-artifact@v4
         with:
-          name: 'vma-win-x64'
+          name: 'vma-win-arm64'
           path: ./build/vma/Release/vma.dll
           overwrite: true
       - id: D3D12MA-native
         uses: actions/upload-artifact@v4
         with:
-          name: 'D3D12MA-win-x64'
+          name: 'D3D12MA-win-arm64'
           path: ./build/Release/D3D12MA.dll
-          overwrite: true
-      - id: D3D12MA-managed
-        uses: actions/upload-artifact@v4
-        with:
-          name: 'D3D12MA-managed'
-          path: ./GpuMemoryAllocator.D3d12/bin/Release/*.nupkg
           overwrite: true

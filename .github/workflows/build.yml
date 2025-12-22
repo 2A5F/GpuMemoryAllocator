@@ -8,13 +8,22 @@ on:
   workflow_dispatch:
   workflow_call:
     outputs:
-      linux-x64-vma-native-artifact: ${{ steps.build-linux-x64.outputs.vma-native-artifact }}
-      win-x64-vma-native-artifact: ${{ steps.build-win-x64.outputs.vma-native-artifact }}
-      win-x64-D3D12MA-native-artifact: ${{ steps.build-win-x64.outputs.D3D12MA-native-artifact }}
-      win-x64-D3D12MA-managed-nupkg-artifact: ${{ steps.build-win-x64.outputs.D3D12MA-managed-nupkg-artifact }}
+      D3D12MA-managed-nupkg-artifact: ${{ jobs.build-managed-d3d12ma.outputs.D3D12MA-managed-nupkg-artifact }}
+      linux-x64-vma-native-artifact: ${{ jobs.build-linux-x64.outputs.vma-native-artifact }}
+      linux-arm64-vma-native-artifact: ${{ jobs.build-linux-arm64.outputs.vma-native-artifact }}
+      win-x64-vma-native-artifact: ${{ jobs.build-win-x64.outputs.vma-native-artifact }}
+      win-arm64-vma-native-artifact: ${{ jobs.build-win-arm64.outputs.vma-native-artifact }}
+      win-x64-D3D12MA-native-artifact: ${{ jobs.build-win-x64.outputs.D3D12MA-native-artifact }}
+      win-arm64-D3D12MA-native-artifact: ${{ jobs.build-win-arm64.outputs.D3D12MA-native-artifact }}
 
 jobs:
+  build-managed-d3d12ma:
+    uses: ./.github/workflows/build-managed-d3d12ma.yml
   build-win-x64:
     uses: ./.github/workflows/build-win-x64.yml
+  build-win-arm64:
+    uses: ./.github/workflows/build-win-arm64.yml
   build-linux-x64:
     uses: ./.github/workflows/build-linux-x64.yml
+  build-linux-arm64:
+    uses: ./.github/workflows/build-linux-arm64.yml
