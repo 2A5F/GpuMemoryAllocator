@@ -22,6 +22,8 @@ on:
         value: ${{ jobs.build-win-x64.outputs.D3D12MA-native-artifact }}
       win-arm64-D3D12MA-native-artifact:
         value: ${{ jobs.build-win-arm64.outputs.D3D12MA-native-artifact }}
+      macos-arm64-vma-native-artifact:
+        value: ${{ jobs.build-macos-arm64.outputs.vma-native-artifact }}
 
 jobs:
   build-managed-d3d12ma:
@@ -34,3 +36,5 @@ jobs:
     uses: ./.github/workflows/build-linux-x64.yml
   build-linux-arm64:
     uses: ./.github/workflows/build-linux-arm64.yml
+  build-macos-arm64:
+    uses: ./.github/workflows/build-macos-arm64.yml
