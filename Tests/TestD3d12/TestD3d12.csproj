@@ -5,10 +5,61 @@
         <TargetFramework>net10.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <D3D12SDKVersion>717</D3D12SDKVersion>
+        <D3D12SDKPath>D3D12</D3D12SDKPath>
+    </PropertyGroup>
+    
     <ItemGroup>
       <ProjectReference Include="..\..\GpuMemoryAllocator.D3d12\GpuMemoryAllocator.D3d12.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Coplt.Dropping" Version="0.6.0" />
+        <PackageReference Include="Coplt.Mathematics" Version="0.17.0" />
+        <PackageReference Include="Microsoft.Direct3D.D3D12" Version="1.717.1-preview"  GeneratePathProperty="true" ExcludeAssets="all" />
+        <PackageReference Include="Microsoft.Direct3D.DXC" Version="1.8.2505.32"  GeneratePathProperty="true" ExcludeAssets="all" />
+        <PackageReference Include="Serilog" Version="4.3.0" />
+        <PackageReference Include="Serilog.Enrichers.Environment" Version="3.0.1" />
+        <PackageReference Include="Serilog.Enrichers.Thread" Version="4.0.0" />
+        <PackageReference Include="Serilog.Exceptions" Version="8.4.0" />
+        <PackageReference Include="Serilog.Sinks.Async" Version="2.1.0" />
+        <PackageReference Include="Serilog.Sinks.Console" Version="6.1.1" />
+        <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
+        <PackageReference Include="Silk.NET.Core" Version="2.22.0" />
+        <PackageReference Include="Silk.NET.DXGI" Version="2.22.0" />
+        <PackageReference Include="Silk.NET.Direct3D12" Version="2.22.0" />
+        <PackageReference Include="Silk.NET.Input" Version="2.22.0" />
+        <PackageReference Include="Silk.NET.Input.Common" Version="2.22.0" />
+        <PackageReference Include="Silk.NET.Input.Sdl" Version="2.22.0" />
+        <PackageReference Include="Silk.NET.SDL" Version="2.22.0" />
+        <PackageReference Include="Silk.NET.Windowing" Version="2.22.0" />
+        <PackageReference Include="Silk.NET.Windowing.Sdl" Version="2.22.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="../../build/Release/D3d12MA.dll" CopyToOutputDirectory="PreserveNewest" Visible="false" />
+        <None Include=".\D3D12SDKVersionPatcher.exe" Visible="false"/>
+        <None Include="$(PkgMicrosoft_Direct3D_D3D12)\build\native\bin\x64\**\*.dll"
+              Exclude="$(PkgMicrosoft_Direct3D_D3D12)\build\native\bin\x64\DirectSR.dll"
+              Link="$(D3D12SDKPath)\%(RecursiveDir)%(Filename)%(Extension)"
+              CopyToOutputDirectory="PreserveNewest"
+              Visible="false"
+        />
+        <None Include="$(PkgMicrosoft_Direct3D_D3D12)\build\native\bin\x64\**\*.pdb"
+              Exclude="$(PkgMicrosoft_Direct3D_D3D12)\build\native\bin\x64\DirectSR.pdb;$(PkgMicrosoft_Direct3D_D3D12)\build\native\bin\x64\d3dconfig.pdb"
+              Link="$(D3D12SDKPath)\%(RecursiveDir)%(Filename)%(Extension)"
+              CopyToOutputDirectory="PreserveNewest"
+              Visible="false"
+              Condition="'$(Configuration)' == 'Debug'"
+        />
+    </ItemGroup>
+    
+    <Target Name="PatchDxSdkExport" AfterTargets="Build">
+        <Exec Command=".\D3D12SDKVersionPatcher.exe &quot;.\$(OutDir)$(AssemblyName).exe&quot; $(D3D12SDKVersion) .\$(D3D12SDKPath)\"/>
+    </Target>
 
 </Project>
