@@ -1,4 +1,4 @@
-﻿name: Build Macos
+﻿name: Build Macos Arm64
 
 on:
   workflow_dispatch:
@@ -26,6 +26,6 @@ jobs:
       - id: vma-native
         uses: actions/upload-artifact@v4
         with:
-          name: 'vma-macos'
+          name: 'vma-macos-arm64'
           path: ./build/vma/Release/libvma.dylib
           overwrite: true

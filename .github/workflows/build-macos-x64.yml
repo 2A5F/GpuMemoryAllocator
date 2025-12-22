@@ -1,0 +1,31 @@
+﻿name: Build Macos x64
+
+on:
+  workflow_dispatch:
+  workflow_call:
+    outputs:
+      vma-native-artifact:
+        value: ${{ jobs.build.outputs.vma-native-artifact }}
+
+jobs:
+  build:
+    runs-on: macos-latest-large
+    outputs:
+      vma-native-artifact: ${{ steps.vma-native.outputs.artifact-id }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Init
+        shell: bash
+        run: ./init.sh
+      - name: Build
+        shell: bash
+        run: ./build_native.sh
+      - id: vma-native
+        uses: actions/upload-artifact@v4
+        with:
+          name: 'vma-macos-x64'
+          path: ./build/vma/Release/libvma.dylib
+          overwrite: true

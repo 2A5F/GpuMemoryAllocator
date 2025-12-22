@@ -10,10 +10,7 @@
       "name": "Main",
       "binaryDir": "${sourceDir}/build",
       "generator": "Ninja Multi-Config",
-      "toolchainFile": "${sourceDir}/ThirdParty/vcpkg/scripts/buildsystems/vcpkg.cmake",
-      "cacheVariables": {
-        "CMAKE_OSX_ARCHITECTURES": "arm64;x86_64"
-      }
+      "toolchainFile": "${sourceDir}/ThirdParty/vcpkg/scripts/buildsystems/vcpkg.cmake"
     }
   ],
   "buildPresets": [
