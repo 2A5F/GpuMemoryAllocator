@@ -6,6 +6,8 @@ using Silk.NET.Maths;
 using Silk.NET.Windowing;
 using TestD3d12;
 
+// ReSharper disable AccessToDisposedClosure
+
 Utils.InitLogger();
 
 IInputContext input = null!;
@@ -28,7 +30,16 @@ var window = Window.Create(window_options);
 window.Load += OnLoad;
 window.Update += OnUpdate;
 window.Render += OnRender;
-window.Run();
+
+try
+{
+    window.Run();
+}
+finally
+{
+    swap_chain?.Dispose();
+    ctx?.Dispose();
+}
 
 return;
 

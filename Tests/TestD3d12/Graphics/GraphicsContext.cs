@@ -45,6 +45,8 @@ public unsafe partial class GraphicsContext
     private ComPtr<ID3D12CommandQueue> m_queue;
     [Drop]
     private ComPtr<ID3D12Fence> m_fence;
+    [Drop]
+    private ComPtr<D3D12MA.Allocator> m_allocator;
 
     private readonly Queue<IGpuRecyclable> m_recycle_queue = new();
     private readonly Lock m_recycle_lock = new();
@@ -66,6 +68,8 @@ public unsafe partial class GraphicsContext
 
     public ref readonly ComPtr<ID3D12CommandQueue> Queue => ref m_queue;
     public ref readonly ComPtr<ID3D12Fence> Fence => ref m_fence;
+    
+    public ref readonly ComPtr<D3D12MA.Allocator> Allocator => ref m_allocator;
 
     public ReadOnlySpan<ComPtr<ID3D12CommandAllocator>> CommandAllocator => m_cmd_allocator;
     public CommandList CommandList => m_main_list;
@@ -167,6 +171,19 @@ public unsafe partial class GraphicsContext
                 out ComPtr<ID3D12GraphicsCommandList7> cmd_list)
             .TryThrowHResult();
         m_main_list = new(this, cmd_list, CommandListType.Direct) { m_main = true };
+
+        #endregion
+        
+        #region create alloactor
+
+        var allocator_desc = new D3D12MA.AllocatorDesc
+        {
+            pDevice = (ID3D12Device*)m_device.Handle,
+            pAdapter = (IDXGIAdapter*)m_adapter.Handle,
+        };
+        D3D12MA.Allocator* p_allocator;
+        D3D12MA.Apis.CreateAllocator(&allocator_desc, &p_allocator).TryThrowHResult();
+        m_allocator = p_allocator;
 
         #endregion
     }
