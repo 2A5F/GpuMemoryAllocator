@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     outputs:
       vma-native-artifact: ${{ steps.vma-native.outputs.artifact-id }}
 
