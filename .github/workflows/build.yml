@@ -8,13 +8,20 @@ on:
   workflow_dispatch:
   workflow_call:
     outputs:
-      D3D12MA-managed-nupkg-artifact: ${{ jobs.build-managed-d3d12ma.outputs.D3D12MA-managed-nupkg-artifact }}
-      linux-x64-vma-native-artifact: ${{ jobs.build-linux-x64.outputs.vma-native-artifact }}
-      linux-arm64-vma-native-artifact: ${{ jobs.build-linux-arm64.outputs.vma-native-artifact }}
-      win-x64-vma-native-artifact: ${{ jobs.build-win-x64.outputs.vma-native-artifact }}
-      win-arm64-vma-native-artifact: ${{ jobs.build-win-arm64.outputs.vma-native-artifact }}
-      win-x64-D3D12MA-native-artifact: ${{ jobs.build-win-x64.outputs.D3D12MA-native-artifact }}
-      win-arm64-D3D12MA-native-artifact: ${{ jobs.build-win-arm64.outputs.D3D12MA-native-artifact }}
+      D3D12MA-managed-nupkg-artifact:
+        value: ${{ jobs.build-managed-d3d12ma.outputs.D3D12MA-managed-nupkg-artifact }}
+      linux-x64-vma-native-artifact:
+        value: ${{ jobs.build-linux-x64.outputs.vma-native-artifact }}
+      linux-arm64-vma-native-artifact:
+        value: ${{ jobs.build-linux-arm64.outputs.vma-native-artifact }}
+      win-x64-vma-native-artifact:
+        value: ${{ jobs.build-win-x64.outputs.vma-native-artifact }}
+      win-arm64-vma-native-artifact:
+        value: ${{ jobs.build-win-arm64.outputs.vma-native-artifact }}
+      win-x64-D3D12MA-native-artifact:
+        value: ${{ jobs.build-win-x64.outputs.D3D12MA-native-artifact }}
+      win-arm64-D3D12MA-native-artifact:
+        value: ${{ jobs.build-win-arm64.outputs.D3D12MA-native-artifact }}
 
 jobs:
   build-managed-d3d12ma:
