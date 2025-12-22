@@ -11,6 +11,9 @@ public unsafe partial class CommandList(GraphicsContext Context, ComPtr<ID3D12Gr
 {
     #region Fields
 
+    public GraphicsContext Context { get; } = Context;
+    public CommandListType Type { get; } = type;
+
     [Drop]
     private ComPtr<ID3D12GraphicsCommandList7> list = list;
 
@@ -117,6 +120,45 @@ public unsafe partial class CommandList(GraphicsContext Context, ComPtr<ID3D12Gr
     ) => Raw->BeginRenderPass((uint)RenderTargets.Length, in RenderTargets.GetPinnableReference(), null, Flags);
 
     public void EndRenderPass() => Raw->EndRenderPass();
+
+    #endregion
+
+    #region Draw
+
+    public void Draw(
+        uint VertexCountPerInstance,
+        uint InstanceCount = 1,
+        uint StartVertexLocation = 0,
+        uint StartInstanceLocation = 0
+    ) => list.Handle->DrawInstanced(VertexCountPerInstance, InstanceCount, StartVertexLocation, StartInstanceLocation);
+
+    public void DrawIndexed(
+        uint IndexCountPerInstance,
+        uint InstanceCount = 1,
+        uint StartIndexLocation = 0,
+        int BaseVertexLocation = 0,
+        uint StartInstanceLocation = 0
+    ) => list.Handle->DrawIndexedInstanced(IndexCountPerInstance, InstanceCount, StartIndexLocation, BaseVertexLocation, StartInstanceLocation);
+
+    #endregion
+
+    #region DispatchMesh
+
+    public void DispatchMesh(
+        uint ThreadGroupCountX,
+        uint ThreadGroupCountY,
+        uint ThreadGroupCountZ
+    ) => list.Handle->DispatchMesh(ThreadGroupCountX, ThreadGroupCountY, ThreadGroupCountZ);
+
+    #endregion
+
+    #region Dispatch
+
+    public void Dispatch(
+        uint ThreadGroupCountX,
+        uint ThreadGroupCountY,
+        uint ThreadGroupCountZ
+    ) => list.Handle->Dispatch(ThreadGroupCountX, ThreadGroupCountY, ThreadGroupCountZ);
 
     #endregion
 }

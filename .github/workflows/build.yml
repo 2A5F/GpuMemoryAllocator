@@ -1,0 +1,20 @@
+﻿name: Build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+  workflow_call:
+    outputs:
+      linux-x64-vma-native-artifact: ${{ steps.build-linux-x64.outputs.vma-native-artifact }}
+      win-x64-vma-native-artifact: ${{ steps.build-win-x64.outputs.vma-native-artifact }}
+      win-x64-D3D12MA-native-artifact: ${{ steps.build-win-x64.outputs.D3D12MA-native-artifact }}
+      win-x64-D3D12MA-managed-nupkg-artifact: ${{ steps.build-win-x64.outputs.D3D12MA-managed-nupkg-artifact }}
+
+jobs:
+  build-win-x64:
+    uses: ./.github/workflows/build-win-x64.yml
+  build-linux-x64:
+    uses: ./.github/workflows/build-linux-x64.yml

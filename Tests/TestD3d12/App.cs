@@ -7,17 +7,11 @@ namespace TestD3d12;
 
 public unsafe class App(IWindow window, GraphicsContext ctx, HwndSwapChain swap_chain)
 {
+    public GpuResource image = null!;
+
     public void OnLoad()
     {
-        D3D12MA.AllocationDesc allocation_desc = new()
-        {
-            Flags = D3D12MA.AllocationFlags.None,
-            HeapType = HeapType.Default,
-            ExtraHeapFlags = HeapFlags.None,
-            CustomPool = null,
-            pPrivateData = null
-        };
-        ResourceDesc1 resource_desc = new()
+        image = new GpuResource(ctx, new ResourceDesc1
         {
             Dimension = ResourceDimension.Texture2D,
             Width = 1024,
@@ -28,13 +22,7 @@ public unsafe class App(IWindow window, GraphicsContext ctx, HwndSwapChain swap_
             SampleDesc = new(1, 0),
             Layout = TextureLayout.LayoutUnknown,
             Flags = ResourceFlags.None,
-        };
-        D3D12MA.Allocation* p_allocation;
-        ctx.Allocator.Handle->CreateResource3(
-            &allocation_desc, &resource_desc,
-            BarrierLayout.CopyDest, null, 0, null,
-            &p_allocation, null, null
-        ).TryThrowHResult();
+        });
     }
 
     public void OnUpdate(double delta_time) { }

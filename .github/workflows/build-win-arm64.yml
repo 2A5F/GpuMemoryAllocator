@@ -1,4 +1,4 @@
-﻿name: Build Windows x64
+﻿name: Build Windows Arm64
 
 on:
   workflow_dispatch:
@@ -13,7 +13,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: windows-11-arm
     outputs:
       vma-native-artifact: ${{ steps.vma-native.outputs.artifact-id }}
       D3D12MA-native-artifact: ${{ steps.D3D12MA-native.outputs.artifact-id }}
