@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
     <metadata minClientVersion="2.12">
         <id>GpuMemoryAllocator.vma.runtime.win-arm64</id>
-        <version>0.1.0</version>
+        <version>3.3.0-0.1.0</version>
         <authors>2A5F</authors>
         <owners>2A5F</owners>
         <license type="expression">MIT</license>

@@ -5,6 +5,6 @@
     </PropertyGroup>
 
     <Target Name="DoGen" AfterTargets="Build">
-        <Exec Command="pwsh ./sync.ps1 $(Version)" WorkingDirectory="../" />
+        <Exec Command="pwsh ./sync.ps1 $(ThisVersion) $(VmaVersion) $(D3d12maVersion)" WorkingDirectory="../" />
     </Target>
 </Project>

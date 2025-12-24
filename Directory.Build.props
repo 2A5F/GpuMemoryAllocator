@@ -1,5 +1,10 @@
 ﻿<Project>
     <PropertyGroup>
+        <ThisVersion>0.1.0</ThisVersion>
+        <VmaVersion>3.3.0</VmaVersion>
+        <D3d12maVersion>3.0.1</D3d12maVersion>
         <Version>0.1.0</Version>
+        <RepositoryUrl>https://github.com/2A5F/GpuMemoryAllocator</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/2A5F/GpuMemoryAllocator</PackageProjectUrl>
     </PropertyGroup>
 </Project>

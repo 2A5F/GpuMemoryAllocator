@@ -4,12 +4,14 @@
         <TargetFrameworks>net10.0;net8.0</TargetFrameworks>
         <LangVersion>14.0</LangVersion>
         <ImplicitUsings>enable</ImplicitUsings>
+        <Version>$(VmaVersion)-$(ThisVersion)</Version>
         <Nullable>enable</Nullable>
         <RunAOTCompilation>true</RunAOTCompilation>
         <RootNamespace>Vma</RootNamespace>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <NoWarn>CS0169;CS0649</NoWarn>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Description>Unsafe C# bindings for vma</Description>
     </PropertyGroup>
 
     <ItemGroup>
@@ -18,6 +20,17 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Silk.NET.Vulkan" Version="2.22.0" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <None Include="../LICENSE.md">
+            <Pack>True</Pack>
+            <PackagePath>/</PackagePath>
+        </None>
+        <None Include="../README.md">
+            <Pack>True</Pack>
+            <PackagePath>/</PackagePath>
+        </None>
     </ItemGroup>
 
 </Project>

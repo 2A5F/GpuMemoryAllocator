@@ -26,6 +26,8 @@ on:
         value: ${{ jobs.build-win-arm64.outputs.D3D12MA-native-artifact }}
       macos-arm64-vma-native-artifact:
         value: ${{ jobs.build-macos-arm64.outputs.vma-native-artifact }}
+      pack-all-artifact:
+        value: ${{ jobs.pack-all.outputs.pack-all-artifact }}
 
 jobs:
   build-managed-vma:
@@ -42,3 +44,26 @@ jobs:
     uses: ./.github/workflows/build-linux-arm64.yml
   build-macos-arm64:
     uses: ./.github/workflows/build-macos-arm64.yml
+  pack-all:
+    needs:
+      - build-managed-vma
+      - build-managed-d3d12ma
+      - build-win-arm64
+      - build-win-x64
+      - build-linux-arm64
+      - build-linux-x64
+      - build-macos-arm64
+    runs-on: ubuntu-latest
+    outputs:
+      pack-all-artifact: ${{ steps.pack-all.outputs.artifact-id }}
+    steps:
+      - uses: actions/download-artifact@v7
+        with:
+          merge-multiple: true
+          path: ./artifacts
+      - id: pack-all
+        uses: actions/upload-artifact@v6
+        with:
+          path: ./artifacts/*
+          name: pack-all
+          overwrite: true
