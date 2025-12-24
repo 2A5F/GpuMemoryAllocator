@@ -4,7 +4,7 @@
         <IncludeBuildOutput>false</IncludeBuildOutput>
     </PropertyGroup>
 
-    <Target Name="DoGen" AfterTargets="Build" Condition="$([MSBuild]::IsOSPlatform('Windows'))">
+    <Target Name="DoGen" AfterTargets="Build">
         <Exec Command="pwsh ./sync.ps1 $(Version)" WorkingDirectory="../" />
     </Target>
 </Project>
