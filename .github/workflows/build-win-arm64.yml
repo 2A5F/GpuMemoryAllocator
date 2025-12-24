@@ -32,15 +32,21 @@ jobs:
       - name: Build
         shell: pwsh
         run: ./build_native.ps1
+      - name: Pack VMA
+        shell: pwsh
+        run: ./Native/buid_vma-win-arm64.ps1
+      - name: Pack D3D12MA
+        shell: pwsh
+        run: ./Native/buid_d3d12ma-win-arm64.ps1
       - id: vma-native
         uses: actions/upload-artifact@v4
         with:
           name: 'vma-win-arm64'
-          path: ./build/vma/Release/vma.dll
+          path: ./Native/packages/GpuMemoryAllocator.vma.*.nupkg
           overwrite: true
       - id: D3D12MA-native
         uses: actions/upload-artifact@v4
         with:
           name: 'D3D12MA-win-arm64'
-          path: ./build/Release/D3D12MA.dll
+          path: ./Native/packages/GpuMemoryAllocator.D3D12MA.*.nupkg
           overwrite: true

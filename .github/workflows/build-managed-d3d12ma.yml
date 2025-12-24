@@ -31,3 +31,12 @@ jobs:
           name: 'D3D12MA-managed'
           path: ./GpuMemoryAllocator.D3d12/bin/Release/*.nupkg
           overwrite: true
+      - name: Pack D3D12MA
+        shell: pwsh
+        run: ./Native/buid_d3d12ma-meta.ps1
+      - id: D3D12MA-meta
+        uses: actions/upload-artifact@v4
+        with:
+          name: 'D3D12MA-meta'
+          path: ./Native/packages/GpuMemoryAllocator.D3D12MA.*.nupkg
+          overwrite: true

@@ -29,9 +29,12 @@ jobs:
       - name: Build
         shell: bash
         run: ./build_native.sh
+      - name: Pack VMA
+        shell: pwsh
+        run: ./Native/buid_vma-linux-arm64.ps1
       - id: vma-native
         uses: actions/upload-artifact@v4
         with:
           name: 'vma-linux-arm64'
-          path: ./build/vma/Release/libvma.so
+          path: ./Native/packages/GpuMemoryAllocator.vma.*.nupkg
           overwrite: true

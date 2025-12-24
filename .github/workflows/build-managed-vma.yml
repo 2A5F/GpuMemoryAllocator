@@ -31,3 +31,12 @@ jobs:
           name: 'vma-managed'
           path: ./GpuMemoryAllocator.Vulkan/bin/Release/*.nupkg
           overwrite: true
+      - name: Pack Vma
+        shell: pwsh
+        run: ./Native/buid_vma-meta.ps1
+      - id: vma-meta
+        uses: actions/upload-artifact@v4
+        with:
+          name: 'vma-meta'
+          path: ./Native/packages/GpuMemoryAllocator.vma.*.nupkg
+          overwrite: true
