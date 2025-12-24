@@ -64,6 +64,8 @@ public unsafe partial class SwapChain
 
     private SwapchainCreateInfoKHR m_create_info;
 
+    private bool out_date;
+
     #endregion
 
     #region Drop
@@ -347,7 +349,7 @@ public unsafe partial class SwapChain
             var semaphore = m_image_available_semaphores[m_semaphore_frame++ % 4];
             uint image_index;
             var result = m_khr_swapchain!.AcquireNextImage(Graphics.Device, m_swapchain, ulong.MaxValue, semaphore, default, &image_index);
-            if (result == Result.ErrorOutOfDateKhr) { }
+            if (result == Result.ErrorOutOfDateKhr) out_date = true;
             else result.TryThrow();
             m_next_image_index = (int)image_index;
 
@@ -381,7 +383,7 @@ public unsafe partial class SwapChain
         {
             var cur_size = m_cur_size;
             var new_size = Unsafe.BitCast<ulong, uint2>(Interlocked.Read(ref Unsafe.As<uint2, ulong>(ref m_new_size)));
-            if (!cur_size.Equals(new_size))
+            if (!cur_size.Equals(new_size) && out_date)
             {
                 DoResize_InLock(new_size);
             }
@@ -442,7 +444,13 @@ public unsafe partial class SwapChain
 
     private void WaitAll_InLock()
     {
-        Graphics.Vk.QueueWaitIdle(Graphics.Queue).TryThrow();
+        ulong max = 0;
+        for (var i = 0; i < FrameCount; i++)
+        {
+            var v = m_fence_values[i];
+            if (v > max) max = v;
+        }
+        Graphics.WaitOnCpu(max);
     }
 
     [Drop(Order = -1)]

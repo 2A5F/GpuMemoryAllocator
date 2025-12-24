@@ -2,6 +2,7 @@
 using Silk.NET.Direct3D12;
 using Silk.NET.DXGI;
 using Silk.NET.Input;
+using Silk.NET.Maths;
 using Silk.NET.Windowing;
 using TestD3d12;
 
@@ -30,6 +31,7 @@ var window = Window.Create(WindowOptions.Default with
 window.Load += OnLoad;
 window.Update += OnUpdate;
 window.Render += OnRender;
+window.Resize += OnResize;
 
 try
 {
@@ -86,4 +88,9 @@ void OnRender(double delta_time)
     {
         window.IsVisible = true;
     }
+}
+
+void OnResize(Vector2D<int> size)
+{
+    swap_chain.OnResize(new((uint)size.X, (uint)size.Y));
 }
