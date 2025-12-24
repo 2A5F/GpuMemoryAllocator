@@ -1,2 +1,2 @@
 ﻿Set-Location -Path $PSScriptRoot
-dotnet pack ".\d3d12ma\d3d12ma.csproj" -o "./packages"
+dotnet pack ".\D3D12MA\D3D12MA.csproj" -o "./packages"
