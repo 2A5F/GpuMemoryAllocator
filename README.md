@@ -4,6 +4,8 @@
 
 C# bindings for d3d12ma and vma, based on silk.net.
 
+*Since VMA and D3D12MA are not updated frequently, they are not automatically updated. If they become outdated, please submit an issue to remind us.*
+
 ## Packages
 
 - [![Nuget](https://img.shields.io/nuget/v/GpuMemoryAllocator.D3d12)](https://www.nuget.org/packages/GpuMemoryAllocator.D3d12/)  
