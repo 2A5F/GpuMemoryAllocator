@@ -1,6 +1,31 @@
 # GpuMemoryAllocator
 
+[![Build](https://github.com/2A5F/GpuMemoryAllocator/actions/workflows/build.yml/badge.svg)](https://github.com/2A5F/GpuMemoryAllocator/actions/workflows/build.yml)
+
 C# bindings for d3d12ma and vma, based on silk.net.
+
+## Packages
+
+- [![Nuget](https://img.shields.io/nuget/v/GpuMemoryAllocator.D3d12)](https://www.nuget.org/packages/GpuMemoryAllocator.D3d12/)  
+  The D3D12MA binding
+
+  - [![Nuget](https://img.shields.io/nuget/v/GpuMemoryAllocator.D3D12MA)](https://www.nuget.org/packages/GpuMemoryAllocator.D3D12MA/)  
+    The meta pack for D3D12MA native build
+
+    - [![Nuget](https://img.shields.io/nuget/v/GpuMemoryAllocator.D3D12MA.runtime.win-x64)](https://www.nuget.org/packages/GpuMemoryAllocator.D3D12MA.runtime.win-x64/)
+    - [![Nuget](https://img.shields.io/nuget/v/GpuMemoryAllocator.D3D12MA.runtime.win-arm64)](https://www.nuget.org/packages/GpuMemoryAllocator.D3D12MA.runtime.win-arm64/)
+
+- [![Nuget](https://img.shields.io/nuget/v/GpuMemoryAllocator.Vulkan)](https://www.nuget.org/packages/GpuMemoryAllocator.Vulkan/)  
+  The vma binding
+
+  - [![Nuget](https://img.shields.io/nuget/v/GpuMemoryAllocator.vma)](https://www.nuget.org/packages/GpuMemoryAllocator.vma/)  
+    The meta pack for vma native build
+
+    - [![Nuget](https://img.shields.io/nuget/v/GpuMemoryAllocator.vma.runtime.win-x64)](https://www.nuget.org/packages/GpuMemoryAllocator.vma.runtime.win-x64/)
+    - [![Nuget](https://img.shields.io/nuget/v/GpuMemoryAllocator.vma.runtime.win-arm64)](https://www.nuget.org/packages/GpuMemoryAllocator.vma.runtime.win-arm64/)
+    - [![Nuget](https://img.shields.io/nuget/v/GpuMemoryAllocator.vma.runtime.linux-x64)](https://www.nuget.org/packages/GpuMemoryAllocator.vma.runtime.linux-x64/)
+    - [![Nuget](https://img.shields.io/nuget/v/GpuMemoryAllocator.vma.runtime.linux-arm64)](https://www.nuget.org/packages/GpuMemoryAllocator.vma.runtime.linux-arm64/)
+    - [![Nuget](https://img.shields.io/nuget/v/GpuMemoryAllocator.vma.runtime.macos-arm64)](https://www.nuget.org/packages/GpuMemoryAllocator.vma.runtime.macos-arm64/)
 
 ## Build
 
