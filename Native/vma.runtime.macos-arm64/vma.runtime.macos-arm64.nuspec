@@ -12,6 +12,6 @@
     <files>
         <file src="../../LICENSE.md" target="LICENSE.md" />
         <file src="../../README.md" target="README.md" />
-        <file src="../../build/vma/Release/vma.dylib" target="runtimes/macos-arm64/native/vma.dylib" />
+        <file src="../../build/vma/Release/libvma.dylib" target="runtimes/macos-arm64/native/libvma.dylib" />
     </files>
 </package>

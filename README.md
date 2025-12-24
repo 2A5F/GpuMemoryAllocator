@@ -25,5 +25,5 @@ C# bindings for d3d12ma and vma, based on silk.net.
 - Required pwsh
 
 ```powershell
-dotnet build ./Native/Sync/Sync.csproj
+./sync.ps1
 ```

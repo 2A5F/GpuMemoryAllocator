@@ -12,6 +12,6 @@
     <files>
         <file src="../../LICENSE.md" target="LICENSE.md" />
         <file src="../../README.md" target="README.md" />
-        <file src="../../build/vma/Release/vma.so" target="runtimes/linux-arm64/native/vma.so" />
+        <file src="../../build/vma/Release/libvma.so" target="runtimes/linux-arm64/native/libvma.so" />
     </files>
 </package>
