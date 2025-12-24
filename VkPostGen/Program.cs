@@ -84,7 +84,20 @@ static void GenItem(Dictionary<string, string> name_map, StringBuilder code, Xml
                     if (field_name == name) field_name = member.Attributes!["name"]!.Value;
                     var typ_node = member["type"]!;
                     var typ = typ_node.InnerText;
-                    typ = name_map.GetValueOrDefault(typ, typ);
+                    typ = (name, field_name) switch
+                    {
+                        ("AllocatorCreateInfo", "Flags") => "AllocatorCreateFlags",
+                        ("AllocatorCreateInfo", "PTypeExternalMemoryHandleTypes") => "ExternalMemoryHandleTypeFlags*",
+                        ("AllocationCreateInfo", "Flags") => "AllocationCreateFlags",
+                        ("AllocationCreateInfo", "RequiredFlags") => "MemoryPropertyFlags",
+                        ("AllocationCreateInfo", "PreferredFlags") => "MemoryPropertyFlags",
+                        ("PoolCreateInfo", "Flags") => "PoolCreateFlags",
+                        ("DefragmentationInfo", "Flags") => "DefragmentationFlags",
+                        ("VirtualBlockCreateInfo", "Flags") => "VirtualBlockCreateFlags",
+                        ("VirtualAllocationCreateInfo", "Flags") => "VirtualAllocationCreateFlags",
+                        _ => name_map.GetValueOrDefault(typ, typ),
+                    };
+
                     var count = typ_node.Attributes["count"]?.Value;
                     if (count is not null) typ = $"InlineArray{count}<{typ}>";
                     code.AppendLine($"    public {typ} {field_name};");

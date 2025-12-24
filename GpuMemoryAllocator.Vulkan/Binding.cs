@@ -1,5 +1,4 @@
 namespace Vma;
-
 [Flags]
 public enum AllocatorCreateFlags : int
 {
@@ -105,59 +104,59 @@ public unsafe struct VirtualBlock
 }
 public unsafe struct DeviceMemoryCallbacks
 {
-    public delegate* unmanaged[Stdcall]<Allocator*, uint, DeviceMemory*, ulong, void*, void> PfnAllocate;
-    public delegate* unmanaged[Stdcall]<Allocator*, uint, DeviceMemory*, ulong, void*, void> PfnFree;
+    public delegate* unmanaged[Stdcall]<Allocator*, uint, DeviceMemory, ulong, void*, void> PfnAllocate;
+    public delegate* unmanaged[Stdcall]<Allocator*, uint, DeviceMemory, ulong, void*, void> PfnFree;
     public void* PUserData;
 }
 public unsafe struct VulkanFunctions
 {
-    public delegate* unmanaged[Stdcall]<Instance*, byte*, delegate* unmanaged[Stdcall]<void>> VkGetInstanceProcAddr;
-    public delegate* unmanaged[Stdcall]<Device*, byte*, delegate* unmanaged[Stdcall]<void>> VkGetDeviceProcAddr;
-    public delegate* unmanaged[Stdcall]<PhysicalDevice*, PhysicalDeviceProperties*, void> VkGetPhysicalDeviceProperties;
-    public delegate* unmanaged[Stdcall]<PhysicalDevice*, PhysicalDeviceMemoryProperties*, void> VkGetPhysicalDeviceMemoryProperties;
-    public delegate* unmanaged[Stdcall]<Device*, MemoryAllocateInfo*, AllocationCallbacks*, DeviceMemory**, Result> VkAllocateMemory;
-    public delegate* unmanaged[Stdcall]<Device*, DeviceMemory*, AllocationCallbacks*, void> VkFreeMemory;
-    public delegate* unmanaged[Stdcall]<Device*, DeviceMemory*, ulong, ulong, uint, void**, Result> VkMapMemory;
-    public delegate* unmanaged[Stdcall]<Device*, DeviceMemory*, void> VkUnmapMemory;
-    public delegate* unmanaged[Stdcall]<Device*, uint, MappedMemoryRange*, Result> VkFlushMappedMemoryRanges;
-    public delegate* unmanaged[Stdcall]<Device*, uint, MappedMemoryRange*, Result> VkInvalidateMappedMemoryRanges;
-    public delegate* unmanaged[Stdcall]<Device*, Buffer*, DeviceMemory*, ulong, Result> VkBindBufferMemory;
-    public delegate* unmanaged[Stdcall]<Device*, Image*, DeviceMemory*, ulong, Result> VkBindImageMemory;
-    public delegate* unmanaged[Stdcall]<Device*, Buffer*, MemoryRequirements*, void> VkGetBufferMemoryRequirements;
-    public delegate* unmanaged[Stdcall]<Device*, Image*, MemoryRequirements*, void> VkGetImageMemoryRequirements;
-    public delegate* unmanaged[Stdcall]<Device*, BufferCreateInfo*, AllocationCallbacks*, Buffer**, Result> VkCreateBuffer;
-    public delegate* unmanaged[Stdcall]<Device*, Buffer*, AllocationCallbacks*, void> VkDestroyBuffer;
-    public delegate* unmanaged[Stdcall]<Device*, ImageCreateInfo*, AllocationCallbacks*, Image**, Result> VkCreateImage;
-    public delegate* unmanaged[Stdcall]<Device*, Image*, AllocationCallbacks*, void> VkDestroyImage;
-    public delegate* unmanaged[Stdcall]<CommandBuffer*, Buffer*, Buffer*, uint, BufferCopy*, void> VkCmdCopyBuffer;
-    public delegate* unmanaged[Stdcall]<Device*, BufferMemoryRequirementsInfo2*, MemoryRequirements2*, void> VkGetBufferMemoryRequirements2khr;
-    public delegate* unmanaged[Stdcall]<Device*, ImageMemoryRequirementsInfo2*, MemoryRequirements2*, void> VkGetImageMemoryRequirements2khr;
-    public delegate* unmanaged[Stdcall]<Device*, uint, BindBufferMemoryInfo*, Result> VkBindBufferMemory2khr;
-    public delegate* unmanaged[Stdcall]<Device*, uint, BindImageMemoryInfo*, Result> VkBindImageMemory2khr;
-    public delegate* unmanaged[Stdcall]<PhysicalDevice*, PhysicalDeviceMemoryProperties2*, void> VkGetPhysicalDeviceMemoryProperties2khr;
-    public delegate* unmanaged[Stdcall]<Device*, DeviceBufferMemoryRequirements*, MemoryRequirements2*, void> VkGetDeviceBufferMemoryRequirements;
-    public delegate* unmanaged[Stdcall]<Device*, DeviceImageMemoryRequirements*, MemoryRequirements2*, void> VkGetDeviceImageMemoryRequirements;
+    public delegate* unmanaged[Stdcall]<Instance, byte*, delegate* unmanaged[Stdcall]<void>> VkGetInstanceProcAddr;
+    public delegate* unmanaged[Stdcall]<Device, byte*, delegate* unmanaged[Stdcall]<void>> VkGetDeviceProcAddr;
+    public delegate* unmanaged[Stdcall]<PhysicalDevice, PhysicalDeviceProperties*, void> VkGetPhysicalDeviceProperties;
+    public delegate* unmanaged[Stdcall]<PhysicalDevice, PhysicalDeviceMemoryProperties*, void> VkGetPhysicalDeviceMemoryProperties;
+    public delegate* unmanaged[Stdcall]<Device, MemoryAllocateInfo*, AllocationCallbacks*, DeviceMemory*, Result> VkAllocateMemory;
+    public delegate* unmanaged[Stdcall]<Device, DeviceMemory, AllocationCallbacks*, void> VkFreeMemory;
+    public delegate* unmanaged[Stdcall]<Device, DeviceMemory, ulong, ulong, uint, void**, Result> VkMapMemory;
+    public delegate* unmanaged[Stdcall]<Device, DeviceMemory, void> VkUnmapMemory;
+    public delegate* unmanaged[Stdcall]<Device, uint, MappedMemoryRange*, Result> VkFlushMappedMemoryRanges;
+    public delegate* unmanaged[Stdcall]<Device, uint, MappedMemoryRange*, Result> VkInvalidateMappedMemoryRanges;
+    public delegate* unmanaged[Stdcall]<Device, Buffer, DeviceMemory, ulong, Result> VkBindBufferMemory;
+    public delegate* unmanaged[Stdcall]<Device, Image, DeviceMemory, ulong, Result> VkBindImageMemory;
+    public delegate* unmanaged[Stdcall]<Device, Buffer, MemoryRequirements*, void> VkGetBufferMemoryRequirements;
+    public delegate* unmanaged[Stdcall]<Device, Image, MemoryRequirements*, void> VkGetImageMemoryRequirements;
+    public delegate* unmanaged[Stdcall]<Device, BufferCreateInfo*, AllocationCallbacks*, Buffer*, Result> VkCreateBuffer;
+    public delegate* unmanaged[Stdcall]<Device, Buffer, AllocationCallbacks*, void> VkDestroyBuffer;
+    public delegate* unmanaged[Stdcall]<Device, ImageCreateInfo*, AllocationCallbacks*, Image*, Result> VkCreateImage;
+    public delegate* unmanaged[Stdcall]<Device, Image, AllocationCallbacks*, void> VkDestroyImage;
+    public delegate* unmanaged[Stdcall]<CommandBuffer, Buffer, Buffer, uint, BufferCopy*, void> VkCmdCopyBuffer;
+    public delegate* unmanaged[Stdcall]<Device, BufferMemoryRequirementsInfo2*, MemoryRequirements2*, void> VkGetBufferMemoryRequirements2khr;
+    public delegate* unmanaged[Stdcall]<Device, ImageMemoryRequirementsInfo2*, MemoryRequirements2*, void> VkGetImageMemoryRequirements2khr;
+    public delegate* unmanaged[Stdcall]<Device, uint, BindBufferMemoryInfo*, Result> VkBindBufferMemory2khr;
+    public delegate* unmanaged[Stdcall]<Device, uint, BindImageMemoryInfo*, Result> VkBindImageMemory2khr;
+    public delegate* unmanaged[Stdcall]<PhysicalDevice, PhysicalDeviceMemoryProperties2*, void> VkGetPhysicalDeviceMemoryProperties2khr;
+    public delegate* unmanaged[Stdcall]<Device, DeviceBufferMemoryRequirements*, MemoryRequirements2*, void> VkGetDeviceBufferMemoryRequirements;
+    public delegate* unmanaged[Stdcall]<Device, DeviceImageMemoryRequirements*, MemoryRequirements2*, void> VkGetDeviceImageMemoryRequirements;
     public void* VkGetMemoryWin32HandleKhr;
 }
 public unsafe struct AllocatorCreateInfo
 {
-    public uint Flags;
-    public PhysicalDevice* PhysicalDevice;
-    public Device* Device;
+    public AllocatorCreateFlags Flags;
+    public PhysicalDevice PhysicalDevice;
+    public Device Device;
     public ulong PreferredLargeHeapBlockSize;
     public AllocationCallbacks* PAllocationCallbacks;
     public DeviceMemoryCallbacks* PDeviceMemoryCallbacks;
     public ulong* PHeapSizeLimit;
     public VulkanFunctions* PVulkanFunctions;
-    public Instance* Instance;
+    public Instance Instance;
     public uint VulkanApiVersion;
-    public uint* PTypeExternalMemoryHandleTypes;
+    public ExternalMemoryHandleTypeFlags* PTypeExternalMemoryHandleTypes;
 }
 public unsafe struct AllocatorInfo
 {
-    public Instance* Instance;
-    public PhysicalDevice* PhysicalDevice;
-    public Device* Device;
+    public Instance Instance;
+    public PhysicalDevice PhysicalDevice;
+    public Device Device;
 }
 public unsafe struct Statistics
 {
@@ -189,10 +188,10 @@ public unsafe struct Budget
 }
 public unsafe struct AllocationCreateInfo
 {
-    public uint Flags;
+    public AllocationCreateFlags Flags;
     public MemoryUsage Usage;
-    public uint RequiredFlags;
-    public uint PreferredFlags;
+    public MemoryPropertyFlags RequiredFlags;
+    public MemoryPropertyFlags PreferredFlags;
     public uint MemoryTypeBits;
     public Pool* Pool;
     public void* PUserData;
@@ -201,7 +200,7 @@ public unsafe struct AllocationCreateInfo
 public unsafe struct PoolCreateInfo
 {
     public uint MemoryTypeIndex;
-    public uint Flags;
+    public PoolCreateFlags Flags;
     public ulong BlockSize;
     public nuint MinBlockCount;
     public nuint MaxBlockCount;
@@ -212,7 +211,7 @@ public unsafe struct PoolCreateInfo
 public unsafe struct AllocationInfo
 {
     public uint MemoryType;
-    public DeviceMemory* DeviceMemory;
+    public DeviceMemory DeviceMemory;
     public ulong Offset;
     public ulong Size;
     public void* PMappedData;
@@ -227,7 +226,7 @@ public unsafe struct AllocationInfo2
 }
 public unsafe struct DefragmentationInfo
 {
-    public uint Flags;
+    public DefragmentationFlags Flags;
     public Pool* Pool;
     public ulong MaxBytesPerPass;
     public uint MaxAllocationsPerPass;
@@ -255,14 +254,14 @@ public unsafe struct DefragmentationStats
 public unsafe struct VirtualBlockCreateInfo
 {
     public ulong Size;
-    public uint Flags;
+    public VirtualBlockCreateFlags Flags;
     public AllocationCallbacks* PAllocationCallbacks;
 }
 public unsafe struct VirtualAllocationCreateInfo
 {
     public ulong Size;
     public ulong Alignment;
-    public uint Flags;
+    public VirtualAllocationCreateFlags Flags;
     public void* PUserData;
 }
 public unsafe struct VirtualAllocationInfo
@@ -338,10 +337,10 @@ public static unsafe partial class Apis
     public static extern Result AllocateMemoryPages(Allocator* allocator, MemoryRequirements* pVkMemoryRequirements, AllocationCreateInfo* pCreateInfo, nuint allocationCount, Allocation** pAllocations, AllocationInfo* pAllocationInfo);
     [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
     [DllImport("vma", EntryPoint = "vmaAllocateMemoryForBuffer", ExactSpelling = true)]
-    public static extern Result AllocateMemoryForBuffer(Allocator* allocator, Buffer* buffer, AllocationCreateInfo* pCreateInfo, Allocation** pAllocation, AllocationInfo* pAllocationInfo);
+    public static extern Result AllocateMemoryForBuffer(Allocator* allocator, Buffer buffer, AllocationCreateInfo* pCreateInfo, Allocation** pAllocation, AllocationInfo* pAllocationInfo);
     [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
     [DllImport("vma", EntryPoint = "vmaAllocateMemoryForImage", ExactSpelling = true)]
-    public static extern Result AllocateMemoryForImage(Allocator* allocator, Image* image, AllocationCreateInfo* pCreateInfo, Allocation** pAllocation, AllocationInfo* pAllocationInfo);
+    public static extern Result AllocateMemoryForImage(Allocator* allocator, Image image, AllocationCreateInfo* pCreateInfo, Allocation** pAllocation, AllocationInfo* pAllocationInfo);
     [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
     [DllImport("vma", EntryPoint = "vmaFreeMemory", ExactSpelling = true)]
     public static extern void FreeMemory(Allocator* allocator, Allocation* allocation);
@@ -404,43 +403,43 @@ public static unsafe partial class Apis
     public static extern Result EndDefragmentationPass(Allocator* allocator, DefragmentationContext* context, DefragmentationPassMoveInfo* pPassInfo);
     [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
     [DllImport("vma", EntryPoint = "vmaBindBufferMemory", ExactSpelling = true)]
-    public static extern Result BindBufferMemory(Allocator* allocator, Allocation* allocation, Buffer* buffer);
+    public static extern Result BindBufferMemory(Allocator* allocator, Allocation* allocation, Buffer buffer);
     [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
     [DllImport("vma", EntryPoint = "vmaBindBufferMemory2", ExactSpelling = true)]
-    public static extern Result BindBufferMemory2(Allocator* allocator, Allocation* allocation, ulong allocationLocalOffset, Buffer* buffer, void* pNext);
+    public static extern Result BindBufferMemory2(Allocator* allocator, Allocation* allocation, ulong allocationLocalOffset, Buffer buffer, void* pNext);
     [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
     [DllImport("vma", EntryPoint = "vmaBindImageMemory", ExactSpelling = true)]
-    public static extern Result BindImageMemory(Allocator* allocator, Allocation* allocation, Image* image);
+    public static extern Result BindImageMemory(Allocator* allocator, Allocation* allocation, Image image);
     [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
     [DllImport("vma", EntryPoint = "vmaBindImageMemory2", ExactSpelling = true)]
-    public static extern Result BindImageMemory2(Allocator* allocator, Allocation* allocation, ulong allocationLocalOffset, Image* image, void* pNext);
+    public static extern Result BindImageMemory2(Allocator* allocator, Allocation* allocation, ulong allocationLocalOffset, Image image, void* pNext);
     [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
     [DllImport("vma", EntryPoint = "vmaCreateBuffer", ExactSpelling = true)]
-    public static extern Result CreateBuffer(Allocator* allocator, BufferCreateInfo* pBufferCreateInfo, AllocationCreateInfo* pAllocationCreateInfo, Buffer** pBuffer, Allocation** pAllocation, AllocationInfo* pAllocationInfo);
+    public static extern Result CreateBuffer(Allocator* allocator, BufferCreateInfo* pBufferCreateInfo, AllocationCreateInfo* pAllocationCreateInfo, Buffer* pBuffer, Allocation** pAllocation, AllocationInfo* pAllocationInfo);
     [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
     [DllImport("vma", EntryPoint = "vmaCreateBufferWithAlignment", ExactSpelling = true)]
-    public static extern Result CreateBufferWithAlignment(Allocator* allocator, BufferCreateInfo* pBufferCreateInfo, AllocationCreateInfo* pAllocationCreateInfo, ulong minAlignment, Buffer** pBuffer, Allocation** pAllocation, AllocationInfo* pAllocationInfo);
+    public static extern Result CreateBufferWithAlignment(Allocator* allocator, BufferCreateInfo* pBufferCreateInfo, AllocationCreateInfo* pAllocationCreateInfo, ulong minAlignment, Buffer* pBuffer, Allocation** pAllocation, AllocationInfo* pAllocationInfo);
     [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
     [DllImport("vma", EntryPoint = "vmaCreateAliasingBuffer", ExactSpelling = true)]
-    public static extern Result CreateAliasingBuffer(Allocator* allocator, Allocation* allocation, BufferCreateInfo* pBufferCreateInfo, Buffer** pBuffer);
+    public static extern Result CreateAliasingBuffer(Allocator* allocator, Allocation* allocation, BufferCreateInfo* pBufferCreateInfo, Buffer* pBuffer);
     [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
     [DllImport("vma", EntryPoint = "vmaCreateAliasingBuffer2", ExactSpelling = true)]
-    public static extern Result CreateAliasingBuffer2(Allocator* allocator, Allocation* allocation, ulong allocationLocalOffset, BufferCreateInfo* pBufferCreateInfo, Buffer** pBuffer);
+    public static extern Result CreateAliasingBuffer2(Allocator* allocator, Allocation* allocation, ulong allocationLocalOffset, BufferCreateInfo* pBufferCreateInfo, Buffer* pBuffer);
     [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
     [DllImport("vma", EntryPoint = "vmaDestroyBuffer", ExactSpelling = true)]
-    public static extern void DestroyBuffer(Allocator* allocator, Buffer* buffer, Allocation* allocation);
+    public static extern void DestroyBuffer(Allocator* allocator, Buffer buffer, Allocation* allocation);
     [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
     [DllImport("vma", EntryPoint = "vmaCreateImage", ExactSpelling = true)]
-    public static extern Result CreateImage(Allocator* allocator, ImageCreateInfo* pImageCreateInfo, AllocationCreateInfo* pAllocationCreateInfo, Image** pImage, Allocation** pAllocation, AllocationInfo* pAllocationInfo);
+    public static extern Result CreateImage(Allocator* allocator, ImageCreateInfo* pImageCreateInfo, AllocationCreateInfo* pAllocationCreateInfo, Image* pImage, Allocation** pAllocation, AllocationInfo* pAllocationInfo);
     [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
     [DllImport("vma", EntryPoint = "vmaCreateAliasingImage", ExactSpelling = true)]
-    public static extern Result CreateAliasingImage(Allocator* allocator, Allocation* allocation, ImageCreateInfo* pImageCreateInfo, Image** pImage);
+    public static extern Result CreateAliasingImage(Allocator* allocator, Allocation* allocation, ImageCreateInfo* pImageCreateInfo, Image* pImage);
     [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
     [DllImport("vma", EntryPoint = "vmaCreateAliasingImage2", ExactSpelling = true)]
-    public static extern Result CreateAliasingImage2(Allocator* allocator, Allocation* allocation, ulong allocationLocalOffset, ImageCreateInfo* pImageCreateInfo, Image** pImage);
+    public static extern Result CreateAliasingImage2(Allocator* allocator, Allocation* allocation, ulong allocationLocalOffset, ImageCreateInfo* pImageCreateInfo, Image* pImage);
     [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
     [DllImport("vma", EntryPoint = "vmaDestroyImage", ExactSpelling = true)]
-    public static extern void DestroyImage(Allocator* allocator, Image* image, Allocation* allocation);
+    public static extern void DestroyImage(Allocator* allocator, Image image, Allocation* allocation);
     [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
     [DllImport("vma", EntryPoint = "vmaCreateVirtualBlock", ExactSpelling = true)]
     public static extern Result CreateVirtualBlock(VirtualBlockCreateInfo* pCreateInfo, VirtualBlock** pVirtualBlock);

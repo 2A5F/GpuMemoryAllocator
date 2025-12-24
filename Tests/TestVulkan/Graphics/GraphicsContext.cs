@@ -48,6 +48,8 @@ public unsafe partial class GraphicsContext
     private InlineArray3<CommandBuffer> m_command_buffers;
 
     private CommandList m_command_list;
+    
+    private Vma.Allocator* m_allocator;
 
     private readonly Queue<IGpuRecyclable> m_recycle_queue = new();
     private readonly Lock m_recycle_lock = new();
@@ -78,6 +80,7 @@ public unsafe partial class GraphicsContext
     [Drop]
     private void Drop()
     {
+        if (m_allocator != null) Vma.Apis.DestroyAllocator(m_allocator);
         for (var i = 0; i < FrameCount; i++)
         {
             if (m_command_buffers[i].Handle != 0)
@@ -346,6 +349,24 @@ public unsafe partial class GraphicsContext
         }
 
         m_command_list = new(this);
+
+        #endregion
+
+        #region Create Allactor
+
+        {
+            Vma.AllocatorCreateInfo info = new()
+            {
+                Flags = Vma.AllocatorCreateFlags.BufferDeviceAddressBit,
+                PhysicalDevice = m_physical_device,
+                Device = m_device,
+                Instance = m_instance,
+                VulkanApiVersion = Vk.Version13,
+            };
+            Vma.Allocator* allocator;
+            Vma.Apis.CreateAllocator(&info, &allocator).TryThrow();
+            m_allocator = allocator;
+        }
 
         #endregion
     }
