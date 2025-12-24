@@ -1,0 +1,32 @@
+﻿<#@ template language="C#" #>
+<#@ output extension=".json" #>
+<#@ parameter name="Version" type="System.String" #>
+{
+  "runtimes": {
+    "win-arm64": {
+      "GpuMemoryAllocator.vma": {
+        "GpuMemoryAllocator.vma.runtime.win-arm64": "<#= Version #>"
+      }
+    },
+    "win-x64": {
+      "GpuMemoryAllocator.vma": {
+        "GpuMemoryAllocator.vma.runtime.win-x64": "<#= Version #>"
+      }
+    },
+    "linux-arm64": {
+      "GpuMemoryAllocator.vma": {
+        "GpuMemoryAllocator.vma.runtime.linux-arm64": "<#= Version #>"
+      }
+    },
+    "linux-x64": {
+      "GpuMemoryAllocator.vma": {
+        "GpuMemoryAllocator.vma.runtime.linux-x64": "<#= Version #>"
+      }
+    }
+    "macos-arm64": {
+      "GpuMemoryAllocator.vma": {
+        "GpuMemoryAllocator.vma.runtime.macos-arm64": "<#= Version #>"
+      }
+    }
+  }
+}

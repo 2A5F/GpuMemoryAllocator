@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/Native/">
+    <Project Path="Native/Sync/Sync.csproj" />
+  </Folder>
   <Folder Name="/PostGen/">
     <Project Path="D3d12PostGen/D3d12PostGen.csproj" />
     <Project Path="VkPostGen/VkPostGen.csproj" />

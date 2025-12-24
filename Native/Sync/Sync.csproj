@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <IncludeBuildOutput>false</IncludeBuildOutput>
+    </PropertyGroup>
+
+    <Target Name="DoGen" AfterTargets="Build" Condition="$([MSBuild]::IsOSPlatform('Windows'))">
+        <Exec Command="pwsh ./sync.ps1 $(Version)" WorkingDirectory="../" />
+    </Target>
+</Project>

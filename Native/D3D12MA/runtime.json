@@ -1,0 +1,14 @@
+{
+  "runtimes": {
+    "win-arm64": {
+      "GpuMemoryAllocator.D3D12MA": {
+        "GpuMemoryAllocator.D3D12MA.runtime.win-arm64": "0.1.0"
+      }
+    },
+    "win-x64": {
+      "GpuMemoryAllocator.D3D12MA": {
+        "GpuMemoryAllocator.D3D12MA.runtime.win-x64": "0.1.0"
+      }
+    }
+  }
+}
