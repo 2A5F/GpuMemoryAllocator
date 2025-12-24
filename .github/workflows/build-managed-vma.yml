@@ -1,0 +1,33 @@
+﻿name: Build Managed Vma
+
+on:
+  workflow_dispatch:
+  workflow_call:
+    outputs:
+      vma-managed-nupkg-artifact:
+        value: ${{ jobs.build.outputs.vma-managed-nupkg-artifact }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      vma-managed-nupkg-artifact: ${{ steps.vma-managed.outputs.artifact-id }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - name: Dotnet Restore
+        run: dotnet restore
+      - name: Build
+        run: dotnet build ./GpuMemoryAllocator.Vulkan/GpuMemoryAllocator.Vulkan.csproj -c Release
+      - id: vma-managed
+        uses: actions/upload-artifact@v4
+        with:
+          name: 'vma-managed'
+          path: ./GpuMemoryAllocator.Vulkan/bin/Release/*.nupkg
+          overwrite: true

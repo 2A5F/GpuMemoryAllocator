@@ -72,6 +72,8 @@ public unsafe partial class GraphicsContext
     public ReadOnlySpan<CommandBuffer> CommandBuffers => m_command_buffers;
 
     public CommandList CommandList => m_command_list;
+    
+    public Vma.Allocator* Allocator => m_allocator;
 
     #endregion
 
@@ -358,10 +360,10 @@ public unsafe partial class GraphicsContext
             Vma.AllocatorCreateInfo info = new()
             {
                 Flags = Vma.AllocatorCreateFlags.BufferDeviceAddressBit,
+                VulkanApiVersion = Vk.Version13,
+                Instance = m_instance,
                 PhysicalDevice = m_physical_device,
                 Device = m_device,
-                Instance = m_instance,
-                VulkanApiVersion = Vk.Version13,
             };
             Vma.Allocator* allocator;
             Vma.Apis.CreateAllocator(&info, &allocator).TryThrow();

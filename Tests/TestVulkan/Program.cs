@@ -5,6 +5,8 @@ using Silk.NET.Maths;
 using Silk.NET.Windowing;
 using TestVulkan;
 
+// ReSharper disable AccessToModifiedClosure
+
 Utils.InitLogger();
 
 IInputContext input = null!;
@@ -35,8 +37,9 @@ try
 }
 finally
 {
-    swap_chain?.Dispose();
-    ctx?.Dispose();
+   app?.Dispose();
+   swap_chain?.Dispose();
+   ctx?.Dispose();
 }
 
 return;

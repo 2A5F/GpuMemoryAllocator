@@ -1,3 +1,4 @@
+using Coplt.Dropping;
 using Silk.NET.Direct3D12;
 using Silk.NET.DXGI;
 using Silk.NET.Input;
@@ -5,13 +6,15 @@ using Silk.NET.Windowing;
 
 namespace TestD3d12;
 
-public unsafe class App(IWindow window, GraphicsContext ctx, HwndSwapChain swap_chain)
+[Dropping]
+public unsafe partial class App(IWindow window, GraphicsContext ctx, HwndSwapChain swap_chain)
 {
-    public GpuResource image = null!;
+    [Drop]
+    public GpuResource? image;
 
     public void OnLoad()
     {
-        image = new GpuResource(ctx, new ResourceDesc1
+        image = new(ctx, new()
         {
             Dimension = ResourceDimension.Texture2D,
             Width = 1024,

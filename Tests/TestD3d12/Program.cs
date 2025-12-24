@@ -39,6 +39,7 @@ try
 }
 finally
 {
+    app?.Dispose();
     swap_chain?.Dispose();
     ctx?.Dispose();
 }

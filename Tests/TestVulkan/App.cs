@@ -1,13 +1,36 @@
+using Coplt.Dropping;
 using Silk.NET.Input;
 using Silk.NET.Vulkan;
 using Silk.NET.Windowing;
 
 namespace TestVulkan;
 
-public unsafe class App(IWindow window, GraphicsContext ctx, SwapChain swap_chain)
+[Dropping]
+public unsafe partial class App(IWindow window, GraphicsContext ctx, SwapChain swap_chain)
 {
+    [Drop]
+    public GpuImage? image;
+
     public void OnLoad()
     {
+        var queue_family_index = ctx.QueueFamilyIndex;
+        image = new(ctx, new()
+        {
+            SType = StructureType.ImageCreateInfo,
+            Flags = ImageCreateFlags.None,
+            ImageType = ImageType.Type2D,
+            Format = Format.R8G8B8A8Unorm,
+            Extent = new(1024, 1024, 1),
+            MipLevels = 1,
+            ArrayLayers = 1,
+            Samples = SampleCountFlags.Count1Bit,
+            Tiling = ImageTiling.Optimal,
+            Usage = ImageUsageFlags.SampledBit,
+            SharingMode = SharingMode.Exclusive,
+            QueueFamilyIndexCount = 1,
+            PQueueFamilyIndices = &queue_family_index,
+            InitialLayout = ImageLayout.Undefined,
+        });
     }
 
     public void OnUpdate(double delta_time) { }

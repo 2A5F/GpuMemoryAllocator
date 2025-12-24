@@ -8,6 +8,8 @@ on:
   workflow_dispatch:
   workflow_call:
     outputs:
+      vma-managed-nupkg-artifact:
+        value: ${{ jobs.build-managed-vma.outputs.vma-managed-nupkg-artifact }}
       D3D12MA-managed-nupkg-artifact:
         value: ${{ jobs.build-managed-d3d12ma.outputs.D3D12MA-managed-nupkg-artifact }}
       linux-x64-vma-native-artifact:
@@ -26,6 +28,8 @@ on:
         value: ${{ jobs.build-macos-arm64.outputs.vma-native-artifact }}
 
 jobs:
+  build-managed-vma:
+    uses: ./.github/workflows/build-managed-vma.yml
   build-managed-d3d12ma:
     uses: ./.github/workflows/build-managed-d3d12ma.yml
   build-win-x64:
