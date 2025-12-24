@@ -1,6 +1,6 @@
-﻿#if !NET10_0_OR_GREATER
-namespace Vma.CompilerServices;
+﻿namespace Vma.CompilerServices;
 
+#if !NET10_0_OR_GREATER
 /// <summary>
 /// Represents an inline array of <typeparamref name="T"/> with a fixed length of 2.
 /// </summary>
@@ -151,3 +151,13 @@ public struct InlineArray16<T>
     private T t;
 }
 #endif
+
+/// <summary>
+/// Represents an inline array of <typeparamref name="T"/> with a fixed length of 32.
+/// </summary>
+/// <typeparam name="T">The type of elements in the array.</typeparam>
+[InlineArray(32)]
+public struct InlineArray32<T>
+{
+    private T t;
+}
