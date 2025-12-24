@@ -1,0 +1,1683 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<bindings>
+  <namespace name="Vma">
+    <enumeration name="VmaAllocatorCreateFlagBits" access="public">
+      <type>int</type>
+      <enumerator name="VMA_ALLOCATOR_CREATE_EXTERNALLY_SYNCHRONIZED_BIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x00000001</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_ALLOCATOR_CREATE_KHR_DEDICATED_ALLOCATION_BIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x00000002</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x00000004</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_ALLOCATOR_CREATE_EXT_MEMORY_BUDGET_BIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x00000008</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_ALLOCATOR_CREATE_AMD_DEVICE_COHERENT_MEMORY_BIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x00000010</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_ALLOCATOR_CREATE_BUFFER_DEVICE_ADDRESS_BIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x00000020</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_ALLOCATOR_CREATE_EXT_MEMORY_PRIORITY_BIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x00000040</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_ALLOCATOR_CREATE_KHR_MAINTENANCE4_BIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x00000080</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_ALLOCATOR_CREATE_KHR_MAINTENANCE5_BIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x00000100</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_ALLOCATOR_CREATE_KHR_EXTERNAL_MEMORY_WIN32_BIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x00000200</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_ALLOCATOR_CREATE_FLAG_BITS_MAX_ENUM" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x7FFFFFFF</code>
+        </value>
+      </enumerator>
+    </enumeration>
+    <enumeration name="VmaMemoryUsage" access="public">
+      <type>int</type>
+      <enumerator name="VMA_MEMORY_USAGE_UNKNOWN" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_MEMORY_USAGE_GPU_ONLY" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>1</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_MEMORY_USAGE_CPU_ONLY" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>2</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_MEMORY_USAGE_CPU_TO_GPU" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>3</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_MEMORY_USAGE_GPU_TO_CPU" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>4</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_MEMORY_USAGE_CPU_COPY" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>5</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_MEMORY_USAGE_GPU_LAZILY_ALLOCATED" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>6</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_MEMORY_USAGE_AUTO" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>7</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_MEMORY_USAGE_AUTO_PREFER_DEVICE" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>8</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_MEMORY_USAGE_AUTO_PREFER_HOST" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>9</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_MEMORY_USAGE_MAX_ENUM" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x7FFFFFFF</code>
+        </value>
+      </enumerator>
+    </enumeration>
+    <enumeration name="VmaAllocationCreateFlagBits" access="public">
+      <type>int</type>
+      <enumerator name="VMA_ALLOCATION_CREATE_DEDICATED_MEMORY_BIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x00000001</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_ALLOCATION_CREATE_NEVER_ALLOCATE_BIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x00000002</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_ALLOCATION_CREATE_MAPPED_BIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x00000004</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_ALLOCATION_CREATE_USER_DATA_COPY_STRING_BIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x00000020</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_ALLOCATION_CREATE_UPPER_ADDRESS_BIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x00000040</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_ALLOCATION_CREATE_DONT_BIND_BIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x00000080</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_ALLOCATION_CREATE_WITHIN_BUDGET_BIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x00000100</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_ALLOCATION_CREATE_CAN_ALIAS_BIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x00000200</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x00000400</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_ALLOCATION_CREATE_HOST_ACCESS_RANDOM_BIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x00000800</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_ALLOCATION_CREATE_HOST_ACCESS_ALLOW_TRANSFER_INSTEAD_BIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x00001000</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x00010000</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x00020000</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_ALLOCATION_CREATE_STRATEGY_MIN_OFFSET_BIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x00040000</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_ALLOCATION_CREATE_STRATEGY_BEST_FIT_BIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>VMA_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_ALLOCATION_CREATE_STRATEGY_FIRST_FIT_BIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>VMA_ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_ALLOCATION_CREATE_STRATEGY_MASK" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>VMA_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT | VMA_ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT | VMA_ALLOCATION_CREATE_STRATEGY_MIN_OFFSET_BIT</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_ALLOCATION_CREATE_FLAG_BITS_MAX_ENUM" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x7FFFFFFF</code>
+        </value>
+      </enumerator>
+    </enumeration>
+    <enumeration name="VmaPoolCreateFlagBits" access="public">
+      <type>int</type>
+      <enumerator name="VMA_POOL_CREATE_IGNORE_BUFFER_IMAGE_GRANULARITY_BIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x00000002</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_POOL_CREATE_LINEAR_ALGORITHM_BIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x00000004</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_POOL_CREATE_ALGORITHM_MASK" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>VMA_POOL_CREATE_LINEAR_ALGORITHM_BIT</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_POOL_CREATE_FLAG_BITS_MAX_ENUM" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x7FFFFFFF</code>
+        </value>
+      </enumerator>
+    </enumeration>
+    <enumeration name="VmaDefragmentationFlagBits" access="public">
+      <type>int</type>
+      <enumerator name="VMA_DEFRAGMENTATION_FLAG_ALGORITHM_FAST_BIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x1</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_DEFRAGMENTATION_FLAG_ALGORITHM_BALANCED_BIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x2</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_DEFRAGMENTATION_FLAG_ALGORITHM_FULL_BIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x4</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_DEFRAGMENTATION_FLAG_ALGORITHM_EXTENSIVE_BIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x8</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_DEFRAGMENTATION_FLAG_ALGORITHM_MASK" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>VMA_DEFRAGMENTATION_FLAG_ALGORITHM_FAST_BIT | VMA_DEFRAGMENTATION_FLAG_ALGORITHM_BALANCED_BIT | VMA_DEFRAGMENTATION_FLAG_ALGORITHM_FULL_BIT | VMA_DEFRAGMENTATION_FLAG_ALGORITHM_EXTENSIVE_BIT</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_DEFRAGMENTATION_FLAG_BITS_MAX_ENUM" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x7FFFFFFF</code>
+        </value>
+      </enumerator>
+    </enumeration>
+    <enumeration name="VmaDefragmentationMoveOperation" access="public">
+      <type>int</type>
+      <enumerator name="VMA_DEFRAGMENTATION_MOVE_OPERATION_COPY" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_DEFRAGMENTATION_MOVE_OPERATION_IGNORE" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>1</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_DEFRAGMENTATION_MOVE_OPERATION_DESTROY" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>2</code>
+        </value>
+      </enumerator>
+    </enumeration>
+    <enumeration name="VmaVirtualBlockCreateFlagBits" access="public">
+      <type>int</type>
+      <enumerator name="VMA_VIRTUAL_BLOCK_CREATE_LINEAR_ALGORITHM_BIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x00000001</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_VIRTUAL_BLOCK_CREATE_ALGORITHM_MASK" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>VMA_VIRTUAL_BLOCK_CREATE_LINEAR_ALGORITHM_BIT</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_VIRTUAL_BLOCK_CREATE_FLAG_BITS_MAX_ENUM" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x7FFFFFFF</code>
+        </value>
+      </enumerator>
+    </enumeration>
+    <enumeration name="VmaVirtualAllocationCreateFlagBits" access="public">
+      <type>int</type>
+      <enumerator name="VMA_VIRTUAL_ALLOCATION_CREATE_UPPER_ADDRESS_BIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>VmaAllocationCreateFlagBits.VMA_ALLOCATION_CREATE_UPPER_ADDRESS_BIT</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>VmaAllocationCreateFlagBits.VMA_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>VmaAllocationCreateFlagBits.VMA_ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_OFFSET_BIT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>VmaAllocationCreateFlagBits.VMA_ALLOCATION_CREATE_STRATEGY_MIN_OFFSET_BIT</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_VIRTUAL_ALLOCATION_CREATE_STRATEGY_MASK" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>VmaAllocationCreateFlagBits.VMA_ALLOCATION_CREATE_STRATEGY_MASK</code>
+        </value>
+      </enumerator>
+      <enumerator name="VMA_VIRTUAL_ALLOCATION_CREATE_FLAG_BITS_MAX_ENUM" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x7FFFFFFF</code>
+        </value>
+      </enumerator>
+    </enumeration>
+    <struct name="VmaAllocator_T" access="public"></struct>
+    <struct name="VmaPool_T" access="public"></struct>
+    <struct name="VmaAllocation_T" access="public"></struct>
+    <struct name="VmaDefragmentationContext_T" access="public"></struct>
+    <struct name="VmaVirtualAllocation_T" access="public"></struct>
+    <struct name="VmaVirtualBlock_T" access="public"></struct>
+    <struct name="VmaDeviceMemoryCallbacks" access="public" unsafe="true">
+      <field name="pfnAllocate" access="public">
+        <type native="PFN_vmaAllocateDeviceMemoryFunction _Nullable">delegate* unmanaged[Stdcall]&lt;VmaAllocator_T*, uint, VkDeviceMemory_T*, ulong, void*, void&gt;</type>
+      </field>
+      <field name="pfnFree" access="public">
+        <type native="PFN_vmaFreeDeviceMemoryFunction _Nullable">delegate* unmanaged[Stdcall]&lt;VmaAllocator_T*, uint, VkDeviceMemory_T*, ulong, void*, void&gt;</type>
+      </field>
+      <field name="pUserData" access="public">
+        <type native="void * _Nullable">void*</type>
+      </field>
+    </struct>
+    <struct name="VmaVulkanFunctions" access="public" unsafe="true">
+      <field name="vkGetInstanceProcAddr" access="public">
+        <type native="PFN_vkGetInstanceProcAddr _Nullable">delegate* unmanaged[Stdcall]&lt;VkInstance_T*, byte*, delegate* unmanaged[Stdcall]&lt;void&gt;&gt;</type>
+      </field>
+      <field name="vkGetDeviceProcAddr" access="public">
+        <type native="PFN_vkGetDeviceProcAddr _Nullable">delegate* unmanaged[Stdcall]&lt;VkDevice_T*, byte*, delegate* unmanaged[Stdcall]&lt;void&gt;&gt;</type>
+      </field>
+      <field name="vkGetPhysicalDeviceProperties" access="public">
+        <type native="PFN_vkGetPhysicalDeviceProperties _Nullable">delegate* unmanaged[Stdcall]&lt;VkPhysicalDevice_T*, VkPhysicalDeviceProperties*, void&gt;</type>
+      </field>
+      <field name="vkGetPhysicalDeviceMemoryProperties" access="public">
+        <type native="PFN_vkGetPhysicalDeviceMemoryProperties _Nullable">delegate* unmanaged[Stdcall]&lt;VkPhysicalDevice_T*, VkPhysicalDeviceMemoryProperties*, void&gt;</type>
+      </field>
+      <field name="vkAllocateMemory" access="public">
+        <type native="PFN_vkAllocateMemory _Nullable">delegate* unmanaged[Stdcall]&lt;VkDevice_T*, VkMemoryAllocateInfo*, VkAllocationCallbacks*, VkDeviceMemory_T**, VkResult&gt;</type>
+      </field>
+      <field name="vkFreeMemory" access="public">
+        <type native="PFN_vkFreeMemory _Nullable">delegate* unmanaged[Stdcall]&lt;VkDevice_T*, VkDeviceMemory_T*, VkAllocationCallbacks*, void&gt;</type>
+      </field>
+      <field name="vkMapMemory" access="public">
+        <type native="PFN_vkMapMemory _Nullable">delegate* unmanaged[Stdcall]&lt;VkDevice_T*, VkDeviceMemory_T*, ulong, ulong, uint, void**, VkResult&gt;</type>
+      </field>
+      <field name="vkUnmapMemory" access="public">
+        <type native="PFN_vkUnmapMemory _Nullable">delegate* unmanaged[Stdcall]&lt;VkDevice_T*, VkDeviceMemory_T*, void&gt;</type>
+      </field>
+      <field name="vkFlushMappedMemoryRanges" access="public">
+        <type native="PFN_vkFlushMappedMemoryRanges _Nullable">delegate* unmanaged[Stdcall]&lt;VkDevice_T*, uint, VkMappedMemoryRange*, VkResult&gt;</type>
+      </field>
+      <field name="vkInvalidateMappedMemoryRanges" access="public">
+        <type native="PFN_vkInvalidateMappedMemoryRanges _Nullable">delegate* unmanaged[Stdcall]&lt;VkDevice_T*, uint, VkMappedMemoryRange*, VkResult&gt;</type>
+      </field>
+      <field name="vkBindBufferMemory" access="public">
+        <type native="PFN_vkBindBufferMemory _Nullable">delegate* unmanaged[Stdcall]&lt;VkDevice_T*, VkBuffer_T*, VkDeviceMemory_T*, ulong, VkResult&gt;</type>
+      </field>
+      <field name="vkBindImageMemory" access="public">
+        <type native="PFN_vkBindImageMemory _Nullable">delegate* unmanaged[Stdcall]&lt;VkDevice_T*, VkImage_T*, VkDeviceMemory_T*, ulong, VkResult&gt;</type>
+      </field>
+      <field name="vkGetBufferMemoryRequirements" access="public">
+        <type native="PFN_vkGetBufferMemoryRequirements _Nullable">delegate* unmanaged[Stdcall]&lt;VkDevice_T*, VkBuffer_T*, VkMemoryRequirements*, void&gt;</type>
+      </field>
+      <field name="vkGetImageMemoryRequirements" access="public">
+        <type native="PFN_vkGetImageMemoryRequirements _Nullable">delegate* unmanaged[Stdcall]&lt;VkDevice_T*, VkImage_T*, VkMemoryRequirements*, void&gt;</type>
+      </field>
+      <field name="vkCreateBuffer" access="public">
+        <type native="PFN_vkCreateBuffer _Nullable">delegate* unmanaged[Stdcall]&lt;VkDevice_T*, VkBufferCreateInfo*, VkAllocationCallbacks*, VkBuffer_T**, VkResult&gt;</type>
+      </field>
+      <field name="vkDestroyBuffer" access="public">
+        <type native="PFN_vkDestroyBuffer _Nullable">delegate* unmanaged[Stdcall]&lt;VkDevice_T*, VkBuffer_T*, VkAllocationCallbacks*, void&gt;</type>
+      </field>
+      <field name="vkCreateImage" access="public">
+        <type native="PFN_vkCreateImage _Nullable">delegate* unmanaged[Stdcall]&lt;VkDevice_T*, VkImageCreateInfo*, VkAllocationCallbacks*, VkImage_T**, VkResult&gt;</type>
+      </field>
+      <field name="vkDestroyImage" access="public">
+        <type native="PFN_vkDestroyImage _Nullable">delegate* unmanaged[Stdcall]&lt;VkDevice_T*, VkImage_T*, VkAllocationCallbacks*, void&gt;</type>
+      </field>
+      <field name="vkCmdCopyBuffer" access="public">
+        <type native="PFN_vkCmdCopyBuffer _Nullable">delegate* unmanaged[Stdcall]&lt;VkCommandBuffer_T*, VkBuffer_T*, VkBuffer_T*, uint, VkBufferCopy*, void&gt;</type>
+      </field>
+      <field name="vkGetBufferMemoryRequirements2KHR" access="public">
+        <type native="PFN_vkGetBufferMemoryRequirements2KHR _Nullable">delegate* unmanaged[Stdcall]&lt;VkDevice_T*, VkBufferMemoryRequirementsInfo2*, VkMemoryRequirements2*, void&gt;</type>
+      </field>
+      <field name="vkGetImageMemoryRequirements2KHR" access="public">
+        <type native="PFN_vkGetImageMemoryRequirements2KHR _Nullable">delegate* unmanaged[Stdcall]&lt;VkDevice_T*, VkImageMemoryRequirementsInfo2*, VkMemoryRequirements2*, void&gt;</type>
+      </field>
+      <field name="vkBindBufferMemory2KHR" access="public">
+        <type native="PFN_vkBindBufferMemory2KHR _Nullable">delegate* unmanaged[Stdcall]&lt;VkDevice_T*, uint, VkBindBufferMemoryInfo*, VkResult&gt;</type>
+      </field>
+      <field name="vkBindImageMemory2KHR" access="public">
+        <type native="PFN_vkBindImageMemory2KHR _Nullable">delegate* unmanaged[Stdcall]&lt;VkDevice_T*, uint, VkBindImageMemoryInfo*, VkResult&gt;</type>
+      </field>
+      <field name="vkGetPhysicalDeviceMemoryProperties2KHR" access="public">
+        <type native="PFN_vkGetPhysicalDeviceMemoryProperties2KHR _Nullable">delegate* unmanaged[Stdcall]&lt;VkPhysicalDevice_T*, VkPhysicalDeviceMemoryProperties2*, void&gt;</type>
+      </field>
+      <field name="vkGetDeviceBufferMemoryRequirements" access="public">
+        <type native="PFN_vkGetDeviceBufferMemoryRequirementsKHR _Nullable">delegate* unmanaged[Stdcall]&lt;VkDevice_T*, VkDeviceBufferMemoryRequirements*, VkMemoryRequirements2*, void&gt;</type>
+      </field>
+      <field name="vkGetDeviceImageMemoryRequirements" access="public">
+        <type native="PFN_vkGetDeviceImageMemoryRequirementsKHR _Nullable">delegate* unmanaged[Stdcall]&lt;VkDevice_T*, VkDeviceImageMemoryRequirements*, VkMemoryRequirements2*, void&gt;</type>
+      </field>
+      <field name="vkGetMemoryWin32HandleKHR" access="public">
+        <type native="void * _Nullable">void*</type>
+      </field>
+    </struct>
+    <struct name="VmaAllocatorCreateInfo" access="public" unsafe="true">
+      <field name="flags" access="public">
+        <type native="VmaAllocatorCreateFlags">uint</type>
+      </field>
+      <field name="physicalDevice" access="public">
+        <type native="VkPhysicalDevice _Nonnull">VkPhysicalDevice_T*</type>
+      </field>
+      <field name="device" access="public">
+        <type native="VkDevice _Nonnull">VkDevice_T*</type>
+      </field>
+      <field name="preferredLargeHeapBlockSize" access="public">
+        <type native="VkDeviceSize">ulong</type>
+      </field>
+      <field name="pAllocationCallbacks" access="public">
+        <type native="const VkAllocationCallbacks * _Nullable">VkAllocationCallbacks*</type>
+      </field>
+      <field name="pDeviceMemoryCallbacks" access="public">
+        <type native="const VmaDeviceMemoryCallbacks * _Nullable">VmaDeviceMemoryCallbacks*</type>
+      </field>
+      <field name="pHeapSizeLimit" access="public">
+        <type native="const VkDeviceSize * _Nullable">ulong*</type>
+      </field>
+      <field name="pVulkanFunctions" access="public">
+        <type native="const VmaVulkanFunctions * _Nullable">VmaVulkanFunctions*</type>
+      </field>
+      <field name="instance" access="public">
+        <type native="VkInstance _Nonnull">VkInstance_T*</type>
+      </field>
+      <field name="vulkanApiVersion" access="public">
+        <type native="uint32_t">uint</type>
+      </field>
+      <field name="pTypeExternalMemoryHandleTypes" access="public">
+        <type native="const VkExternalMemoryHandleTypeFlagsKHR * _Nullable">uint*</type>
+      </field>
+    </struct>
+    <struct name="VmaAllocatorInfo" access="public" unsafe="true">
+      <field name="instance" access="public">
+        <type native="VkInstance _Nonnull">VkInstance_T*</type>
+      </field>
+      <field name="physicalDevice" access="public">
+        <type native="VkPhysicalDevice _Nonnull">VkPhysicalDevice_T*</type>
+      </field>
+      <field name="device" access="public">
+        <type native="VkDevice _Nonnull">VkDevice_T*</type>
+      </field>
+    </struct>
+    <struct name="VmaStatistics" access="public">
+      <field name="blockCount" access="public">
+        <type native="uint32_t">uint</type>
+      </field>
+      <field name="allocationCount" access="public">
+        <type native="uint32_t">uint</type>
+      </field>
+      <field name="blockBytes" access="public">
+        <type native="VkDeviceSize">ulong</type>
+      </field>
+      <field name="allocationBytes" access="public">
+        <type native="VkDeviceSize">ulong</type>
+      </field>
+    </struct>
+    <struct name="VmaDetailedStatistics" access="public">
+      <field name="statistics" access="public">
+        <type>VmaStatistics</type>
+      </field>
+      <field name="unusedRangeCount" access="public">
+        <type native="uint32_t">uint</type>
+      </field>
+      <field name="allocationSizeMin" access="public">
+        <type native="VkDeviceSize">ulong</type>
+      </field>
+      <field name="allocationSizeMax" access="public">
+        <type native="VkDeviceSize">ulong</type>
+      </field>
+      <field name="unusedRangeSizeMin" access="public">
+        <type native="VkDeviceSize">ulong</type>
+      </field>
+      <field name="unusedRangeSizeMax" access="public">
+        <type native="VkDeviceSize">ulong</type>
+      </field>
+    </struct>
+    <struct name="VmaTotalStatistics" access="public">
+      <field name="memoryType" access="public">
+        <type native="VmaDetailedStatistics[32]" count="32" fixed="_memoryType_e__FixedBuffer">VmaDetailedStatistics</type>
+      </field>
+      <field name="memoryHeap" access="public">
+        <type native="VmaDetailedStatistics[16]" count="16" fixed="_memoryHeap_e__FixedBuffer">VmaDetailedStatistics</type>
+      </field>
+      <field name="total" access="public">
+        <type>VmaDetailedStatistics</type>
+      </field>
+      <struct name="_memoryType_e__FixedBuffer" access="public">
+        <attribute>InlineArray(32)</attribute>
+        <field name="e0" access="public">
+          <type>VmaDetailedStatistics</type>
+        </field>
+      </struct>
+      <struct name="_memoryHeap_e__FixedBuffer" access="public">
+        <attribute>InlineArray(16)</attribute>
+        <field name="e0" access="public">
+          <type>VmaDetailedStatistics</type>
+        </field>
+      </struct>
+    </struct>
+    <struct name="VmaBudget" access="public">
+      <field name="statistics" access="public">
+        <type>VmaStatistics</type>
+      </field>
+      <field name="usage" access="public">
+        <type native="VkDeviceSize">ulong</type>
+      </field>
+      <field name="budget" access="public">
+        <type native="VkDeviceSize">ulong</type>
+      </field>
+    </struct>
+    <struct name="VmaAllocationCreateInfo" access="public" unsafe="true">
+      <field name="flags" access="public">
+        <type native="VmaAllocationCreateFlags">uint</type>
+      </field>
+      <field name="usage" access="public">
+        <type>VmaMemoryUsage</type>
+      </field>
+      <field name="requiredFlags" access="public">
+        <type native="VkMemoryPropertyFlags">uint</type>
+      </field>
+      <field name="preferredFlags" access="public">
+        <type native="VkMemoryPropertyFlags">uint</type>
+      </field>
+      <field name="memoryTypeBits" access="public">
+        <type native="uint32_t">uint</type>
+      </field>
+      <field name="pool" access="public">
+        <type native="VmaPool _Nullable">VmaPool_T*</type>
+      </field>
+      <field name="pUserData" access="public">
+        <type native="void * _Nullable">void*</type>
+      </field>
+      <field name="priority" access="public">
+        <type>float</type>
+      </field>
+    </struct>
+    <struct name="VmaPoolCreateInfo" access="public" unsafe="true">
+      <field name="memoryTypeIndex" access="public">
+        <type native="uint32_t">uint</type>
+      </field>
+      <field name="flags" access="public">
+        <type native="VmaPoolCreateFlags">uint</type>
+      </field>
+      <field name="blockSize" access="public">
+        <type native="VkDeviceSize">ulong</type>
+      </field>
+      <field name="minBlockCount" access="public">
+        <type native="size_t">nuint</type>
+      </field>
+      <field name="maxBlockCount" access="public">
+        <type native="size_t">nuint</type>
+      </field>
+      <field name="priority" access="public">
+        <type>float</type>
+      </field>
+      <field name="minAllocationAlignment" access="public">
+        <type native="VkDeviceSize">ulong</type>
+      </field>
+      <field name="pMemoryAllocateNext" access="public">
+        <type native="void * _Nullable">void*</type>
+      </field>
+    </struct>
+    <struct name="VmaAllocationInfo" access="public" unsafe="true">
+      <field name="memoryType" access="public">
+        <type native="uint32_t">uint</type>
+      </field>
+      <field name="deviceMemory" access="public">
+        <type native="VkDeviceMemory _Nullable">VkDeviceMemory_T*</type>
+      </field>
+      <field name="offset" access="public">
+        <type native="VkDeviceSize">ulong</type>
+      </field>
+      <field name="size" access="public">
+        <type native="VkDeviceSize">ulong</type>
+      </field>
+      <field name="pMappedData" access="public">
+        <type native="void * _Nullable">void*</type>
+      </field>
+      <field name="pUserData" access="public">
+        <type native="void * _Nullable">void*</type>
+      </field>
+      <field name="pName" access="public">
+        <type native="const char * _Nullable">byte*</type>
+      </field>
+    </struct>
+    <struct name="VmaAllocationInfo2" access="public">
+      <field name="allocationInfo" access="public">
+        <type>VmaAllocationInfo</type>
+      </field>
+      <field name="blockSize" access="public">
+        <type native="VkDeviceSize">ulong</type>
+      </field>
+      <field name="dedicatedMemory" access="public">
+        <type native="VkBool32">uint</type>
+      </field>
+    </struct>
+    <struct name="VmaDefragmentationInfo" access="public" unsafe="true">
+      <field name="flags" access="public">
+        <type native="VmaDefragmentationFlags">uint</type>
+      </field>
+      <field name="pool" access="public">
+        <type native="VmaPool _Nullable">VmaPool_T*</type>
+      </field>
+      <field name="maxBytesPerPass" access="public">
+        <type native="VkDeviceSize">ulong</type>
+      </field>
+      <field name="maxAllocationsPerPass" access="public">
+        <type native="uint32_t">uint</type>
+      </field>
+      <field name="pfnBreakCallback" access="public">
+        <type native="PFN_vmaCheckDefragmentationBreakFunction _Nullable">delegate* unmanaged[Stdcall]&lt;void*, uint&gt;</type>
+      </field>
+      <field name="pBreakCallbackUserData" access="public">
+        <type native="void * _Nullable">void*</type>
+      </field>
+    </struct>
+    <struct name="VmaDefragmentationMove" access="public" unsafe="true">
+      <field name="operation" access="public">
+        <type>VmaDefragmentationMoveOperation</type>
+      </field>
+      <field name="srcAllocation" access="public">
+        <type native="VmaAllocation _Nonnull">VmaAllocation_T*</type>
+      </field>
+      <field name="dstTmpAllocation" access="public">
+        <type native="VmaAllocation _Nonnull">VmaAllocation_T*</type>
+      </field>
+    </struct>
+    <struct name="VmaDefragmentationPassMoveInfo" access="public" unsafe="true">
+      <field name="moveCount" access="public">
+        <type native="uint32_t">uint</type>
+      </field>
+      <field name="pMoves" access="public">
+        <type native="VmaDefragmentationMove * _Nullable">VmaDefragmentationMove*</type>
+      </field>
+    </struct>
+    <struct name="VmaDefragmentationStats" access="public">
+      <field name="bytesMoved" access="public">
+        <type native="VkDeviceSize">ulong</type>
+      </field>
+      <field name="bytesFreed" access="public">
+        <type native="VkDeviceSize">ulong</type>
+      </field>
+      <field name="allocationsMoved" access="public">
+        <type native="uint32_t">uint</type>
+      </field>
+      <field name="deviceMemoryBlocksFreed" access="public">
+        <type native="uint32_t">uint</type>
+      </field>
+    </struct>
+    <struct name="VmaVirtualBlockCreateInfo" access="public" unsafe="true">
+      <field name="size" access="public">
+        <type native="VkDeviceSize">ulong</type>
+      </field>
+      <field name="flags" access="public">
+        <type native="VmaVirtualBlockCreateFlags">uint</type>
+      </field>
+      <field name="pAllocationCallbacks" access="public">
+        <type native="const VkAllocationCallbacks * _Nullable">VkAllocationCallbacks*</type>
+      </field>
+    </struct>
+    <struct name="VmaVirtualAllocationCreateInfo" access="public" unsafe="true">
+      <field name="size" access="public">
+        <type native="VkDeviceSize">ulong</type>
+      </field>
+      <field name="alignment" access="public">
+        <type native="VkDeviceSize">ulong</type>
+      </field>
+      <field name="flags" access="public">
+        <type native="VmaVirtualAllocationCreateFlags">uint</type>
+      </field>
+      <field name="pUserData" access="public">
+        <type native="void * _Nullable">void*</type>
+      </field>
+    </struct>
+    <struct name="VmaVirtualAllocationInfo" access="public" unsafe="true">
+      <field name="offset" access="public">
+        <type native="VkDeviceSize">ulong</type>
+      </field>
+      <field name="size" access="public">
+        <type native="VkDeviceSize">ulong</type>
+      </field>
+      <field name="pUserData" access="public">
+        <type native="void * _Nullable">void*</type>
+      </field>
+    </struct>
+    <class name="Apis" access="public" static="true">
+      <function name="vmaCreateAllocator" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>VkResult</type>
+        <param name="pCreateInfo">
+          <type>VmaAllocatorCreateInfo*</type>
+        </param>
+        <param name="pAllocator">
+          <type>VmaAllocator_T**</type>
+        </param>
+      </function>
+      <function name="vmaDestroyAllocator" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>void</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+      </function>
+      <function name="vmaGetAllocatorInfo" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>void</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="pAllocatorInfo">
+          <type>VmaAllocatorInfo*</type>
+        </param>
+      </function>
+      <function name="vmaGetPhysicalDeviceProperties" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>void</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="ppPhysicalDeviceProperties">
+          <type>VkPhysicalDeviceProperties**</type>
+        </param>
+      </function>
+      <function name="vmaGetMemoryProperties" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>void</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="ppPhysicalDeviceMemoryProperties">
+          <type>VkPhysicalDeviceMemoryProperties**</type>
+        </param>
+      </function>
+      <function name="vmaGetMemoryTypeProperties" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>void</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="memoryTypeIndex">
+          <type>uint</type>
+        </param>
+        <param name="pFlags">
+          <type>uint*</type>
+        </param>
+      </function>
+      <function name="vmaSetCurrentFrameIndex" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>void</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="frameIndex">
+          <type>uint</type>
+        </param>
+      </function>
+      <function name="vmaCalculateStatistics" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>void</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="pStats">
+          <type>VmaTotalStatistics*</type>
+        </param>
+      </function>
+      <function name="vmaGetHeapBudgets" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>void</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="pBudgets">
+          <type>VmaBudget*</type>
+        </param>
+      </function>
+      <function name="vmaFindMemoryTypeIndex" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>VkResult</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="memoryTypeBits">
+          <type>uint</type>
+        </param>
+        <param name="pAllocationCreateInfo">
+          <type>VmaAllocationCreateInfo*</type>
+        </param>
+        <param name="pMemoryTypeIndex">
+          <type>uint*</type>
+        </param>
+      </function>
+      <function name="vmaFindMemoryTypeIndexForBufferInfo" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>VkResult</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="pBufferCreateInfo">
+          <type>VkBufferCreateInfo*</type>
+        </param>
+        <param name="pAllocationCreateInfo">
+          <type>VmaAllocationCreateInfo*</type>
+        </param>
+        <param name="pMemoryTypeIndex">
+          <type>uint*</type>
+        </param>
+      </function>
+      <function name="vmaFindMemoryTypeIndexForImageInfo" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>VkResult</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="pImageCreateInfo">
+          <type>VkImageCreateInfo*</type>
+        </param>
+        <param name="pAllocationCreateInfo">
+          <type>VmaAllocationCreateInfo*</type>
+        </param>
+        <param name="pMemoryTypeIndex">
+          <type>uint*</type>
+        </param>
+      </function>
+      <function name="vmaCreatePool" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>VkResult</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="pCreateInfo">
+          <type>VmaPoolCreateInfo*</type>
+        </param>
+        <param name="pPool">
+          <type>VmaPool_T**</type>
+        </param>
+      </function>
+      <function name="vmaDestroyPool" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>void</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="pool">
+          <type>VmaPool_T*</type>
+        </param>
+      </function>
+      <function name="vmaGetPoolStatistics" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>void</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="pool">
+          <type>VmaPool_T*</type>
+        </param>
+        <param name="pPoolStats">
+          <type>VmaStatistics*</type>
+        </param>
+      </function>
+      <function name="vmaCalculatePoolStatistics" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>void</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="pool">
+          <type>VmaPool_T*</type>
+        </param>
+        <param name="pPoolStats">
+          <type>VmaDetailedStatistics*</type>
+        </param>
+      </function>
+      <function name="vmaCheckPoolCorruption" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>VkResult</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="pool">
+          <type>VmaPool_T*</type>
+        </param>
+      </function>
+      <function name="vmaGetPoolName" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>void</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="pool">
+          <type>VmaPool_T*</type>
+        </param>
+        <param name="ppName">
+          <type>byte**</type>
+        </param>
+      </function>
+      <function name="vmaSetPoolName" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>void</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="pool">
+          <type>VmaPool_T*</type>
+        </param>
+        <param name="pName">
+          <type>byte*</type>
+        </param>
+      </function>
+      <function name="vmaAllocateMemory" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>VkResult</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="pVkMemoryRequirements">
+          <type>VkMemoryRequirements*</type>
+        </param>
+        <param name="pCreateInfo">
+          <type>VmaAllocationCreateInfo*</type>
+        </param>
+        <param name="pAllocation">
+          <type>VmaAllocation_T**</type>
+        </param>
+        <param name="pAllocationInfo">
+          <type>VmaAllocationInfo*</type>
+        </param>
+      </function>
+      <function name="vmaAllocateMemoryPages" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>VkResult</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="pVkMemoryRequirements">
+          <type>VkMemoryRequirements*</type>
+        </param>
+        <param name="pCreateInfo">
+          <type>VmaAllocationCreateInfo*</type>
+        </param>
+        <param name="allocationCount">
+          <type>nuint</type>
+        </param>
+        <param name="pAllocations">
+          <type>VmaAllocation_T**</type>
+        </param>
+        <param name="pAllocationInfo">
+          <type>VmaAllocationInfo*</type>
+        </param>
+      </function>
+      <function name="vmaAllocateMemoryForBuffer" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>VkResult</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="buffer">
+          <type>VkBuffer_T*</type>
+        </param>
+        <param name="pCreateInfo">
+          <type>VmaAllocationCreateInfo*</type>
+        </param>
+        <param name="pAllocation">
+          <type>VmaAllocation_T**</type>
+        </param>
+        <param name="pAllocationInfo">
+          <type>VmaAllocationInfo*</type>
+        </param>
+      </function>
+      <function name="vmaAllocateMemoryForImage" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>VkResult</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="image">
+          <type>VkImage_T*</type>
+        </param>
+        <param name="pCreateInfo">
+          <type>VmaAllocationCreateInfo*</type>
+        </param>
+        <param name="pAllocation">
+          <type>VmaAllocation_T**</type>
+        </param>
+        <param name="pAllocationInfo">
+          <type>VmaAllocationInfo*</type>
+        </param>
+      </function>
+      <function name="vmaFreeMemory" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>void</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="allocation">
+          <type>VmaAllocation_T*</type>
+        </param>
+      </function>
+      <function name="vmaFreeMemoryPages" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>void</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="allocationCount">
+          <type>nuint</type>
+        </param>
+        <param name="pAllocations">
+          <type>VmaAllocation_T**</type>
+        </param>
+      </function>
+      <function name="vmaGetAllocationInfo" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>void</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="allocation">
+          <type>VmaAllocation_T*</type>
+        </param>
+        <param name="pAllocationInfo">
+          <type>VmaAllocationInfo*</type>
+        </param>
+      </function>
+      <function name="vmaGetAllocationInfo2" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>void</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="allocation">
+          <type>VmaAllocation_T*</type>
+        </param>
+        <param name="pAllocationInfo">
+          <type>VmaAllocationInfo2*</type>
+        </param>
+      </function>
+      <function name="vmaSetAllocationUserData" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>void</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="allocation">
+          <type>VmaAllocation_T*</type>
+        </param>
+        <param name="pUserData">
+          <type>void*</type>
+        </param>
+      </function>
+      <function name="vmaSetAllocationName" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>void</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="allocation">
+          <type>VmaAllocation_T*</type>
+        </param>
+        <param name="pName">
+          <type>byte*</type>
+        </param>
+      </function>
+      <function name="vmaGetAllocationMemoryProperties" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>void</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="allocation">
+          <type>VmaAllocation_T*</type>
+        </param>
+        <param name="pFlags">
+          <type>uint*</type>
+        </param>
+      </function>
+      <function name="vmaMapMemory" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>VkResult</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="allocation">
+          <type>VmaAllocation_T*</type>
+        </param>
+        <param name="ppData">
+          <type>void**</type>
+        </param>
+      </function>
+      <function name="vmaUnmapMemory" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>void</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="allocation">
+          <type>VmaAllocation_T*</type>
+        </param>
+      </function>
+      <function name="vmaFlushAllocation" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>VkResult</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="allocation">
+          <type>VmaAllocation_T*</type>
+        </param>
+        <param name="offset">
+          <type>ulong</type>
+        </param>
+        <param name="size">
+          <type>ulong</type>
+        </param>
+      </function>
+      <function name="vmaInvalidateAllocation" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>VkResult</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="allocation">
+          <type>VmaAllocation_T*</type>
+        </param>
+        <param name="offset">
+          <type>ulong</type>
+        </param>
+        <param name="size">
+          <type>ulong</type>
+        </param>
+      </function>
+      <function name="vmaFlushAllocations" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>VkResult</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="allocationCount">
+          <type>uint</type>
+        </param>
+        <param name="allocations">
+          <type>VmaAllocation_T**</type>
+        </param>
+        <param name="offsets">
+          <type>ulong*</type>
+        </param>
+        <param name="sizes">
+          <type>ulong*</type>
+        </param>
+      </function>
+      <function name="vmaInvalidateAllocations" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>VkResult</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="allocationCount">
+          <type>uint</type>
+        </param>
+        <param name="allocations">
+          <type>VmaAllocation_T**</type>
+        </param>
+        <param name="offsets">
+          <type>ulong*</type>
+        </param>
+        <param name="sizes">
+          <type>ulong*</type>
+        </param>
+      </function>
+      <function name="vmaCopyMemoryToAllocation" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>VkResult</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="pSrcHostPointer">
+          <type>void*</type>
+        </param>
+        <param name="dstAllocation">
+          <type>VmaAllocation_T*</type>
+        </param>
+        <param name="dstAllocationLocalOffset">
+          <type>ulong</type>
+        </param>
+        <param name="size">
+          <type>ulong</type>
+        </param>
+      </function>
+      <function name="vmaCopyAllocationToMemory" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>VkResult</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="srcAllocation">
+          <type>VmaAllocation_T*</type>
+        </param>
+        <param name="srcAllocationLocalOffset">
+          <type>ulong</type>
+        </param>
+        <param name="pDstHostPointer">
+          <type>void*</type>
+        </param>
+        <param name="size">
+          <type>ulong</type>
+        </param>
+      </function>
+      <function name="vmaCheckCorruption" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>VkResult</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="memoryTypeBits">
+          <type>uint</type>
+        </param>
+      </function>
+      <function name="vmaBeginDefragmentation" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>VkResult</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="pInfo">
+          <type>VmaDefragmentationInfo*</type>
+        </param>
+        <param name="pContext">
+          <type>VmaDefragmentationContext_T**</type>
+        </param>
+      </function>
+      <function name="vmaEndDefragmentation" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>void</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="context">
+          <type>VmaDefragmentationContext_T*</type>
+        </param>
+        <param name="pStats">
+          <type>VmaDefragmentationStats*</type>
+        </param>
+      </function>
+      <function name="vmaBeginDefragmentationPass" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>VkResult</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="context">
+          <type>VmaDefragmentationContext_T*</type>
+        </param>
+        <param name="pPassInfo">
+          <type>VmaDefragmentationPassMoveInfo*</type>
+        </param>
+      </function>
+      <function name="vmaEndDefragmentationPass" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>VkResult</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="context">
+          <type>VmaDefragmentationContext_T*</type>
+        </param>
+        <param name="pPassInfo">
+          <type>VmaDefragmentationPassMoveInfo*</type>
+        </param>
+      </function>
+      <function name="vmaBindBufferMemory" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>VkResult</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="allocation">
+          <type>VmaAllocation_T*</type>
+        </param>
+        <param name="buffer">
+          <type>VkBuffer_T*</type>
+        </param>
+      </function>
+      <function name="vmaBindBufferMemory2" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>VkResult</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="allocation">
+          <type>VmaAllocation_T*</type>
+        </param>
+        <param name="allocationLocalOffset">
+          <type>ulong</type>
+        </param>
+        <param name="buffer">
+          <type>VkBuffer_T*</type>
+        </param>
+        <param name="pNext">
+          <type>void*</type>
+        </param>
+      </function>
+      <function name="vmaBindImageMemory" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>VkResult</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="allocation">
+          <type>VmaAllocation_T*</type>
+        </param>
+        <param name="image">
+          <type>VkImage_T*</type>
+        </param>
+      </function>
+      <function name="vmaBindImageMemory2" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>VkResult</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="allocation">
+          <type>VmaAllocation_T*</type>
+        </param>
+        <param name="allocationLocalOffset">
+          <type>ulong</type>
+        </param>
+        <param name="image">
+          <type>VkImage_T*</type>
+        </param>
+        <param name="pNext">
+          <type>void*</type>
+        </param>
+      </function>
+      <function name="vmaCreateBuffer" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>VkResult</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="pBufferCreateInfo">
+          <type>VkBufferCreateInfo*</type>
+        </param>
+        <param name="pAllocationCreateInfo">
+          <type>VmaAllocationCreateInfo*</type>
+        </param>
+        <param name="pBuffer">
+          <type>VkBuffer_T**</type>
+        </param>
+        <param name="pAllocation">
+          <type>VmaAllocation_T**</type>
+        </param>
+        <param name="pAllocationInfo">
+          <type>VmaAllocationInfo*</type>
+        </param>
+      </function>
+      <function name="vmaCreateBufferWithAlignment" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>VkResult</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="pBufferCreateInfo">
+          <type>VkBufferCreateInfo*</type>
+        </param>
+        <param name="pAllocationCreateInfo">
+          <type>VmaAllocationCreateInfo*</type>
+        </param>
+        <param name="minAlignment">
+          <type>ulong</type>
+        </param>
+        <param name="pBuffer">
+          <type>VkBuffer_T**</type>
+        </param>
+        <param name="pAllocation">
+          <type>VmaAllocation_T**</type>
+        </param>
+        <param name="pAllocationInfo">
+          <type>VmaAllocationInfo*</type>
+        </param>
+      </function>
+      <function name="vmaCreateAliasingBuffer" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>VkResult</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="allocation">
+          <type>VmaAllocation_T*</type>
+        </param>
+        <param name="pBufferCreateInfo">
+          <type>VkBufferCreateInfo*</type>
+        </param>
+        <param name="pBuffer">
+          <type>VkBuffer_T**</type>
+        </param>
+      </function>
+      <function name="vmaCreateAliasingBuffer2" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>VkResult</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="allocation">
+          <type>VmaAllocation_T*</type>
+        </param>
+        <param name="allocationLocalOffset">
+          <type>ulong</type>
+        </param>
+        <param name="pBufferCreateInfo">
+          <type>VkBufferCreateInfo*</type>
+        </param>
+        <param name="pBuffer">
+          <type>VkBuffer_T**</type>
+        </param>
+      </function>
+      <function name="vmaDestroyBuffer" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>void</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="buffer">
+          <type>VkBuffer_T*</type>
+        </param>
+        <param name="allocation">
+          <type>VmaAllocation_T*</type>
+        </param>
+      </function>
+      <function name="vmaCreateImage" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>VkResult</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="pImageCreateInfo">
+          <type>VkImageCreateInfo*</type>
+        </param>
+        <param name="pAllocationCreateInfo">
+          <type>VmaAllocationCreateInfo*</type>
+        </param>
+        <param name="pImage">
+          <type>VkImage_T**</type>
+        </param>
+        <param name="pAllocation">
+          <type>VmaAllocation_T**</type>
+        </param>
+        <param name="pAllocationInfo">
+          <type>VmaAllocationInfo*</type>
+        </param>
+      </function>
+      <function name="vmaCreateAliasingImage" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>VkResult</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="allocation">
+          <type>VmaAllocation_T*</type>
+        </param>
+        <param name="pImageCreateInfo">
+          <type>VkImageCreateInfo*</type>
+        </param>
+        <param name="pImage">
+          <type>VkImage_T**</type>
+        </param>
+      </function>
+      <function name="vmaCreateAliasingImage2" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>VkResult</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="allocation">
+          <type>VmaAllocation_T*</type>
+        </param>
+        <param name="allocationLocalOffset">
+          <type>ulong</type>
+        </param>
+        <param name="pImageCreateInfo">
+          <type>VkImageCreateInfo*</type>
+        </param>
+        <param name="pImage">
+          <type>VkImage_T**</type>
+        </param>
+      </function>
+      <function name="vmaDestroyImage" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>void</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="image">
+          <type>VkImage_T*</type>
+        </param>
+        <param name="allocation">
+          <type>VmaAllocation_T*</type>
+        </param>
+      </function>
+      <function name="vmaCreateVirtualBlock" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>VkResult</type>
+        <param name="pCreateInfo">
+          <type>VmaVirtualBlockCreateInfo*</type>
+        </param>
+        <param name="pVirtualBlock">
+          <type>VmaVirtualBlock_T**</type>
+        </param>
+      </function>
+      <function name="vmaDestroyVirtualBlock" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>void</type>
+        <param name="virtualBlock">
+          <type>VmaVirtualBlock_T*</type>
+        </param>
+      </function>
+      <function name="vmaIsVirtualBlockEmpty" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type native="VkBool32">uint</type>
+        <param name="virtualBlock">
+          <type>VmaVirtualBlock_T*</type>
+        </param>
+      </function>
+      <function name="vmaGetVirtualAllocationInfo" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>void</type>
+        <param name="virtualBlock">
+          <type>VmaVirtualBlock_T*</type>
+        </param>
+        <param name="allocation">
+          <type>VmaVirtualAllocation_T*</type>
+        </param>
+        <param name="pVirtualAllocInfo">
+          <type>VmaVirtualAllocationInfo*</type>
+        </param>
+      </function>
+      <function name="vmaVirtualAllocate" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>VkResult</type>
+        <param name="virtualBlock">
+          <type>VmaVirtualBlock_T*</type>
+        </param>
+        <param name="pCreateInfo">
+          <type>VmaVirtualAllocationCreateInfo*</type>
+        </param>
+        <param name="pAllocation">
+          <type>VmaVirtualAllocation_T**</type>
+        </param>
+        <param name="pOffset">
+          <type>ulong*</type>
+        </param>
+      </function>
+      <function name="vmaVirtualFree" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>void</type>
+        <param name="virtualBlock">
+          <type>VmaVirtualBlock_T*</type>
+        </param>
+        <param name="allocation">
+          <type>VmaVirtualAllocation_T*</type>
+        </param>
+      </function>
+      <function name="vmaClearVirtualBlock" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>void</type>
+        <param name="virtualBlock">
+          <type>VmaVirtualBlock_T*</type>
+        </param>
+      </function>
+      <function name="vmaSetVirtualAllocationUserData" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>void</type>
+        <param name="virtualBlock">
+          <type>VmaVirtualBlock_T*</type>
+        </param>
+        <param name="allocation">
+          <type>VmaVirtualAllocation_T*</type>
+        </param>
+        <param name="pUserData">
+          <type>void*</type>
+        </param>
+      </function>
+      <function name="vmaGetVirtualBlockStatistics" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>void</type>
+        <param name="virtualBlock">
+          <type>VmaVirtualBlock_T*</type>
+        </param>
+        <param name="pStats">
+          <type>VmaStatistics*</type>
+        </param>
+      </function>
+      <function name="vmaCalculateVirtualBlockStatistics" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>void</type>
+        <param name="virtualBlock">
+          <type>VmaVirtualBlock_T*</type>
+        </param>
+        <param name="pStats">
+          <type>VmaDetailedStatistics*</type>
+        </param>
+      </function>
+      <function name="vmaBuildVirtualBlockStatsString" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>void</type>
+        <param name="virtualBlock">
+          <type>VmaVirtualBlock_T*</type>
+        </param>
+        <param name="ppStatsString">
+          <type>byte**</type>
+        </param>
+        <param name="detailedMap">
+          <type>uint</type>
+        </param>
+      </function>
+      <function name="vmaFreeVirtualBlockStatsString" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>void</type>
+        <param name="virtualBlock">
+          <type>VmaVirtualBlock_T*</type>
+        </param>
+        <param name="pStatsString">
+          <type>byte*</type>
+        </param>
+      </function>
+      <function name="vmaBuildStatsString" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>void</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="ppStatsString">
+          <type>byte**</type>
+        </param>
+        <param name="detailedMap">
+          <type>uint</type>
+        </param>
+      </function>
+      <function name="vmaFreeStatsString" access="public" lib="vma" convention="Cdecl" static="true" unsafe="true">
+        <type>void</type>
+        <param name="allocator">
+          <type>VmaAllocator_T*</type>
+        </param>
+        <param name="pStatsString">
+          <type>byte*</type>
+        </param>
+      </function>
+    </class>
+  </namespace>
+</bindings>

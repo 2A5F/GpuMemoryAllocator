@@ -68,7 +68,7 @@ public unsafe partial class GraphicsContext
 
     public ref readonly ComPtr<ID3D12CommandQueue> Queue => ref m_queue;
     public ref readonly ComPtr<ID3D12Fence> Fence => ref m_fence;
-    
+
     public ref readonly ComPtr<D3D12MA.Allocator> Allocator => ref m_allocator;
 
     public ReadOnlySpan<ComPtr<ID3D12CommandAllocator>> CommandAllocator => m_cmd_allocator;
@@ -173,7 +173,7 @@ public unsafe partial class GraphicsContext
         m_main_list = new(this, cmd_list, CommandListType.Direct) { m_main = true };
 
         #endregion
-        
+
         #region create alloactor
 
         var allocator_desc = new D3D12MA.AllocatorDesc
@@ -193,7 +193,7 @@ public unsafe partial class GraphicsContext
     [Drop(Order = -1000)]
     private void WaitAll()
     {
-        Wait(Signal());
+        WaitOnCpu(SignalOnGpu(), m_event);
     }
 
     #endregion
@@ -275,27 +275,25 @@ public unsafe partial class GraphicsContext
 
     public ulong AllocSignal() => Interlocked.Increment(ref fence_value);
 
-    public ulong Signal()
+    public ulong SignalOnGpu()
     {
         var value = AllocSignal();
         m_queue.Signal(m_fence.Handle, value).TryThrowHResult();
         return value;
     }
 
-    /// <summary>
-    /// Wait On Gpu
-    /// </summary>
-    public void Wait(ulong value) => m_queue.Wait(m_fence.Handle, value).TryThrowHResult();
+    public ulong SignalOnCpu()
+    {
+        var value = AllocSignal();
+        m_fence.Handle->Signal(value);
+        return value;
+    }
 
-    /// <summary>
-    /// Wait On Cpu
-    /// </summary>
-    public void Wait(ulong value, EventWaitHandle handle) => m_fence.Wait(value, handle);
+    public void WaitOnGpu(ulong value) => m_queue.Wait(m_fence.Handle, value).TryThrowHResult();
 
-    /// <summary>
-    /// Wait On Cpu
-    /// </summary>
-    public ValueTask WaitAsync(ulong value, EventWaitHandle handle) => m_fence.WaitAsync(value, handle);
+    public void WaitOnCpu(ulong value, EventWaitHandle handle) => m_fence.Wait(value, handle);
+
+    public ValueTask WaitOnCpuAsync(ulong value, EventWaitHandle handle) => m_fence.WaitAsync(value, handle);
 
     #endregion
 
@@ -316,7 +314,7 @@ public unsafe partial class GraphicsContext
 
     public void EndFrame()
     {
-        m_fence_values[m_cur_frame] = Signal();
+        m_fence_values[m_cur_frame] = SignalOnGpu();
     }
 
     public void ReadyNextFrame()
@@ -324,7 +322,7 @@ public unsafe partial class GraphicsContext
         m_cur_frame++;
         if (m_cur_frame >= FrameCount) m_cur_frame = 0;
         var value = m_fence_values[m_cur_frame];
-        Wait(value, m_event);
+        WaitOnCpu(value, m_event);
         m_cmd_allocator[m_cur_frame].Handle->Reset().TryThrowHResult();
         m_main_list.Raw->Reset(m_cmd_allocator[m_cur_frame].Handle, null).TryThrowHResult();
         Recycle();

@@ -194,7 +194,7 @@ public unsafe partial class HwndSwapChain : ISwapChain
     private void PresentNoWait_InLock()
     {
         m_swap_chain.Present(VSync ? 1u : 0u, 0u);
-        m_fence_values[m_frame_index] = Graphics.Signal();
+        m_fence_values[m_frame_index] = Graphics.SignalOnGpu();
     }
 
     private void WaitFrameReady_InLock()
@@ -211,7 +211,7 @@ public unsafe partial class HwndSwapChain : ISwapChain
             var v = m_fence_values[i];
             if (v < min) min = v;
         }
-        Graphics.Wait(min, m_event);
+        Graphics.WaitOnCpu(min, m_event);
         m_frame_index = (int)m_swap_chain.GetCurrentBackBufferIndex();
     }
 
@@ -239,7 +239,7 @@ public unsafe partial class HwndSwapChain : ISwapChain
             var v = m_fence_values[i];
             if (v > max) max = v;
         }
-        Graphics.Wait(max, m_event);
+        Graphics.WaitOnCpu(max, m_event);
     }
 
 

@@ -1,31 +1,27 @@
-﻿using Coplt.Mathematics;
-using Silk.NET.Direct3D12;
-using Silk.NET.DXGI;
+﻿// ReSharper disable AccessToDisposedClosure
+
 using Silk.NET.Input;
 using Silk.NET.Windowing;
-using TestD3d12;
-
-// ReSharper disable AccessToDisposedClosure
+using TestVulkan;
 
 Utils.InitLogger();
 
 IInputContext input = null!;
 
-DXGI Dxgi = null!;
-var D3d12 = D3D12.GetApi()!;
+var Vk = Silk.NET.Vulkan.Vk.GetApi()!;
 GraphicsContext ctx = null!;
-HwndSwapChain swap_chain = null!;
+SwapChain swap_chain = null!;
 
 ulong frame_count = 0;
 
 App app = null!;
 
-var window = Window.Create(WindowOptions.Default with
+var window = Window.Create(WindowOptions.DefaultVulkan with
 {
     IsVisible = false,
-    Title = "Test D3d12",
+    Title = "Test Vulkan",
     Size = new(960, 540),
-    API = GraphicsAPI.None,
+    API = new(ContextAPI.Vulkan, new(1, 3)),
 });
 window.Load += OnLoad;
 window.Update += OnUpdate;
@@ -47,11 +43,9 @@ void OnLoad()
 {
     window.Center();
     input = window.CreateInput();
-
-    Dxgi = DXGI.GetApi(window);
-    ctx = new(Dxgi, D3d12, true);
-    swap_chain = new(ctx, window.Native!.Win32!.Value.Hwnd, new((uint)window.Size.X, (uint)window.Size.Y));
-    swap_chain.VSync = true;
+    if (window.VkSurface is null) throw new NotSupportedException("Platform not support vulkan");
+    ctx = new(Vk, window.VkSurface, true);
+    swap_chain = new(ctx, window, new((uint)window.Size.X, (uint)window.Size.Y));
 
     app = new(window, ctx, swap_chain);
     foreach (var t in input.Keyboards) t.KeyDown += app.OnKeyDown;

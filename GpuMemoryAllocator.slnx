@@ -1,7 +1,9 @@
 <Solution>
   <Folder Name="/Tests/">
     <Project Path="Tests/TestD3d12/TestD3d12.csproj" />
+    <Project Path="Tests/TestVulkan/TestVulkan.csproj" />
   </Folder>
   <Project Path="D3d12PostGen/D3d12PostGen.csproj" />
   <Project Path="GpuMemoryAllocator.D3d12/GpuMemoryAllocator.D3d12.csproj" />
+  <Project Path="GpuMemoryAllocator.Vulkan/GpuMemoryAllocator.Vulkan.csproj" />
 </Solution>
