@@ -49,9 +49,6 @@ jobs:
           name: 'D3D12MA-managed'
           path: ./GpuMemoryAllocator.D3d12/bin/Release/*.nupkg
           overwrite: true
-      - name: Pack D3D12MA
-        shell: pwsh
-        run: ./Native/buid_d3d12ma-meta.ps1
   build-win-x64:
     runs-on: windows-latest
     steps:
@@ -191,8 +188,7 @@ jobs:
           name: 'vma-macos-arm64'
           path: ./Native/vma/runtimes/macos-arm64/native/
       - name: Pack
-        shell: pwsh
-        run: ./Native/buid_vma.ps1
+        run: dotnet pack "./Native/vma/vma.csproj" -o "./Native/packages"
       - id: upload
         uses: actions/upload-artifact@v6
         with:
@@ -221,8 +217,7 @@ jobs:
           name: 'D3D12MA-win-arm64'
           path: ./Native/D3D12MA/runtimes/win-arm64/native/
       - name: Pack
-        shell: pwsh
-        run: ./Native/buid_vma.ps1
+        run: dotnet pack "./Native/D3D12MA/D3D12MA.csproj" -o "./Native/packages"
       - id: upload
         uses: actions/upload-artifact@v6
         with:

@@ -16,7 +16,7 @@
     <files>
         <file src="../../LICENSE.md" target="LICENSE.md" />
         <file src="../../README.md" target="README.md" />
-        <file src="runtimes/win-x64/native/D3D12MA.dll" target="runtimes/win-x64/native/D3D12MA.dll" />
-        <file src="runtimes/win-arm64/native/D3D12MA.dll" target="runtimes/win-arm64/native/D3D12MA.dll" />
+        <file src="./runtimes/win-x64/native/D3D12MA.dll" target="runtimes/win-x64/native/D3D12MA.dll" />
+        <file src="./runtimes/win-arm64/native/D3D12MA.dll" target="runtimes/win-arm64/native/D3D12MA.dll" />
     </files>
 </package>

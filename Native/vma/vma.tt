@@ -18,8 +18,8 @@
         <file src="../../README.md" target="README.md" />
         <file src="runtimes/win-x64/native/vma.dll" target="runtimes/win-x64/native/vma.dll" />
         <file src="runtimes/win-arm64/native/vma.dll" target="runtimes/win-arm64/native/vma.dll" />
-        <file src="runtimes/linux-x64/native/vma.dll" target="runtimes/linux-x64/native/vma.dll" />
-        <file src="runtimes/linux-arm64/native/vma.dll" target="runtimes/linux-arm64/native/vma.dll" />
-        <file src="runtimes/macos-arm64/native/vma.dll" target="runtimes/macos-arm64/native/vma.dll" />
+        <file src="runtimes/linux-x64/native/libvma.so" target="runtimes/linux-x64/native/libvma.so" />
+        <file src="runtimes/linux-arm64/native/libvma.so" target="runtimes/linux-arm64/native/libvma.so" />
+        <file src="runtimes/macos-arm64/native/libvma.dylib" target="runtimes/macos-arm64/native/libvma.dylib" />
     </files>
 </package>
