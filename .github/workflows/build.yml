@@ -7,59 +7,251 @@ on:
     branches: [ "main" ]
   workflow_dispatch:
   workflow_call:
-    outputs:
-      vma-managed-nupkg-artifact:
-        value: ${{ jobs.build-managed-vma.outputs.vma-managed-nupkg-artifact }}
-      D3D12MA-managed-nupkg-artifact:
-        value: ${{ jobs.build-managed-d3d12ma.outputs.D3D12MA-managed-nupkg-artifact }}
-      linux-x64-vma-native-artifact:
-        value: ${{ jobs.build-linux-x64.outputs.vma-native-artifact }}
-      linux-arm64-vma-native-artifact:
-        value: ${{ jobs.build-linux-arm64.outputs.vma-native-artifact }}
-      win-x64-vma-native-artifact:
-        value: ${{ jobs.build-win-x64.outputs.vma-native-artifact }}
-      win-arm64-vma-native-artifact:
-        value: ${{ jobs.build-win-arm64.outputs.vma-native-artifact }}
-      win-x64-D3D12MA-native-artifact:
-        value: ${{ jobs.build-win-x64.outputs.D3D12MA-native-artifact }}
-      win-arm64-D3D12MA-native-artifact:
-        value: ${{ jobs.build-win-arm64.outputs.D3D12MA-native-artifact }}
-      macos-arm64-vma-native-artifact:
-        value: ${{ jobs.build-macos-arm64.outputs.vma-native-artifact }}
-      pack-all-artifact:
-        value: ${{ jobs.pack-all.outputs.pack-all-artifact }}
 
 jobs:
   build-managed-vma:
-    uses: ./.github/workflows/build-managed-vma.yml
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - name: Dotnet Restore
+        run: dotnet restore
+      - name: Build
+        run: dotnet build ./GpuMemoryAllocator.Vulkan/GpuMemoryAllocator.Vulkan.csproj -c Release
+      - id: vma-managed
+        uses: actions/upload-artifact@v4
+        with:
+          name: 'vma-managed'
+          path: ./GpuMemoryAllocator.Vulkan/bin/Release/*.nupkg
+          overwrite: true
   build-managed-d3d12ma:
-    uses: ./.github/workflows/build-managed-d3d12ma.yml
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - name: Dotnet Restore
+        run: dotnet restore
+      - name: Build
+        run: dotnet build ./GpuMemoryAllocator.D3d12/GpuMemoryAllocator.D3d12.csproj -c Release
+      - id: D3D12MA-managed
+        uses: actions/upload-artifact@v4
+        with:
+          name: 'D3D12MA-managed'
+          path: ./GpuMemoryAllocator.D3d12/bin/Release/*.nupkg
+          overwrite: true
+      - name: Pack D3D12MA
+        shell: pwsh
+        run: ./Native/buid_d3d12ma-meta.ps1
   build-win-x64:
-    uses: ./.github/workflows/build-win-x64.yml
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Init
+        shell: pwsh
+        run: ./init.ps1
+      - name: Build
+        shell: pwsh
+        run: ./build_native.ps1
+      - id: vma-native
+        uses: actions/upload-artifact@v4
+        with:
+          name: 'vma-win-x64'
+          path: ./build/vma/Release/vma.dll
+          overwrite: true
+      - id: D3D12MA-native
+        uses: actions/upload-artifact@v4
+        with:
+          name: 'D3D12MA-win-x64'
+          path: ./build/Release/D3D12MA.dll
+          overwrite: true
   build-win-arm64:
-    uses: ./.github/workflows/build-win-arm64.yml
+    runs-on: windows-11-arm
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Init
+        shell: pwsh
+        run: ./init.ps1
+      - name: Build
+        shell: pwsh
+        run: ./build_native.ps1
+      - id: vma-native
+        uses: actions/upload-artifact@v4
+        with:
+          name: 'vma-win-arm64'
+          path: ./build/vma/Release/vma.dll
+          overwrite: true
+      - id: D3D12MA-native
+        uses: actions/upload-artifact@v4
+        with:
+          name: 'D3D12MA-win-arm64'
+          path: ./build/Release/D3D12MA.dll
+          overwrite: true
   build-linux-x64:
-    uses: ./.github/workflows/build-linux-x64.yml
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Init
+        shell: bash
+        run: ./init.sh
+      - name: Build
+        shell: bash
+        run: ./build_native.sh
+      - id: vma-native
+        uses: actions/upload-artifact@v4
+        with:
+          name: 'vma-linux-x64'
+          path: ./build/vma/Release/libvma.so
+          overwrite: true
   build-linux-arm64:
-    uses: ./.github/workflows/build-linux-arm64.yml
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Init
+        shell: bash
+        run: ./init.sh
+      - name: Build
+        shell: bash
+        run: ./build_native.sh
+      - id: vma-native
+        uses: actions/upload-artifact@v4
+        with:
+          name: 'vma-linux-arm64'
+          path: ./build/vma/Release/libvma.so
+          overwrite: true
   build-macos-arm64:
-    uses: ./.github/workflows/build-macos-arm64.yml
-  pack-all:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Init
+        shell: bash
+        run: ./init.sh
+      - name: Build
+        shell: bash
+        run: ./build_native.sh
+      - id: vma-native
+        uses: actions/upload-artifact@v4
+        with:
+          name: 'vma-macos-arm64'
+          path: ./build/vma/Release/libvma.dylib
+          overwrite: true
+  build-vma-stub:
     needs:
-      - build-managed-vma
-      - build-managed-d3d12ma
       - build-win-arm64
       - build-win-x64
       - build-linux-arm64
       - build-linux-x64
       - build-macos-arm64
     runs-on: ubuntu-latest
-    outputs:
-      pack-all-artifact: ${{ steps.pack-all.outputs.artifact-id }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - name: Dotnet Restore
+        run: dotnet restore
+      - uses: actions/download-artifact@v7
+        with:
+          name: 'vma-win-x64'
+          path: ./Native/vma/runtimes/win-x64/native/
+      - uses: actions/download-artifact@v7
+        with:
+          name: 'vma-win-arm64'
+          path: ./Native/vma/runtimes/win-arm64/native/
+      - uses: actions/download-artifact@v7
+        with:
+          name: 'vma-linux-x64'
+          path: ./Native/vma/runtimes/linux-x64/native/
+      - uses: actions/download-artifact@v7
+        with:
+          name: 'vma-linux-arm64'
+          path: ./Native/vma/runtimes/linux-arm64/native/
+      - uses: actions/download-artifact@v7
+        with:
+          name: 'vma-macos-arm64'
+          path: ./Native/vma/runtimes/macos-arm64/native/
+      - name: Pack
+        shell: pwsh
+        run: ./Native/buid_vma.ps1
+      - id: upload
+        uses: actions/upload-artifact@v6
+        with:
+          path: ./Native/packages/*
+          name: 'vma-stub'
+          overwrite: true
+  build-d3d12ma-stub:
+    needs:
+      - build-win-arm64
+      - build-win-x64
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - name: Dotnet Restore
+        run: dotnet restore
+      - uses: actions/download-artifact@v7
+        with:
+          name: 'D3D12MA-win-x64'
+          path: ./Native/D3D12MA/runtimes/win-x64/native/
+      - uses: actions/download-artifact@v7
+        with:
+          name: 'D3D12MA-win-arm64'
+          path: ./Native/D3D12MA/runtimes/win-arm64/native/
+      - name: Pack
+        shell: pwsh
+        run: ./Native/buid_vma.ps1
+      - id: upload
+        uses: actions/upload-artifact@v6
+        with:
+          path: ./Native/packages/*
+          name: 'D3D12MA-stub'
+          overwrite: true
+  pack-all:
+    needs:
+      - build-managed-vma
+      - build-managed-d3d12ma
+      - build-vma-stub
+      - build-d3d12ma-stub
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v7
         with:
-          merge-multiple: true
+          name: 'vma-managed'
+          path: ./artifacts
+      - uses: actions/download-artifact@v7
+        with:
+          name: 'D3D12MA-managed'
+          path: ./artifacts
+      - uses: actions/download-artifact@v7
+        with:
+          name: 'vma-stub'
+          path: ./artifacts
+      - uses: actions/download-artifact@v7
+        with:
+          name: 'D3D12MA-stub'
           path: ./artifacts
       - id: pack-all
         uses: actions/upload-artifact@v6

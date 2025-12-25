@@ -1,7 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
-        <IncludeBuildOutput>false</IncludeBuildOutput>
-        <NuspecFile>vma.runtime.win-x64.nuspec</NuspecFile>
-    </PropertyGroup>
-</Project>

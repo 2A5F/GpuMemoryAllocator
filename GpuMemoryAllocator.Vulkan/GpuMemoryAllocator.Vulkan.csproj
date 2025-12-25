@@ -12,6 +12,8 @@
         <NoWarn>CS0169;CS0649</NoWarn>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Description>Unsafe C# bindings for vma</Description>
+        <PackageReadmeFile>Readme.md</PackageReadmeFile>
+        <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     </PropertyGroup>
 
     <ItemGroup>
