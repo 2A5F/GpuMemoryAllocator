@@ -23,17 +23,18 @@ submit an issue to remind us.*
 
 ## Build
 
-- Note that you need to clone the submodule.
+- Required .NET 10
+- Required cmake
+- Required ninja
+- Required [vcpkg](https://github.com/microsoft/vcpkg)
 
 - Windows
     - Required clang
-    - Required .NET 10
   ```powershell
   ./init.ps1
   ./build.ps1
   ```
 - Linux
-    - Required .NET 10
   ```shell
   ./init.sh
   ./build.sh
@@ -46,3 +47,8 @@ submit an issue to remind us.*
 ```powershell
 ./sync.ps1
 ```
+
+## Links
+
+[D3D12MemoryAllocator](https://github.com/GPUOpen-LibrariesAndSDKs/D3D12MemoryAllocator)  
+[VulkanMemoryAllocator](https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator)  
