@@ -13,22 +13,13 @@ submit an issue to remind us.*
   The D3D12MA binding
 
     - [![Nuget](https://img.shields.io/nuget/v/GpuMemoryAllocator.D3D12MA) <br/> GpuMemoryAllocator.D3D12MA](https://www.nuget.org/packages/GpuMemoryAllocator.D3D12MA/)  
-      The meta pack for D3D12MA native build
-
-        - [![Nuget](https://img.shields.io/nuget/v/GpuMemoryAllocator.D3D12MA.runtime.win-x64) <br/> GpuMemoryAllocator.D3D12MA.runtime.win-x64](https://www.nuget.org/packages/GpuMemoryAllocator.D3D12MA.runtime.win-x64/)
-        - [![Nuget](https://img.shields.io/nuget/v/GpuMemoryAllocator.D3D12MA.runtime.win-arm64) <br/> GpuMemoryAllocator.D3D12MA.runtime.win-arm64](https://www.nuget.org/packages/GpuMemoryAllocator.D3D12MA.runtime.win-arm64/)
+      The D3D12MA native build
 
 - [![Nuget](https://img.shields.io/nuget/v/GpuMemoryAllocator.Vulkan) <br/> GpuMemoryAllocator.Vulkan](https://www.nuget.org/packages/GpuMemoryAllocator.Vulkan/)  
   The vma binding
 
     - [![Nuget](https://img.shields.io/nuget/v/GpuMemoryAllocator.vma) <br/> GpuMemoryAllocator.vma](https://www.nuget.org/packages/GpuMemoryAllocator.vma/)  
-      The meta pack for vma native build
-
-        - [![Nuget](https://img.shields.io/nuget/v/GpuMemoryAllocator.vma.runtime.win-x64) <br/> GpuMemoryAllocator.vma.runtime.win-x64](https://www.nuget.org/packages/GpuMemoryAllocator.vma.runtime.win-x64/)
-        - [![Nuget](https://img.shields.io/nuget/v/GpuMemoryAllocator.vma.runtime.win-arm64) <br/> GpuMemoryAllocator.vma.runtime.win-arm64](https://www.nuget.org/packages/GpuMemoryAllocator.vma.runtime.win-arm64/)
-        - [![Nuget](https://img.shields.io/nuget/v/GpuMemoryAllocator.vma.runtime.linux-x64) <br/> GpuMemoryAllocator.vma.runtime.linux-x64](https://www.nuget.org/packages/GpuMemoryAllocator.vma.runtime.linux-x64/)
-        - [![Nuget](https://img.shields.io/nuget/v/GpuMemoryAllocator.vma.runtime.linux-arm64) <br/> GpuMemoryAllocator.vma.runtime.linux-arm64](https://www.nuget.org/packages/GpuMemoryAllocator.vma.runtime.linux-arm64/)
-        - [![Nuget](https://img.shields.io/nuget/v/GpuMemoryAllocator.vma.runtime.macos-arm64) <br/> GpuMemoryAllocator.vma.runtime.macos-arm64](https://www.nuget.org/packages/GpuMemoryAllocator.vma.runtime.macos-arm64/)
+      The vma native build
 
 ## Build
 

@@ -1,6 +1,6 @@
 ﻿<Project>
     <PropertyGroup>
-        <ThisVersion>0.1.0</ThisVersion>
+        <ThisVersion>0.2.0</ThisVersion>
         <VmaVersion>3.3.0</VmaVersion>
         <D3d12maVersion>3.0.1</D3d12maVersion>
         <Version>0.1.0</Version>
