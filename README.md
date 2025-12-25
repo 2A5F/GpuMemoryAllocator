@@ -27,6 +27,7 @@ submit an issue to remind us.*
 - Required cmake
 - Required ninja
 - Required [vcpkg](https://github.com/microsoft/vcpkg)
+  - Required env VCPKG_INSTALLATION_ROOT
 
 - Windows
     - Required clang
