@@ -2,12 +2,12 @@
   "dependencies": [
     {
       "name": "directx-headers",
-      "version>=": "1.618.1",
+      "version>=": "1.619.1",
       "platform": "windows"
     },
     {
       "name": "d3d12-memory-allocator",
-      "version>=": "3.0.1",
+      "version>=": "3.1.0",
       "platform": "windows"
     },
     {
@@ -16,7 +16,7 @@
     },
     {
       "name": "vulkan-headers",
-      "version>=": "1.4.309.0"
+      "version>=": "1.4.350.0"
     },
     {
       "name": "vulkan-memory-allocator",

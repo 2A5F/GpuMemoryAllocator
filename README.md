@@ -44,6 +44,7 @@ submit an issue to remind us.*
 ### Sync Version
 
 - Required pwsh
+- Edit `Directory.Build.props`
 
 ```powershell
 ./sync.ps1
