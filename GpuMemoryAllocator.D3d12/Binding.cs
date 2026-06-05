@@ -1,4 +1,5 @@
 namespace D3D12MA;
+
 public unsafe partial struct AllocationCallbacks
 {
     public delegate* unmanaged[Cdecl]<nuint, nuint, void*, void*> pAllocate;
@@ -394,6 +395,7 @@ public enum AllocatorFlags : int
     DefaultPoolsNotZeroed = 0x4,
     MsaaTexturesAlwaysCommitted = 0x8,
     DontPreferSmallBuffersCommitted = 0x10,
+    DontUseTightAlignment = 0x20,
 }
 public unsafe partial struct AllocatorDesc
 {
@@ -437,6 +439,14 @@ public unsafe partial struct Allocator
         return __((Allocator*)Unsafe.AsPointer(ref this));
         [UnmanagedCallConv(CallConvs = [typeof(CallConvThiscall)])]
         [DllImport("D3D12MA", EntryPoint = "?IsGPUUploadHeapSupported@Allocator@D3D12MA@@QEBAHXZ")]
+        static extern int __(Allocator* pThis);
+    }
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public int IsTightAlignmentSupported()
+    {
+        return __((Allocator*)Unsafe.AsPointer(ref this));
+        [UnmanagedCallConv(CallConvs = [typeof(CallConvThiscall)])]
+        [DllImport("D3D12MA", EntryPoint = "?IsTightAlignmentSupported@Allocator@D3D12MA@@QEBAHXZ")]
         static extern int __(Allocator* pThis);
     }
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -706,15 +716,15 @@ public static unsafe partial class Apis
 }
 public unsafe partial struct Allocation : IComVtbl<Allocation>, IComVtbl<IUnknown>
 {
-    public void*** AsVtblPtr() => (void***) Unsafe.AsPointer(ref Unsafe.AsRef(in this));
+    public void*** AsVtblPtr() => (void***)Unsafe.AsPointer(ref Unsafe.AsRef(in this));
 }
 public unsafe partial struct DefragmentationContext : IComVtbl<DefragmentationContext>, IComVtbl<IUnknown>
 {
-    public void*** AsVtblPtr() => (void***) Unsafe.AsPointer(ref Unsafe.AsRef(in this));
+    public void*** AsVtblPtr() => (void***)Unsafe.AsPointer(ref Unsafe.AsRef(in this));
 }
 public unsafe partial struct Pool : IComVtbl<Pool>, IComVtbl<IUnknown>
 {
-    public void*** AsVtblPtr() => (void***) Unsafe.AsPointer(ref Unsafe.AsRef(in this));
+    public void*** AsVtblPtr() => (void***)Unsafe.AsPointer(ref Unsafe.AsRef(in this));
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public int BeginDefragmentation(DefragmentationDesc* pDesc, out ComPtr<DefragmentationContext> Context)
     {
@@ -727,10 +737,10 @@ public unsafe partial struct Pool : IComVtbl<Pool>, IComVtbl<IUnknown>
 }
 public unsafe partial struct Allocator : IComVtbl<Allocator>, IComVtbl<IUnknown>
 {
-    public void*** AsVtblPtr() => (void***) Unsafe.AsPointer(ref Unsafe.AsRef(in this));
+    public void*** AsVtblPtr() => (void***)Unsafe.AsPointer(ref Unsafe.AsRef(in this));
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public int CreateResource<T0>(AllocationDesc* pAllocDesc, ResourceDesc* pResourceDesc, ResourceStates InitialResourceState, ClearValue* pOptimizedClearValue, out ComPtr<Allocation> Allocation, out ComPtr<T0> Resource)
-        where T0: unmanaged, IComVtbl<T0>
+        where T0 : unmanaged, IComVtbl<T0>
     {
         Unsafe.SkipInit(out Allocation);
         Unsafe.SkipInit(out Resource);
@@ -742,7 +752,7 @@ public unsafe partial struct Allocator : IComVtbl<Allocator>, IComVtbl<IUnknown>
     }
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public int CreateResource2<T0>(AllocationDesc* pAllocDesc, ResourceDesc1* pResourceDesc, ResourceStates InitialResourceState, ClearValue* pOptimizedClearValue, out ComPtr<Allocation> Allocation, out ComPtr<T0> Resource)
-        where T0: unmanaged, IComVtbl<T0>
+        where T0 : unmanaged, IComVtbl<T0>
     {
         Unsafe.SkipInit(out Allocation);
         Unsafe.SkipInit(out Resource);
@@ -754,7 +764,7 @@ public unsafe partial struct Allocator : IComVtbl<Allocator>, IComVtbl<IUnknown>
     }
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public int CreateResource3<T0>(AllocationDesc* pAllocDesc, ResourceDesc1* pResourceDesc, BarrierLayout InitialLayout, ClearValue* pOptimizedClearValue, uint NumCastableFormats, Format* pCastableFormats, out ComPtr<Allocation> Allocation, out ComPtr<T0> Resource)
-        where T0: unmanaged, IComVtbl<T0>
+        where T0 : unmanaged, IComVtbl<T0>
     {
         Unsafe.SkipInit(out Allocation);
         Unsafe.SkipInit(out Resource);
@@ -775,7 +785,7 @@ public unsafe partial struct Allocator : IComVtbl<Allocator>, IComVtbl<IUnknown>
     }
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public int CreateAliasingResource<T0>(Allocation* pAllocation, ulong AllocationLocalOffset, ResourceDesc* pResourceDesc, ResourceStates InitialResourceState, ClearValue* pOptimizedClearValue, out ComPtr<T0> Resource)
-        where T0: unmanaged, IComVtbl<T0>
+        where T0 : unmanaged, IComVtbl<T0>
     {
         Unsafe.SkipInit(out Resource);
         fixed (T0** ppvResource = Resource)
@@ -785,7 +795,7 @@ public unsafe partial struct Allocator : IComVtbl<Allocator>, IComVtbl<IUnknown>
     }
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public int CreateAliasingResource1<T0>(Allocation* pAllocation, ulong AllocationLocalOffset, ResourceDesc1* pResourceDesc, ResourceStates InitialResourceState, ClearValue* pOptimizedClearValue, out ComPtr<T0> Resource)
-        where T0: unmanaged, IComVtbl<T0>
+        where T0 : unmanaged, IComVtbl<T0>
     {
         Unsafe.SkipInit(out Resource);
         fixed (T0** ppvResource = Resource)
@@ -795,7 +805,7 @@ public unsafe partial struct Allocator : IComVtbl<Allocator>, IComVtbl<IUnknown>
     }
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public int CreateAliasingResource2<T0>(Allocation* pAllocation, ulong AllocationLocalOffset, ResourceDesc1* pResourceDesc, BarrierLayout InitialLayout, ClearValue* pOptimizedClearValue, uint NumCastableFormats, Format* pCastableFormats, out ComPtr<T0> Resource)
-        where T0: unmanaged, IComVtbl<T0>
+        where T0 : unmanaged, IComVtbl<T0>
     {
         Unsafe.SkipInit(out Resource);
         fixed (T0** ppvResource = Resource)
@@ -824,5 +834,5 @@ public unsafe partial struct Allocator : IComVtbl<Allocator>, IComVtbl<IUnknown>
 }
 public unsafe partial struct VirtualBlock : IComVtbl<VirtualBlock>, IComVtbl<IUnknown>
 {
-    public void*** AsVtblPtr() => (void***) Unsafe.AsPointer(ref Unsafe.AsRef(in this));
+    public void*** AsVtblPtr() => (void***)Unsafe.AsPointer(ref Unsafe.AsRef(in this));
 }

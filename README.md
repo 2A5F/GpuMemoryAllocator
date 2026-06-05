@@ -41,6 +41,12 @@ submit an issue to remind us.*
   ./build.sh
   ```
 
+### Gen Binding
+
+```powershell
+./gen.ps1
+```
+
 ### Sync Version
 
 - Required pwsh

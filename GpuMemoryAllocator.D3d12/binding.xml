@@ -844,6 +844,12 @@
           <code>0x10</code>
         </value>
       </enumerator>
+      <enumerator name="ALLOCATOR_FLAG_DONT_USE_TIGHT_ALIGNMENT" access="public">
+        <type primitive="False">int</type>
+        <value>
+          <code>0x20</code>
+        </value>
+      </enumerator>
     </enumeration>
     <struct name="ALLOCATOR_DESC" access="public" unsafe="true">
       <field name="Flags" access="public">
@@ -900,6 +906,12 @@
         </param>
       </function>
       <function name="IsGPUUploadHeapSupported" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?IsGPUUploadHeapSupported@Allocator@D3D12MA@@QEBAHXZ" static="true" readonly="true">
+        <type native="BOOL">int</type>
+        <param name="pThis">
+          <type>Allocator*</type>
+        </param>
+      </function>
+      <function name="IsTightAlignmentSupported" access="public" lib="D3D12MA" convention="ThisCall" entrypoint="?IsTightAlignmentSupported@Allocator@D3D12MA@@QEBAHXZ" static="true" readonly="true">
         <type native="BOOL">int</type>
         <param name="pThis">
           <type>Allocator*</type>

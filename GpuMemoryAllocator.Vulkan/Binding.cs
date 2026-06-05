@@ -1,4 +1,5 @@
 namespace Vma;
+
 [Flags]
 public enum AllocatorCreateFlags : int
 {
